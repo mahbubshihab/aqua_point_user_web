@@ -52,6 +52,7 @@ export interface ProductItem {
   description: string;
   specifications: Record<string, string>;
   warranty: string;
+  cloudinary_url?: string;
   imageUrl: string;
   galleryUrls?: string[];
   stock: number;

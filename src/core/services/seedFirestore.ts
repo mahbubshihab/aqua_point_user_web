@@ -14,9 +14,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 15,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_open.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129051/rjlqkn2a9vi9kcsraa9y.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129051/rjlqkn2a9vi9kcsraa9y.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_open.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129051/rjlqkn2a9vi9kcsraa9y.webp'
     ],
     description: '7-stage Reverse Osmosis drinking water purification system featuring an open frame structure for effortless maintenance and high-output mineral purification.',
     specifications: {
@@ -37,9 +38,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 12,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_stand.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129054/uax0cccoxwo4qcuwvjvs.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129054/uax0cccoxwo4qcuwvjvs.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_stand.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129054/uax0cccoxwo4qcuwvjvs.webp'
     ],
     description: 'Sturdy standing frame 7-stage RO water purifier with integrated pressure gauge, mineral infusion, and high-efficiency membrane.',
     specifications: {
@@ -60,9 +62,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 20,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/eureka_classic.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129058/mqia1hlufpbmi6a0z7vf.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129058/mqia1hlufpbmi6a0z7vf.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/eureka_classic.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129058/mqia1hlufpbmi6a0z7vf.webp'
     ],
     description: 'Reliable household 7-stage RO purifier engineered for maximum TDS reduction and crisp drinking water.',
     specifications: {
@@ -83,9 +86,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 18,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/puro_plus.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129061/lfdyiinct38ud5ek5bpp.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129061/lfdyiinct38ud5ek5bpp.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/puro_plus.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129061/lfdyiinct38ud5ek5bpp.webp'
     ],
     description: 'Compact 6-stage cabinet purifier integrating RO, UV sterilizer, and UF membrane for 100% safe drinking water.',
     specifications: {
@@ -106,9 +110,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 15,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/fighter_elite.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129064/xeza6nt1cyoyriuvojfl.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129064/xeza6nt1cyoyriuvojfl.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/fighter_elite.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129064/xeza6nt1cyoyriuvojfl.webp'
     ],
     description: 'Feature-packed 7-stage cabinet purifier with multi-layer barrier protecting against pathogens and heavy metals.',
     specifications: {
@@ -129,9 +134,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 10,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/fighter_1.0.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129067/rqjop8k8b9ho8wnrik2s.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129067/rqjop8k8b9ho8wnrik2s.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/fighter_1.0.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129067/rqjop8k8b9ho8wnrik2s.webp'
     ],
     description: 'Next-generation Fighter 1.0 cabinet purifier with high-flow booster pump and automatic flush valve.',
     specifications: {
@@ -152,9 +158,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 8,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_cabinet.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129069/yipomm5wmxtfzgadumjb.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129069/yipomm5wmxtfzgadumjb.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_cabinet.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129069/yipomm5wmxtfzgadumjb.webp'
     ],
     description: 'Top-tier 7-stage enclosed Livotec cabinet RO purifier with luxury tempered glass aesthetics and digital TDS display.',
     specifications: {
@@ -174,9 +181,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 14,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/glass_door_cabinet.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129072/dnnvunfiukp48uejobwa.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129072/dnnvunfiukp48uejobwa.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/glass_door_cabinet.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129072/dnnvunfiukp48uejobwa.webp'
     ],
     description: 'Designer tempered glass front panel cabinet RO water purifier with internal food-grade storage tank.',
     specifications: {
@@ -197,9 +205,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 16,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/modern_cabinet.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129074/cnci14sqc5umtv3z9d0u.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129074/cnci14sqc5umtv3z9d0u.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/modern_cabinet.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129074/cnci14sqc5umtv3z9d0u.webp'
     ],
     description: 'Sleek modern cabinet design with high-capacity filter cartridges and quiet operation.',
     specifications: {
@@ -219,9 +228,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 22,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/slim_cabinet.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129077/qbcwiswhkkrajnhzuvsn.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129077/qbcwiswhkkrajnhzuvsn.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/slim_cabinet.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129077/qbcwiswhkkrajnhzuvsn.webp'
     ],
     description: 'Ultra-slim footprint cabinet purifier engineered for modern urban apartments and compact kitchens.',
     specifications: {
@@ -241,9 +251,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 7,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/pure_x_dispenser.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129081/xwspevqgsjmaltfbizug.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129081/xwspevqgsjmaltfbizug.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/pure_x_dispenser.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129081/xwspevqgsjmaltfbizug.webp'
     ],
     description: '100 GPD commercial grade water dispenser with high recovery RO system for heavy daily demand.',
     specifications: {
@@ -264,9 +275,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 9,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/heron_dispenser.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129084/yrj6vitwcgqy4s446ht7.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129084/yrj6vitwcgqy4s446ht7.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/heron_dispenser.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129084/yrj6vitwcgqy4s446ht7.webp'
     ],
     description: 'Dual temperature hot & cold water filter dispenser with compressor cooling and safety hot tap.',
     specifications: {
@@ -287,9 +299,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 11,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/table_top_dispenser.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129087/k61qenvat7wbgc8enef0.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129087/k61qenvat7wbgc8enef0.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/table_top_dispenser.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129087/k61qenvat7wbgc8enef0.webp'
     ],
     description: 'Countertop water dispenser providing instant purified drinking water without taking floor space.',
     specifications: {
@@ -309,9 +322,10 @@ export const REAL_PRODUCTS = [
     warranty: '6 Months',
     stock: 30,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/puryca_filter.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129091/aiio5c5nhkypt1rzpdwp.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129091/aiio5c5nhkypt1rzpdwp.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/puryca_filter.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129091/aiio5c5nhkypt1rzpdwp.webp'
     ],
     description: 'Premium multi-stage filter system delivering crystal clear drinking water and mineral enhancement.',
     specifications: {
@@ -332,9 +346,10 @@ export const REAL_PRODUCTS = [
     warranty: '6 Months',
     stock: 100,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/pp_sediment_cartridge.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129094/y7bhzi2jzjrkzj0zumca.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129094/y7bhzi2jzjrkzj0zumca.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/pp_sediment_cartridge.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129094/y7bhzi2jzjrkzj0zumca.webp'
     ],
     description: 'High density 5-micron polypropylene sediment cartridge for trapping rust, silt, scale, and sand particles.',
     specifications: {
@@ -356,9 +371,10 @@ export const REAL_PRODUCTS = [
     warranty: '6 Months',
     stock: 85,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/cto_carbon_cartridge.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129097/mgzcqyw88atklcqnylid.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129097/mgzcqyw88atklcqnylid.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/cto_carbon_cartridge.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129097/mgzcqyw88atklcqnylid.webp'
     ],
     description: 'Extruded coconut shell activated carbon block cartridge eliminating chlorine, odor, bad taste, and organic compounds.',
     specifications: {
@@ -379,9 +395,10 @@ export const REAL_PRODUCTS = [
     warranty: '6 Months',
     stock: 50,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/ro_membrane_75gpd.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129100/wwa5olpqbney6atqlcve.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129100/wwa5olpqbney6atqlcve.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/ro_membrane_75gpd.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129100/wwa5olpqbney6atqlcve.webp'
     ],
     description: 'High-rejection 75 GPD reverse osmosis membrane filtering out 99% of dissolved solids, heavy metals, arsenic, and bacteria.',
     specifications: {
@@ -403,9 +420,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 3,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/commercial_ro_500lph.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129103/nz44nrn2bth9ky0sin3p.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129103/nz44nrn2bth9ky0sin3p.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/commercial_ro_500lph.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129103/nz44nrn2bth9ky0sin3p.webp'
     ],
     description: '500 Liters Per Hour heavy-duty commercial reverse osmosis plant with stainless steel frame, high-pressure pump, and pre-filtration vessels.',
     specifications: {
@@ -428,9 +446,10 @@ export const REAL_PRODUCTS = [
     warranty: '1 Year Electrical',
     stock: 2,
     stockStatus: 'In Stock',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/industrial_ro_1000lph.jpg',
+    cloudinary_url: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129107/x0dwunekw24ayjncirp2.webp',
+    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129107/x0dwunekw24ayjncirp2.webp',
     galleryUrls: [
-      'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/industrial_ro_1000lph.jpg'
+      'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129107/x0dwunekw24ayjncirp2.webp'
     ],
     description: '1000 Liters Per Hour industrial scale water purification plant designed for factories, food processing, pharmaceutical, and large residential complexes.',
     specifications: {
