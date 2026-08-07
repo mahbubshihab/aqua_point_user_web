@@ -15,9 +15,9 @@ export const FeaturedProducts: React.FC = () => {
     const loadProducts = async () => {
       const dbProducts = await fetchProductsFromFirestore();
       if (dbProducts && dbProducts.length > 0) {
-        setProducts(dbProducts.slice(0, 4));
+        setProducts(dbProducts);
       } else {
-        setProducts(SAMPLE_PRODUCTS.slice(0, 4));
+        setProducts(SAMPLE_PRODUCTS);
       }
       setLoading(false);
     };

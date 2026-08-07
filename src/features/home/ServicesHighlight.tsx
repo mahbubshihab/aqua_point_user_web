@@ -2,81 +2,112 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Wrench, Shield, TestTube, Cpu, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { 
+  Wrench, 
+  ShieldCheck, 
+  TestTube, 
+  Cpu, 
+  Building2, 
+  ArrowRight, 
+  CheckCircle2 
+} from 'lucide-react';
 
 export const ServicesHighlight: React.FC = () => {
   const services = [
     {
-      title: 'Free Installation',
-      description: 'Expert technician setup for all home & commercial RO purifiers with free plumbing check.',
-      icon: Cpu,
+      title: 'Free Water Quality Testing',
+      description: 'Comprehensive doorstep water analysis for TDS, pH level, iron, hardness, and microbial safety index.',
+      icon: TestTube,
       color: 'text-[#00BCE1]',
       bg: 'bg-[#F0F9FF]',
+      badge: '100% Free Service',
     },
     {
-      title: 'Scheduled Servicing',
-      description: 'Periodic cartridge replacement, RO membrane cleaning, and leakage inspection.',
-      icon: Wrench,
+      title: 'Professional Installation',
+      description: 'Certified technician installation for residential RO purifiers, cabinet filters, and water dispensers.',
+      icon: Cpu,
       color: 'text-[#10B981]',
       bg: 'bg-[#ECFDF5]',
+      badge: 'Free On Orders > ৳15k',
     },
     {
-      title: 'Annual Maintenance (AMC)',
-      description: 'Hassle-free 365-day warranty cover, unlimited service visits, and free filter replacement.',
-      icon: Shield,
+      title: 'Servicing & Repair',
+      description: 'Rapid 2-hour emergency repair response, pump replacement, electrical diagnostics, and leak fix.',
+      icon: Wrench,
       color: 'text-[#F59E0B]',
       bg: 'bg-[#FFFBEB]',
+      badge: '2-Hour Response',
     },
     {
-      title: 'Water Quality Testing',
-      description: 'Comprehensive lab analysis for TDS, pH, Iron, Arsenic, and microbial bacteria count.',
-      icon: TestTube,
+      title: 'Filter Replacement & AMC',
+      description: 'Annual Maintenance Contracts (AMC) with automated 365-day periodic cartridge & membrane change.',
+      icon: ShieldCheck,
       color: 'text-purple-600',
       bg: 'bg-purple-50',
+      badge: 'Annual Care Plan',
+    },
+    {
+      title: 'Industrial Plant Consulting',
+      description: 'Custom engineering, site audit, and installation for 500 LPH to 5000 LPH commercial RO & iron removal plants.',
+      icon: Building2,
+      color: 'text-blue-600',
+      bg: 'bg-blue-50',
+      badge: 'Turnkey Solution',
     },
   ];
 
   return (
-    <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="p-8 sm:p-12 rounded-3xl bg-white border border-[#E2E8F0] shadow-md">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
           <div>
-            <span className="text-xs font-bold text-[#10B981] uppercase tracking-widest">
-              End-to-End Care
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00BCE1]/10 text-[#00BCE1] border border-[#00BCE1]/20 text-xs font-extrabold uppercase tracking-wide">
+              🛠 DOORSTEP TECHNICIAN & CARE
             </span>
-            <h2 className="text-3xl font-extrabold text-[#0F172A] mt-1">
-              Professional <span className="text-[#00BCE1]">Aqua Services</span> & Doorstep Support
+            <h2 className="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight mt-2">
+              Water Treatment <span className="text-[#00BCE1]">Services</span> & Support
             </h2>
+            <p className="text-xs sm:text-sm text-[#64748B] mt-1">
+              End-to-end water quality testing, professional installation, scheduled servicing, and industrial plant consulting.
+            </p>
           </div>
           <Link
             href="/services"
-            className="px-6 py-3 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2"
+            className="px-6 py-3 rounded-full bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-md shadow-cyan-500/20 flex items-center justify-center gap-2 shrink-0"
           >
             <span>Book A Technician Service</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
           {services.map((service, idx) => {
             const Icon = service.icon;
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#00BCE1]/40 transition-all duration-300 space-y-4 hover:-translate-y-1"
+                className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#00BCE1] hover:bg-white transition-all duration-300 space-y-3 shadow-sm hover:shadow-lg flex flex-col justify-between hover:-translate-y-1"
               >
-                <div className={`w-12 h-12 rounded-xl ${service.bg} flex items-center justify-center border border-[#E2E8F0]`}>
-                  <Icon className={`w-6 h-6 ${service.color}`} />
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className={`w-11 h-11 rounded-xl ${service.bg} flex items-center justify-center border border-[#E2E8F0]`}>
+                      <Icon className={`w-5 h-5 ${service.color}`} />
+                    </div>
+                    <span className="text-[10px] font-extrabold text-[#64748B] bg-white px-2 py-0.5 rounded-full border border-[#E2E8F0]">
+                      {service.badge}
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-extrabold text-[#0F172A]">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs text-[#64748B] leading-relaxed">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-[#0F172A]">
-                  {service.title}
-                </h3>
-                <p className="text-xs text-[#475569] leading-relaxed">
-                  {service.description}
-                </p>
-                <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#10B981] pt-2 border-t border-[#E2E8F0]">
+
+                <div className="flex items-center gap-1 text-[11px] font-bold text-[#10B981] pt-3 border-t border-[#E2E8F0]">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Guaranteed Technicians</span>
+                  <span>Guaranteed Service</span>
                 </div>
               </div>
             );

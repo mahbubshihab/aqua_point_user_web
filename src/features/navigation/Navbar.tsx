@@ -47,30 +47,34 @@ export const Navbar: React.FC = () => {
       {/* 1. Top Bar Component - Bright Electric Aqua Cyan background (#00BCE1 / #008BAA) */}
       <div className="bg-gradient-to-r from-[#008BAA] via-[#00BCE1] to-[#008BAA] text-white py-2 px-4 text-xs font-medium border-b border-white/10">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-          {/* Left Text */}
+          {/* Left Text: Address & Free Water Testing */}
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
             <span className="flex items-center gap-1.5 font-semibold">
               <span>💧</span> 100% Certified Pure RO Water
             </span>
             <span className="hidden sm:inline opacity-60">•</span>
-            <span className="hidden sm:inline text-sky-100 font-medium">
-              Free Installation on Orders over ৳15,000
+            <span className="hidden md:inline text-sky-100 font-medium">
+              📍 House 72, Janata Housing Road, 3 Ring Road, Dhaka 1219
+            </span>
+            <span className="hidden lg:inline opacity-60">•</span>
+            <span className="hidden lg:inline text-sky-100 font-medium">
+              🧪 Free Water Testing
             </span>
           </div>
 
-          {/* Right Text */}
+          {/* Right Text: Helpline & Warranty */}
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap text-right ml-auto sm:ml-0">
             <a 
-              href="tel:09613700750" 
+              href="tel:01780885841" 
               className="flex items-center gap-1.5 hover:text-sky-200 transition-colors font-semibold"
             >
               <Phone className="w-3.5 h-3.5" />
-              <span>☎ 09613 700 750 / 01780-885841</span>
+              <span>☎ 01780-885841 / 09613 700 750</span>
             </a>
             <span className="hidden md:inline opacity-60">•</span>
             <span className="hidden md:flex items-center gap-1 text-sky-100 font-medium">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-300 inline" />
-              <span>🛡️ 1-Year Warranty Included</span>
+              <span>🛡️ 1-Year Warranty</span>
             </span>
           </div>
         </div>
