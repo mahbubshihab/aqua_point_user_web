@@ -117,8 +117,19 @@ export const FAQS_COLLECTION = 'faqs';
 export const COMPANY_INFO_COLLECTION = 'company_info';
 export const REVIEWS_COLLECTION = 'reviews';
 export const CLIENTS_COLLECTION = 'clients';
+export const BANNERS_COLLECTION = 'banners';
 
 // Helper Types
+export interface BannerItem {
+  id: string;
+  title: string;
+  tag?: string;
+  imageUrl: string;
+  ctaLink?: string;
+  isActive: boolean;
+  createdAt?: DocumentData;
+}
+
 export interface ClientItem {
   id: string;
   name: string;
@@ -391,4 +402,96 @@ export const subscribeToApprovedReviewsFromFirestore = (callback: (reviews: Revi
     });
   });
 };
+
+export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
+  try {
+    const q = query(collection(db, BANNERS_COLLECTION), orderBy('createdAt', 'desc'));
+    const querySnapshot = await getDocs(q);
+    const banners: BannerItem[] = [];
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      const isActive = data.isActive !== undefined ? Boolean(data.isActive) : true;
+      if (isActive) {
+        banners.push({
+          id: docSnap.id,
+          title: data.title || 'Untitled Banner',
+          tag: data.tag || data.badge || '',
+          imageUrl: data.imageUrl || data.image || '',
+          ctaLink: data.ctaLink || data.link || '',
+          isActive: true,
+          createdAt: data.createdAt,
+        });
+      }
+    });
+    return banners;
+  } catch (error) {
+    console.warn("Firestore fetch banners error, falling back to simple query:", error);
+    try {
+      const fallbackQ = collection(db, BANNERS_COLLECTION);
+      const querySnapshot = await getDocs(fallbackQ);
+      const banners: BannerItem[] = [];
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        const isActive = data.isActive !== undefined ? Boolean(data.isActive) : true;
+        if (isActive) {
+          banners.push({
+            id: docSnap.id,
+            title: data.title || 'Untitled Banner',
+            tag: data.tag || data.badge || '',
+            imageUrl: data.imageUrl || data.image || '',
+            ctaLink: data.ctaLink || data.link || '',
+            isActive: true,
+            createdAt: data.createdAt,
+          });
+        }
+      });
+      return banners;
+    } catch (e) {
+      console.warn("Fallback fetch banners error:", e);
+      return [];
+    }
+  }
+};
+
+export const subscribeToBannersFromFirestore = (callback: (banners: BannerItem[]) => void) => {
+  const q = query(collection(db, BANNERS_COLLECTION), orderBy('createdAt', 'desc'));
+  return onSnapshot(q, (snapshot) => {
+    const list: BannerItem[] = snapshot.docs
+      .map((docSnap) => {
+        const data = docSnap.data();
+        return {
+          id: docSnap.id,
+          title: data.title || 'Untitled Banner',
+          tag: data.tag || data.badge || '',
+          imageUrl: data.imageUrl || data.image || '',
+          ctaLink: data.ctaLink || data.link || '',
+          isActive: data.isActive !== undefined ? Boolean(data.isActive) : true,
+          createdAt: data.createdAt,
+        };
+      })
+      .filter(b => b.isActive && b.imageUrl);
+    callback(list);
+  }, (error) => {
+    console.warn("Firestore banners snapshot error, falling back:", error);
+    const fallbackQ = collection(db, BANNERS_COLLECTION);
+    onSnapshot(fallbackQ, (snapshot) => {
+      const list: BannerItem[] = snapshot.docs
+        .map((docSnap) => {
+          const data = docSnap.data();
+          return {
+            id: docSnap.id,
+            title: data.title || 'Untitled Banner',
+            tag: data.tag || data.badge || '',
+            imageUrl: data.imageUrl || data.image || '',
+            ctaLink: data.ctaLink || data.link || '',
+            isActive: data.isActive !== undefined ? Boolean(data.isActive) : true,
+            createdAt: data.createdAt,
+          };
+        })
+        .filter(b => b.isActive && b.imageUrl);
+      callback(list);
+    });
+  });
+};
+
 
