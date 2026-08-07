@@ -9,25 +9,29 @@ export const WhyUsAndTestimonials: React.FC = () => {
       title: '7-Stage Mineral RO',
       description: 'Retains essential calcium & magnesium while purifying 99.99% impurities.',
       icon: ShieldCheck,
-      color: 'text-[#00E5FF]',
+      color: 'text-[#0284C7]',
+      bg: 'bg-[#F0F9FF]',
     },
     {
       title: '2-Hour Rapid Response',
       description: 'Dedicated helpline & quick doorstep emergency maintenance dispatch.',
       icon: Clock,
       color: 'text-[#10B981]',
+      bg: 'bg-[#ECFDF5]',
     },
     {
       title: '100% Authentic Parts',
       description: 'Original imported Filmtec RO membranes & NSF certified carbon filters.',
       icon: Award,
       color: 'text-[#F59E0B]',
+      bg: 'bg-[#FFFBEB]',
     },
     {
       title: 'Eco Smart Power',
       description: 'Automated auto-cutoff & low power consumption technology.',
       icon: Zap,
-      color: 'text-purple-400',
+      color: 'text-purple-600',
+      bg: 'bg-purple-50',
     },
   ];
 
@@ -56,18 +60,18 @@ export const WhyUsAndTestimonials: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+    <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
       {/* Why Aqua Point */}
       <div className="space-y-10">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs font-bold text-[#00E5FF] uppercase tracking-widest">
+          <span className="text-xs font-bold text-[#0284C7] uppercase tracking-widest">
             The Aqua Point Distinction
           </span>
-          <h2 className="text-3xl font-extrabold text-white">
+          <h2 className="text-3xl font-extrabold text-[#0F172A]">
             Why Thousands Trust <span className="text-[#10B981]">Aqua Point</span>
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-[#475569]">
             Engineered specifically for Bangladesh groundwater conditions with high iron, hardness, and TDS.
           </p>
         </div>
@@ -78,11 +82,13 @@ export const WhyUsAndTestimonials: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-[#131826]/70 border border-[#1E2638] backdrop-blur-xl hover:border-[#00E5FF]/40 transition-all duration-300 space-y-3 shadow-lg"
+                className="p-6 rounded-2xl bg-white border border-[#E2E8F0] hover:border-[#0284C7]/40 transition-all duration-300 space-y-3 shadow-sm"
               >
-                <Icon className={`w-8 h-8 ${f.color}`} />
-                <h3 className="text-base font-bold text-white">{f.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{f.description}</p>
+                <div className={`w-12 h-12 rounded-xl ${f.bg} flex items-center justify-center border border-[#E2E8F0]`}>
+                  <Icon className={`w-6 h-6 ${f.color}`} />
+                </div>
+                <h3 className="text-base font-bold text-[#0F172A]">{f.title}</h3>
+                <p className="text-xs text-[#475569] leading-relaxed">{f.description}</p>
               </div>
             );
           })}
@@ -90,12 +96,12 @@ export const WhyUsAndTestimonials: React.FC = () => {
       </div>
 
       {/* Testimonials */}
-      <div className="p-8 sm:p-12 rounded-3xl bg-[#131826]/80 border border-[#1E2638] backdrop-blur-2xl shadow-2xl space-y-10">
+      <div className="p-8 sm:p-12 rounded-3xl bg-white border border-[#E2E8F0] shadow-md space-y-10">
         <div className="text-center max-w-xl mx-auto space-y-2">
           <span className="text-xs font-bold text-[#F59E0B] uppercase tracking-widest">
             Client Feedback & Reviews
           </span>
-          <h2 className="text-3xl font-extrabold text-white">
+          <h2 className="text-3xl font-extrabold text-[#0F172A]">
             Loved By Families & Businesses
           </h2>
         </div>
@@ -104,27 +110,27 @@ export const WhyUsAndTestimonials: React.FC = () => {
           {testimonials.map((t, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-[#0A0D16]/80 border border-[#1E2638] space-y-4 flex flex-col justify-between"
+              className="p-6 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex text-amber-400">
+                  <div className="flex text-amber-500">
                     {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <Quote className="w-6 h-6 text-slate-600" />
+                  <Quote className="w-6 h-6 text-[#CBD5E1]" />
                 </div>
-                <p className="text-xs text-slate-300 italic leading-relaxed">
+                <p className="text-xs text-[#334155] italic leading-relaxed">
                   "{t.comment}"
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#1E2638]">
-                <h4 className="text-sm font-bold text-white">{t.name}</h4>
-                <div className="flex items-center justify-between text-[11px] text-slate-400 mt-0.5">
+              <div className="pt-4 border-t border-[#E2E8F0]">
+                <h4 className="text-sm font-bold text-[#0F172A]">{t.name}</h4>
+                <div className="flex items-center justify-between text-[11px] text-[#64748B] mt-0.5">
                   <span>{t.role}</span>
-                  <span className="text-[#00E5FF]">{t.location}</span>
+                  <span className="text-[#0284C7] font-semibold">{t.location}</span>
                 </div>
               </div>
             </div>

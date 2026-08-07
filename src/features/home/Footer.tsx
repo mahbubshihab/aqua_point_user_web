@@ -2,20 +2,20 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Droplets, PhoneCall, Mail, MapPin, ShieldCheck, Heart, ExternalLink } from 'lucide-react';
+import { Droplets, PhoneCall, Mail, MapPin, ShieldCheck, CreditCard, Lock, ArrowUpRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="mt-20 border-t border-[#1E2638] bg-[#0A0D16] text-slate-400 text-sm">
-      {/* Top Footer Section */}
+    <footer className="mt-20 bg-[#0F172A] text-white text-sm">
+      {/* 4-Column Deep Navy Footer Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           
-          {/* Col 1: Brand Info */}
-          <div className="lg:col-span-2 space-y-4">
+          {/* Column 1: Company Mission & Brand Info */}
+          <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00E5FF] to-[#10B981] p-0.5 shadow-[0_0_15px_rgba(0,229,255,0.3)]">
-                <div className="w-full h-full bg-[#0A0D16] rounded-[10px] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0284C7] to-[#00E5FF] p-0.5 shadow-md">
+                <div className="w-full h-full bg-[#0F172A] rounded-[10px] flex items-center justify-center">
                   <Droplets className="w-5 h-5 text-[#00E5FF]" />
                 </div>
               </div>
@@ -24,67 +24,66 @@ export const Footer: React.FC = () => {
               </span>
             </Link>
             
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Bangladesh’s premier water treatment technology provider. Delivering luxury Woodistic glass RO purifiers, commercial filtration plants, and 24/7 technician support.
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Aqua Point is committed to providing 100% pure, healthy, and mineral-balanced drinking water solutions across Bangladesh. We offer premium 7-stage Woodistic glass RO purifiers, industrial plants, and 24/7 doorstep technician services.
             </p>
 
-            <div className="p-4 rounded-xl bg-[#131826] border border-[#1E2638] space-y-2">
-              <div className="text-xs font-bold text-slate-200 flex items-center gap-2">
-                <PhoneCall className="w-4 h-4 text-[#10B981] animate-bounce" />
-                <span>24/7 Hotline Support</span>
+            <div className="pt-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-200">
+                <ShieldCheck className="w-4 h-4 text-[#10B981]" />
+                <span>BSTI & WHO Drinking Standard Certified</span>
               </div>
-              <a 
-                href="tel:09613700750" 
-                className="text-lg font-extrabold text-[#00E5FF] hover:underline block"
-              >
-                09613 700 750
-              </a>
             </div>
           </div>
 
-          {/* Col 2: Quick Links */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-extrabold text-white uppercase tracking-widest">
+          {/* Column 2: Quick Links */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-extrabold text-white uppercase tracking-widest border-b border-slate-700 pb-2">
               Quick Links
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-xs text-slate-300">
               <li>
-                <Link href="/" className="hover:text-[#00E5FF] transition-colors">
-                  Home Page
+                <Link href="/" className="hover:text-[#00E5FF] transition-colors flex items-center gap-1">
+                  <span>Home</span>
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="hover:text-[#00E5FF] transition-colors">
-                  RO Purifiers Catalog
+                <Link href="/products" className="hover:text-[#00E5FF] transition-colors flex items-center gap-1">
+                  <span>Products Catalog</span>
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=Spare+Parts" className="hover:text-[#00E5FF] transition-colors">
-                  Spare Parts & Filters
+                <Link href="/services" className="hover:text-[#00E5FF] transition-colors flex items-center gap-1">
+                  <span>Technician Servicing</span>
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-[#00E5FF] transition-colors">
-                  Book Technician Service
+                <Link href="/#water-quality" className="hover:text-[#00E5FF] transition-colors flex items-center gap-1">
+                  <span>Water Quality Meter</span>
                 </Link>
               </li>
               <li>
-                <Link href="/cart" className="hover:text-[#00E5FF] transition-colors">
-                  Shopping Cart & Orders
+                <Link href="/contact#about" className="hover:text-[#00E5FF] transition-colors flex items-center gap-1">
+                  <span>About Aqua Point</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-[#00E5FF] transition-colors flex items-center gap-1">
+                  <span>Contact Us</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Categories */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-extrabold text-white uppercase tracking-widest">
-              Product Categories
+          {/* Column 3: Product & Service Categories */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-extrabold text-white uppercase tracking-widest border-b border-slate-700 pb-2">
+              Our Products
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-xs text-slate-300">
               <li>
                 <Link href="/products?category=RO+Purifiers" className="hover:text-[#10B981] transition-colors">
-                  Residential RO Systems
+                  7-Stage RO Purifiers
                 </Link>
               </li>
               <li>
@@ -94,56 +93,78 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/products?category=Industrial+RO+Plants" className="hover:text-[#10B981] transition-colors">
-                  Commercial RO Plants
+                  Industrial RO Plants (500+ LPH)
                 </Link>
               </li>
               <li>
                 <Link href="/products?category=Spare+Parts" className="hover:text-[#10B981] transition-colors">
-                  UV Lamps & Cartridges
+                  RO Membranes & Filter Cartridges
                 </Link>
               </li>
               <li>
-                <Link href="/#water-telemetry" className="hover:text-[#10B981] transition-colors">
-                  TDS Quality Meter
+                <Link href="/services" className="hover:text-[#10B981] transition-colors">
+                  Annual Maintenance Contracts (AMC)
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Contact Address */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-extrabold text-white uppercase tracking-widest">
-              Headquarters
+          {/* Column 4: Contact Info & Address */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-extrabold text-white uppercase tracking-widest border-b border-slate-700 pb-2">
+              Contact & Location
             </h4>
-            <ul className="space-y-3 text-xs">
-              <li className="flex items-start gap-2">
+            <ul className="space-y-3 text-xs text-slate-300">
+              <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#00E5FF] shrink-0 mt-0.5" />
-                <span>Aqua Point Tower, House 42, Road 11, Block D, Banani, Dhaka-1213</span>
+                <span>House 72, Janata Housing Road, 3 Ring Road, Dhaka 1219</span>
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#10B981] shrink-0" />
+              <li className="flex items-center gap-2.5">
+                <PhoneCall className="w-4 h-4 text-[#10B981] shrink-0" />
+                <a href="tel:09613700750" className="hover:text-[#00E5FF] font-bold">09613 700 750</a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#F59E0B] shrink-0" />
                 <span>support@aquapointbd.com</span>
               </li>
-              <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                <span>BSTI & NSF Certified</span>
-              </li>
             </ul>
+
+            {/* Helpline CTA box inside column */}
+            <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 space-y-1">
+              <span className="text-[11px] text-slate-400 font-medium block">Need instant assistance?</span>
+              <a href="tel:09613700750" className="text-sm font-extrabold text-[#00E5FF] hover:underline block">
+                Call Helpline: 09613 700 750
+              </a>
+            </div>
           </div>
 
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-[#1E2638] bg-[#070910] py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      {/* Payment Gateway Badges & Copyright Footer Bar */}
+      <div className="border-t border-slate-800 bg-[#0B1120] py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} Aqua Point BD. All rights reserved. Designed with Woodistic Glassmorphic Architecture.
+            © {new Date().getFullYear()} Aqua Point BD. All rights reserved. Designed with Woodistic Clean White & Ocean Aqua Water Theme.
           </div>
-          <div className="flex items-center gap-6">
-            <Link href="/contact" className="hover:text-slate-300">Privacy Policy</Link>
-            <Link href="/contact" className="hover:text-slate-300">Terms of Service</Link>
-            <Link href="/contact" className="hover:text-[#00E5FF]">Help Center</Link>
+
+          {/* Payment Gateway Badges */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-[11px] font-semibold text-slate-400 mr-2 flex items-center gap-1">
+              <Lock className="w-3 h-3 text-[#10B981]" /> Secure Payments:
+            </span>
+            <span className="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-[11px] font-bold text-pink-400">
+              bKash
+            </span>
+            <span className="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-[11px] font-bold text-orange-400">
+              Nagad
+            </span>
+            <span className="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-[11px] font-bold text-blue-400">
+              VISA / Card
+            </span>
+            <span className="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-[11px] font-bold text-[#10B981]">
+              Cash On Delivery
+            </span>
           </div>
         </div>
       </div>

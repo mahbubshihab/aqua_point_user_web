@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className={`${inter.className} min-h-screen bg-[#0A0D16] text-[#F8FAFC] antialiased flex flex-col justify-between selection:bg-[#00E5FF] selection:text-[#0A0D16]`}>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.className} min-h-screen bg-white text-[#0F172A] antialiased flex flex-col justify-between selection:bg-[#0284C7] selection:text-white`}>
         <CartProvider>
           <Navbar />
           <main className="flex-grow">{children}</main>

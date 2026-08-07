@@ -12,9 +12,10 @@ export const QuickActionCards: React.FC = () => {
       icon: Wrench,
       href: '/services',
       badge: '2 Hour Dispatch',
-      color: 'from-[#00E5FF]/20 via-[#131826] to-[#131826]',
-      borderColor: 'hover:border-[#00E5FF]',
-      iconColor: 'text-[#00E5FF]',
+      color: 'bg-white',
+      borderColor: 'hover:border-[#0284C7]',
+      iconColor: 'text-[#0284C7]',
+      bgIcon: 'bg-[#F0F9FF]',
     },
     {
       title: 'Buy Spare Parts',
@@ -22,9 +23,10 @@ export const QuickActionCards: React.FC = () => {
       icon: ShoppingBag,
       href: '/products?category=Spare+Parts',
       badge: '100% Original',
-      color: 'from-[#10B981]/20 via-[#131826] to-[#131826]',
+      color: 'bg-white',
       borderColor: 'hover:border-[#10B981]',
       iconColor: 'text-[#10B981]',
+      bgIcon: 'bg-[#ECFDF5]',
     },
     {
       title: 'Invoices & Orders',
@@ -32,9 +34,10 @@ export const QuickActionCards: React.FC = () => {
       icon: Receipt,
       href: '/cart',
       badge: 'Instant Track',
-      color: 'from-[#F59E0B]/20 via-[#131826] to-[#131826]',
+      color: 'bg-white',
       borderColor: 'hover:border-[#F59E0B]',
       iconColor: 'text-[#F59E0B]',
+      bgIcon: 'bg-[#FFFBEB]',
     },
     {
       title: 'Customer Support',
@@ -42,9 +45,10 @@ export const QuickActionCards: React.FC = () => {
       icon: Headset,
       href: '/contact',
       badge: '09613 700 750',
-      color: 'from-[#8B5CF6]/20 via-[#131826] to-[#131826]',
-      borderColor: 'hover:border-[#8B5CF6]',
-      iconColor: 'text-[#8B5CF6]',
+      color: 'bg-white',
+      borderColor: 'hover:border-purple-500',
+      iconColor: 'text-purple-600',
+      bgIcon: 'bg-purple-50',
     },
   ];
 
@@ -57,23 +61,23 @@ export const QuickActionCards: React.FC = () => {
             <Link
               key={idx}
               href={action.href}
-              className={`group relative p-5 rounded-2xl bg-gradient-to-br ${action.color} border border-[#1E2638] ${action.borderColor} backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-between`}
+              className={`group relative p-5 rounded-2xl ${action.color} border border-[#E2E8F0] ${action.borderColor} transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-between`}
             >
               <div className="flex items-start justify-between">
-                <div className={`p-3 rounded-xl bg-[#0A0D16]/80 border border-[#1E2638] ${action.iconColor}`}>
+                <div className={`p-3 rounded-xl ${action.bgIcon} border border-[#E2E8F0] ${action.iconColor}`}>
                   <Icon className="w-6 h-6 group-hover:scale-110 transition-transform" />
                 </div>
-                <span className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#0A0D16]/60 border border-[#1E2638] text-slate-300">
+                <span className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569]">
                   {action.badge}
                 </span>
               </div>
 
               <div className="mt-4">
-                <h3 className="text-base font-bold text-white group-hover:text-[#00E5FF] transition-colors flex items-center justify-between">
+                <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#0284C7] transition-colors flex items-center justify-between">
                   <span>{action.title}</span>
-                  <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-[#00E5FF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <ArrowUpRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#0284C7] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[#475569] mt-1">
                   {action.subtitle}
                 </p>
               </div>

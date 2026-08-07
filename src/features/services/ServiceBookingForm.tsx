@@ -11,7 +11,6 @@ import {
   CheckCircle2, 
   AlertCircle,
   ShieldCheck,
-  Droplets,
   Sparkles
 } from 'lucide-react';
 import { submitServiceRequestToFirestore } from '@/core/services/firebase';
@@ -84,14 +83,14 @@ export const ServiceBookingForm: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       
       {/* Header Banner */}
-      <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#131826] via-[#1E2638] to-[#0A0D16] border border-[#1E2638] backdrop-blur-2xl shadow-2xl space-y-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0A0D16] border border-[#10B981]/40 text-xs font-bold text-[#10B981]">
+      <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#F0F9FF] via-white to-[#F8FAFC] border border-[#BAE6FD] shadow-sm space-y-4">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#A7F3D0] text-xs font-bold text-[#10B981] shadow-sm">
           <Wrench className="w-3.5 h-3.5" /> 2-Hour Doorstep Service Dispatch
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Book Technician <span className="text-[#00E5FF]">Maintenance & Repair</span>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
+          Book Technician <span className="text-[#0284C7]">Maintenance & Repair</span>
         </h1>
-        <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
+        <p className="text-sm text-[#475569] max-w-2xl leading-relaxed">
           Schedule an expert Aqua Point certified technician for RO filter replacement, leakage repair, membrane backwash, or comprehensive water quality auditing.
         </p>
       </div>
@@ -100,24 +99,24 @@ export const ServiceBookingForm: React.FC = () => {
         
         {/* Left Form */}
         <div className="lg:col-span-8">
-          <div className="p-8 rounded-3xl bg-[#131826]/80 border border-[#1E2638] backdrop-blur-xl shadow-2xl space-y-6">
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#00E5FF]" />
+          <div className="p-8 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-6">
+            <h2 className="text-xl font-bold text-[#0F172A] flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[#0284C7]" />
               <span>Service Booking Request Form</span>
             </h2>
 
             {success && (
-              <div className="p-6 rounded-2xl bg-[#10B981]/20 border border-[#10B981] space-y-2">
+              <div className="p-6 rounded-2xl bg-[#ECFDF5] border border-[#A7F3D0] space-y-2">
                 <div className="flex items-center gap-2 text-[#10B981] font-bold text-lg">
                   <CheckCircle2 className="w-6 h-6" />
                   <span>Service Request Submitted Successfully!</span>
                 </div>
-                <p className="text-xs text-slate-300">
+                <p className="text-xs text-[#334155]">
                   Your ticket has been registered in Cloud Firestore. An Aqua Point technician supervisor will call your phone to confirm appointment timing.
                 </p>
                 <button
                   onClick={() => setSuccess(false)}
-                  className="mt-2 text-xs font-bold text-[#00E5FF] hover:underline"
+                  className="mt-2 text-xs font-bold text-[#0284C7] hover:underline"
                 >
                   Book another service request
                 </button>
@@ -125,7 +124,7 @@ export const ServiceBookingForm: React.FC = () => {
             )}
 
             {errorMsg && (
-              <div className="p-4 rounded-xl bg-rose-500/20 border border-rose-500 text-xs text-rose-300 flex items-center gap-2">
+              <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-600 font-semibold flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{errorMsg}</span>
               </div>
@@ -135,13 +134,13 @@ export const ServiceBookingForm: React.FC = () => {
               
               {/* Machine selector */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                <label className="text-xs font-bold text-[#475569] uppercase tracking-wider">
                   Select Machine / Equipment Type *
                 </label>
                 <select
                   value={machineType}
                   onChange={(e) => setMachineType(e.target.value)}
-                  className="w-full bg-[#0A0D16] border border-[#1E2638] rounded-xl py-3 px-4 text-xs text-white focus:outline-none focus:border-[#00E5FF]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-3 px-4 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                 >
                   {MACHINE_TYPES.map((m) => (
                     <option key={m} value={m}>{m}</option>
@@ -152,8 +151,8 @@ export const ServiceBookingForm: React.FC = () => {
               {/* Name & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
-                    <User className="w-3.5 h-3.5 text-[#00E5FF]" /> Your Full Name *
+                  <label className="text-xs font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1">
+                    <User className="w-3.5 h-3.5 text-[#0284C7]" /> Your Full Name *
                   </label>
                   <input
                     type="text"
@@ -161,12 +160,12 @@ export const ServiceBookingForm: React.FC = () => {
                     placeholder="e.g. Farhan Ahmed"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full bg-[#0A0D16] border border-[#1E2638] rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-[#00E5FF]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
+                  <label className="text-xs font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1">
                     <PhoneCall className="w-3.5 h-3.5 text-[#10B981]" /> Contact Phone *
                   </label>
                   <input
@@ -175,14 +174,14 @@ export const ServiceBookingForm: React.FC = () => {
                     placeholder="e.g. 01812345678"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-[#0A0D16] border border-[#1E2638] rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-[#00E5FF]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                   />
                 </div>
               </div>
 
               {/* Address */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
+                <label className="text-xs font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5 text-[#F59E0B]" /> Service Address *
                 </label>
                 <textarea
@@ -191,33 +190,33 @@ export const ServiceBookingForm: React.FC = () => {
                   placeholder="House #, Road #, Area (e.g. Uttara, Mirpur, Banani), City"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className="w-full bg-[#0A0D16] border border-[#1E2638] rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-[#00E5FF]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                 />
               </div>
 
               {/* Appointment Date & Time Slot */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-[#00E5FF]" /> Preferred Date *
+                  <label className="text-xs font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1">
+                    <Calendar className="w-3.5 h-3.5 text-[#0284C7]" /> Preferred Date *
                   </label>
                   <input
                     type="date"
                     required
                     value={preferredDate}
                     onChange={(e) => setPreferredDate(e.target.value)}
-                    className="w-full bg-[#0A0D16] border border-[#1E2638] rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-[#00E5FF]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
+                  <label className="text-xs font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5 text-[#10B981]" /> Preferred Time Slot *
                   </label>
                   <select
                     value={preferredSlot}
                     onChange={(e) => setPreferredSlot(e.target.value)}
-                    className="w-full bg-[#0A0D16] border border-[#1E2638] rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-[#00E5FF]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                   >
                     {TIME_SLOTS.map((t) => (
                       <option key={t} value={t}>{t}</option>
@@ -228,7 +227,7 @@ export const ServiceBookingForm: React.FC = () => {
 
               {/* Problem Description */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                <label className="text-xs font-bold text-[#475569] uppercase tracking-wider">
                   Describe Problem / Service Notes
                 </label>
                 <textarea
@@ -236,7 +235,7 @@ export const ServiceBookingForm: React.FC = () => {
                   placeholder="e.g. Water taste bad, low flow rate, filter change required, water leaking from pipe..."
                   value={problemDescription}
                   onChange={(e) => setProblemDescription(e.target.value)}
-                  className="w-full bg-[#0A0D16] border border-[#1E2638] rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-[#00E5FF]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                 />
               </div>
 
@@ -244,7 +243,7 @@ export const ServiceBookingForm: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00E5FF] to-[#10B981] text-[#0A0D16] font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:scale-[1.01] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.01] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 <Wrench className="w-4 h-4" />
                 <span>{loading ? 'Submitting Request...' : 'Confirm Doorstep Technician Booking'}</span>
@@ -257,12 +256,12 @@ export const ServiceBookingForm: React.FC = () => {
         {/* Right Info Sidebar */}
         <div className="lg:col-span-4 space-y-6">
           
-          <div className="p-6 rounded-3xl bg-[#131826]/80 border border-[#1E2638] backdrop-blur-xl space-y-4">
-            <div className="flex items-center gap-2 text-[#00E5FF] font-bold text-sm">
+          <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-4">
+            <div className="flex items-center gap-2 text-[#0284C7] font-bold text-sm">
               <ShieldCheck className="w-5 h-5" />
               <span>Service Standard Guarantee</span>
             </div>
-            <ul className="space-y-3 text-xs text-slate-300">
+            <ul className="space-y-3 text-xs text-[#475569]">
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#10B981] shrink-0 mt-0.5" />
                 <span>Certified trained technician with ID badge</span>
@@ -282,15 +281,15 @@ export const ServiceBookingForm: React.FC = () => {
             </ul>
           </div>
 
-          <div className="p-6 rounded-3xl bg-gradient-to-br from-[#10B981]/20 via-[#131826] to-[#0A0D16] border border-[#10B981]/30 backdrop-blur-xl text-center space-y-3">
+          <div className="p-6 rounded-3xl bg-[#ECFDF5] border border-[#A7F3D0] text-center space-y-3 shadow-sm">
             <PhoneCall className="w-8 h-8 text-[#10B981] mx-auto animate-pulse" />
-            <h3 className="text-base font-bold text-white">Need Emergency Service?</h3>
-            <p className="text-xs text-slate-300">
+            <h3 className="text-base font-bold text-[#0F172A]">Need Emergency Service?</h3>
+            <p className="text-xs text-[#334155]">
               For urgent pipe leaks or water contamination emergencies, call our hotline directly:
             </p>
             <a
               href="tel:09613700750"
-              className="inline-block py-2.5 px-6 rounded-xl bg-[#10B981] text-[#0A0D16] font-extrabold text-sm hover:scale-105 transition-transform"
+              className="inline-block py-2.5 px-6 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-extrabold text-sm shadow-sm transition-all"
             >
               09613 700 750
             </a>
