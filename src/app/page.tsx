@@ -5,6 +5,7 @@ import { FeaturedProducts } from '@/features/home/FeaturedProducts';
 import { ServicesHighlight } from '@/features/home/ServicesHighlight';
 import { WaterQualityMeter } from '@/features/home/WaterQualityMeter';
 import { AboutCompanySection } from '@/features/home/AboutCompanySection';
+import { OurClientsSection } from '@/features/home/OurClientsSection';
 import { FaqsSection } from '@/features/home/FaqsSection';
 import { TestimonialsSection } from '@/features/home/TestimonialsSection';
 
@@ -29,10 +30,13 @@ export default function HomePage() {
       {/* 7. About Aqua Point BD */}
       <AboutCompanySection />
 
-      {/* 8. Authentic FAQs Accordion */}
+      {/* 8. Corporate Clients Showcase */}
+      <OurClientsSection />
+
+      {/* 9. Authentic FAQs Accordion */}
       <FaqsSection />
 
-      {/* 9. Customer Reviews */}
+      {/* 10. Customer Reviews */}
       <TestimonialsSection />
     </div>
   );

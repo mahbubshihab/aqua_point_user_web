@@ -7,6 +7,7 @@ import {
   getDoc, 
   doc, 
   addDoc, 
+  onSnapshot,
   query, 
   where, 
   orderBy, 
@@ -26,6 +27,79 @@ const firebaseConfig = {
   measurementId: "G-ZZ31XCB28Z"
 };
 
+export const fetchClientsFromFirestore = async (): Promise<ClientItem[]> => {
+  try {
+    const q = query(collection(db, CLIENTS_COLLECTION), orderBy('createdAt', 'desc'));
+    const querySnapshot = await getDocs(q);
+    const clients: ClientItem[] = [];
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      clients.push({
+        id: docSnap.id,
+        name: data.name || 'Unnamed Client',
+        industry: data.industry || 'Corporate',
+        logoUrl: data.logoUrl || data.imageUrl || '',
+        createdAt: data.createdAt,
+      });
+    });
+    return clients;
+  } catch (error) {
+    console.warn("Firestore fetch clients error, falling back to simple query:", error);
+    try {
+      const fallbackQ = collection(db, CLIENTS_COLLECTION);
+      const querySnapshot = await getDocs(fallbackQ);
+      const clients: ClientItem[] = [];
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        clients.push({
+          id: docSnap.id,
+          name: data.name || 'Unnamed Client',
+          industry: data.industry || 'Corporate',
+          logoUrl: data.logoUrl || data.imageUrl || '',
+          createdAt: data.createdAt,
+        });
+      });
+      return clients;
+    } catch (e) {
+      console.warn("Fallback fetch clients error:", e);
+      return [];
+    }
+  }
+};
+
+export const subscribeToClientsFromFirestore = (callback: (clients: ClientItem[]) => void) => {
+  const q = query(collection(db, CLIENTS_COLLECTION), orderBy('createdAt', 'desc'));
+  return onSnapshot(q, (snapshot) => {
+    const list: ClientItem[] = snapshot.docs.map((docSnap) => {
+      const data = docSnap.data();
+      return {
+        id: docSnap.id,
+        name: data.name || 'Unnamed Client',
+        industry: data.industry || 'Corporate',
+        logoUrl: data.logoUrl || data.imageUrl || '',
+        createdAt: data.createdAt,
+      };
+    });
+    callback(list);
+  }, (error) => {
+    console.warn("Firestore clients snapshot error:", error);
+    const fallbackQ = collection(db, CLIENTS_COLLECTION);
+    onSnapshot(fallbackQ, (snapshot) => {
+      const list: ClientItem[] = snapshot.docs.map((docSnap) => {
+        const data = docSnap.data();
+        return {
+          id: docSnap.id,
+          name: data.name || 'Unnamed Client',
+          industry: data.industry || 'Corporate',
+          logoUrl: data.logoUrl || data.imageUrl || '',
+          createdAt: data.createdAt,
+        };
+      });
+      callback(list);
+    });
+  });
+};
+
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
@@ -41,8 +115,17 @@ export const INQUIRIES_COLLECTION = 'inquiries';
 export const USERS_COLLECTION = 'users';
 export const FAQS_COLLECTION = 'faqs';
 export const COMPANY_INFO_COLLECTION = 'company_info';
+export const REVIEWS_COLLECTION = 'reviews';
+export const CLIENTS_COLLECTION = 'clients';
 
 // Helper Types
+export interface ClientItem {
+  id: string;
+  name: string;
+  industry?: string;
+  logoUrl: string;
+  createdAt?: DocumentData;
+}
 export interface ProductItem {
   id: string;
   name: string;
@@ -133,6 +216,16 @@ export interface ServiceItem {
   icon?: string;
   color?: string;
   bg?: string;
+}
+
+export interface ReviewItem {
+  id: string;
+  customerName: string;
+  location: string;
+  rating: number;
+  comment: string;
+  isApproved: boolean;
+  createdAt?: DocumentData;
 }
 
 // Firestore Helper API
@@ -235,3 +328,67 @@ export const submitInquiryToFirestore = async (data: Omit<InquiryPayload, 'id' |
     createdAt: serverTimestamp()
   });
 };
+
+export const fetchApprovedReviewsFromFirestore = async (): Promise<ReviewItem[]> => {
+  try {
+    const q = query(collection(db, REVIEWS_COLLECTION), where('isApproved', '==', true));
+    const querySnapshot = await getDocs(q);
+    const reviews: ReviewItem[] = [];
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      reviews.push({
+        id: docSnap.id,
+        customerName: data.customerName || data.name || 'Valued Customer',
+        location: data.location || 'Dhaka',
+        rating: Number(data.rating) || 5,
+        comment: data.comment || '',
+        isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+        createdAt: data.createdAt,
+      });
+    });
+    return reviews;
+  } catch (error) {
+    console.warn("Firestore fetch reviews error:", error);
+    return [];
+  }
+};
+
+export const subscribeToApprovedReviewsFromFirestore = (callback: (reviews: ReviewItem[]) => void) => {
+  const q = query(collection(db, REVIEWS_COLLECTION), where('isApproved', '==', true));
+  return onSnapshot(q, (snapshot) => {
+    const list: ReviewItem[] = snapshot.docs.map((docSnap) => {
+      const data = docSnap.data();
+      return {
+        id: docSnap.id,
+        customerName: data.customerName || data.name || 'Valued Customer',
+        location: data.location || 'Dhaka',
+        rating: Number(data.rating) || 5,
+        comment: data.comment || '',
+        isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+        createdAt: data.createdAt,
+      };
+    });
+    callback(list);
+  }, (error) => {
+    console.warn("Firestore reviews snapshot error:", error);
+    const fallbackQ = collection(db, REVIEWS_COLLECTION);
+    onSnapshot(fallbackQ, (snapshot) => {
+      const list: ReviewItem[] = snapshot.docs
+        .map((docSnap) => {
+          const data = docSnap.data();
+          return {
+            id: docSnap.id,
+            customerName: data.customerName || data.name || 'Valued Customer',
+            location: data.location || 'Dhaka',
+            rating: Number(data.rating) || 5,
+            comment: data.comment || '',
+            isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+            createdAt: data.createdAt,
+          };
+        })
+        .filter(r => r.isApproved);
+      callback(list);
+    });
+  });
+};
+
