@@ -112,7 +112,7 @@ export const ServiceBookingForm: React.FC = () => {
                   <span>Service Request Submitted Successfully!</span>
                 </div>
                 <p className="text-xs text-[#334155]">
-                  Your ticket has been registered in Cloud Firestore. An Aqua Point technician supervisor will call your phone to confirm appointment timing.
+                  Your ticket has been registered successfully. An Aqua Point technician supervisor will call your phone to confirm appointment timing.
                 </p>
                 <button
                   onClick={() => setSuccess(false)}

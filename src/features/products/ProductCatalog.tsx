@@ -134,7 +134,7 @@ export const ProductCatalog: React.FC = () => {
         <div className="p-16 text-center rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-4">
           <Droplets className="w-12 h-12 text-[#94A3B8] mx-auto" />
           <h3 className="text-lg font-bold text-[#0F172A]">No Products Found</h3>
-          <p className="text-xs text-[#475569]">0 products found. Try clearing your search query or selecting a different category filter.</p>
+          <p className="text-xs text-[#475569]">No products match your criteria. Try clearing your search query or selecting a different category filter.</p>
           <button
             onClick={() => { setSelectedCategory('All Products'); setSearchQuery(''); }}
             className="px-4 py-2 rounded-xl bg-[#00BCE1] text-white font-bold text-xs shadow-sm"
