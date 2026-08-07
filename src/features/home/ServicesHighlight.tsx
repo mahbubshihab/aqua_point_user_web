@@ -78,6 +78,10 @@ export const ServicesHighlight: React.FC = () => {
               </div>
             ))}
           </div>
+        ) : services.length === 0 ? (
+          <div className="p-8 text-center bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] text-xs text-[#64748B]">
+            0 services found. No services found.
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
             {services.map((service, idx) => {

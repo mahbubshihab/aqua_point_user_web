@@ -57,7 +57,7 @@ export const FeaturedProducts: React.FC = () => {
         </div>
       ) : displayProducts.length === 0 ? (
         <div className="p-8 text-center bg-white rounded-2xl border border-[#E2E8F0] text-xs text-[#64748B]">
-          No products available at the moment.
+          0 products found. No products found.
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

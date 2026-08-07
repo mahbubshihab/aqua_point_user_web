@@ -46,6 +46,10 @@ export const FaqsSection: React.FC = () => {
               <div key={n} className="h-14 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] animate-pulse" />
             ))}
           </div>
+        ) : faqs.length === 0 ? (
+          <div className="max-w-3xl mx-auto p-8 text-center bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] text-xs text-[#64748B]">
+            0 FAQs found. No FAQs found.
+          </div>
         ) : (
           <div className="max-w-3xl mx-auto space-y-3">
             {faqs.map((faq, idx) => {
