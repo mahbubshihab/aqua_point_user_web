@@ -39,6 +39,8 @@ export const SERVICES_COLLECTION = 'services';
 export const ORDERS_COLLECTION = 'orders';
 export const INQUIRIES_COLLECTION = 'inquiries';
 export const USERS_COLLECTION = 'users';
+export const FAQS_COLLECTION = 'faqs';
+export const COMPANY_INFO_COLLECTION = 'company_info';
 
 // Helper Types
 export interface ProductItem {
@@ -55,6 +57,8 @@ export interface ProductItem {
   stock: number;
   rating?: number;
   featured?: boolean;
+  purpose?: string;
+  application?: string;
   createdAt?: DocumentData;
 }
 
@@ -103,6 +107,23 @@ export interface InquiryPayload {
   createdAt?: DocumentData;
 }
 
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface CompanyInfo {
+  id: string;
+  name: string;
+  foundedYear: string;
+  founder: string;
+  address: string;
+  helpline: string;
+  email: string;
+  description: string;
+}
+
 // Firestore Helper API
 export const fetchProductsFromFirestore = async (categoryFilter?: string): Promise<ProductItem[]> => {
   try {
@@ -133,6 +154,35 @@ export const fetchProductByIdFromFirestore = async (id: string): Promise<Product
     return null;
   } catch (error) {
     console.warn("Firestore fetch single product error:", error);
+    return null;
+  }
+};
+
+export const fetchFaqsFromFirestore = async (): Promise<FaqItem[]> => {
+  try {
+    const q = query(collection(db, FAQS_COLLECTION));
+    const querySnapshot = await getDocs(q);
+    const faqs: FaqItem[] = [];
+    querySnapshot.forEach((docSnap) => {
+      faqs.push({ id: docSnap.id, ...docSnap.data() } as FaqItem);
+    });
+    return faqs;
+  } catch (error) {
+    console.warn("Firestore fetch faqs error:", error);
+    return [];
+  }
+};
+
+export const fetchCompanyInfoFromFirestore = async (): Promise<CompanyInfo | null> => {
+  try {
+    const docRef = doc(db, COMPANY_INFO_COLLECTION, 'main');
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() } as CompanyInfo;
+    }
+    return null;
+  } catch (error) {
+    console.warn("Firestore fetch company info error:", error);
     return null;
   }
 };

@@ -1,6 +1,10 @@
-import { ProductItem } from '../services/firebase';
+import { db, PRODUCTS_COLLECTION, SERVICES_COLLECTION } from './firebase';
+import { doc, setDoc, collection } from 'firebase/firestore';
 
-export const SAMPLE_PRODUCTS: ProductItem[] = [
+export const FAQS_COLLECTION = 'faqs';
+export const COMPANY_INFO_COLLECTION = 'company_info';
+
+export const REAL_PRODUCTS = [
   {
     id: 'livotec-open-7-stage',
     name: 'Livotec Open (7 Stage RO)',
@@ -9,6 +13,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 19500,
     warranty: '1 Year Electrical',
     stock: 15,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_open.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_open.jpg'
@@ -31,6 +36,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 20000,
     warranty: '1 Year Electrical',
     stock: 12,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_stand.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_stand.jpg'
@@ -53,6 +59,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 17000,
     warranty: '1 Year Electrical',
     stock: 20,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/eureka_classic.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/eureka_classic.jpg'
@@ -75,6 +82,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 17500,
     warranty: '1 Year Electrical',
     stock: 18,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/puro_plus.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/puro_plus.jpg'
@@ -97,6 +105,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 17500,
     warranty: '1 Year Electrical',
     stock: 15,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/fighter_elite.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/fighter_elite.jpg'
@@ -119,6 +128,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 18500,
     warranty: '1 Year Electrical',
     stock: 10,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/fighter_1.0.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/fighter_1.0.jpg'
@@ -141,6 +151,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 29000,
     warranty: '1 Year Electrical',
     stock: 8,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_cabinet.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/livotec_cabinet.jpg'
@@ -162,6 +173,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 21000,
     warranty: '1 Year Electrical',
     stock: 14,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/glass_door_cabinet.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/glass_door_cabinet.jpg'
@@ -184,6 +196,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 18000,
     warranty: '1 Year Electrical',
     stock: 16,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/modern_cabinet.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/modern_cabinet.jpg'
@@ -205,6 +218,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 16500,
     warranty: '1 Year Electrical',
     stock: 22,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/slim_cabinet.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/slim_cabinet.jpg'
@@ -226,6 +240,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 23000,
     warranty: '1 Year Electrical',
     stock: 7,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/pure_x_dispenser.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/pure_x_dispenser.jpg'
@@ -248,6 +263,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 25000,
     warranty: '1 Year Electrical',
     stock: 9,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/heron_dispenser.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/heron_dispenser.jpg'
@@ -270,6 +286,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 21500,
     warranty: '1 Year Electrical',
     stock: 11,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/table_top_dispenser.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/table_top_dispenser.jpg'
@@ -291,6 +308,7 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     originalPrice: 6000,
     warranty: '6 Months',
     stock: 30,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/puryca_filter.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/puryca_filter.jpg'
@@ -310,8 +328,10 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     category: 'Filters & Cartridges',
     price: 450,
     originalPrice: 600,
+    purpose: 'Removes dirt, rust, sand',
     warranty: '6 Months',
     stock: 100,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/pp_sediment_cartridge.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/pp_sediment_cartridge.jpg'
@@ -332,8 +352,10 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     category: 'Filters & Cartridges',
     price: 750,
     originalPrice: 950,
+    purpose: 'Removes chlorine & odor',
     warranty: '6 Months',
     stock: 85,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/cto_carbon_cartridge.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/cto_carbon_cartridge.jpg'
@@ -353,8 +375,10 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     category: 'Filters & Cartridges',
     price: 2200,
     originalPrice: 2800,
+    purpose: 'Removes 99% dissolved solids',
     warranty: '6 Months',
     stock: 50,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/ro_membrane_75gpd.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/ro_membrane_75gpd.jpg'
@@ -375,8 +399,10 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     category: 'Industrial RO Plants',
     price: 125000,
     originalPrice: 145000,
+    application: 'Commercial',
     warranty: '1 Year Electrical',
     stock: 3,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/commercial_ro_500lph.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/commercial_ro_500lph.jpg'
@@ -398,8 +424,10 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     category: 'Industrial RO Plants',
     price: 245000,
     originalPrice: 280000,
+    application: 'Factories',
     warranty: '1 Year Electrical',
     stock: 2,
+    stockStatus: 'In Stock',
     imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/industrial_ro_1000lph.jpg',
     galleryUrls: [
       'https://res.cloudinary.com/rvoym2gw/image/upload/v1/aqua_point/industrial_ro_1000lph.jpg'
@@ -416,3 +444,149 @@ export const SAMPLE_PRODUCTS: ProductItem[] = [
     rating: 5.0
   }
 ];
+
+export const REAL_SERVICES = [
+  {
+    id: 'free-water-quality-testing',
+    title: 'Free Water Quality Testing',
+    description: 'Free TDS, pH, and hardness testing at your doorstep in Dhaka to evaluate water safety.',
+    badge: '100% Free Service',
+    icon: 'TestTube'
+  },
+  {
+    id: 'professional-installation',
+    title: 'Professional Installation',
+    description: 'Certified expert technician setup for all residential purifiers, dispensers, and commercial plants.',
+    badge: 'Free on ৳15k+ Orders',
+    icon: 'Cpu'
+  },
+  {
+    id: 'servicing-on-demand-repair',
+    title: 'Servicing & On-Demand Repair',
+    description: 'Rapid 24-hour response maintenance, leak repair, and filter replacement on-call.',
+    badge: '2-Hour Dispatch',
+    icon: 'Wrench'
+  },
+  {
+    id: 'filter-replacement-amc',
+    title: 'Filter Replacement & AMC',
+    description: 'Annual Maintenance Contracts (AMC) ensuring scheduled genuine filter changes and zero breakdown hassle.',
+    badge: '365 Days Guarantee',
+    icon: 'Shield'
+  },
+  {
+    id: 'industrial-plant-consulting',
+    title: 'Industrial Plant Consulting',
+    description: 'Custom design, engineering, and turnkey installation of commercial & industrial RO plants (500 to 10,000+ LPH).',
+    badge: 'Custom Engineering',
+    icon: 'Building'
+  }
+];
+
+export const REAL_FAQS = [
+  {
+    id: 'faq-1',
+    question: 'How often should I change my water purifier filters?',
+    answer: 'PP sediment and CTO carbon filters should generally be replaced every 6 to 9 months, while the RO membrane usually lasts 18 to 24 months depending on feed water TDS.'
+  },
+  {
+    id: 'faq-2',
+    question: 'Do you offer free water testing before purchasing?',
+    answer: 'Yes, Aqua Point BD provides free doorstep TDS and water quality testing in Dhaka to help you select the exact purification system needed.'
+  },
+  {
+    id: 'faq-3',
+    question: 'What warranty comes with Aqua Point BD products?',
+    answer: 'All standard RO purifiers and dispensers come with a 1-Year Electrical Components Warranty plus dedicated after-sales support.'
+  },
+  {
+    id: 'faq-4',
+    question: 'Can Aqua Point BD install industrial RO plants for commercial buildings?',
+    answer: 'Absolutely! We design, deliver, and maintain custom commercial and industrial RO plants ranging from 500 LPH to 10,000+ LPH for factories, schools, and hospitals.'
+  },
+  {
+    id: 'faq-5',
+    question: 'How can I book a servicing appointment?',
+    answer: 'You can book directly via our online Service Booking page or call our helpline at 01780-885841 / 09613 700 750.'
+  }
+];
+
+export const REAL_COMPANY_INFO = {
+  id: 'main',
+  name: 'Aqua Point BD',
+  foundedYear: '2007',
+  founder: 'Enjamamul Haque (Kiron)',
+  address: 'House 72, Janata Housing Road, 3 Ring Road, Dhaka 1219',
+  helpline: '01780-885841 / 09613 700 750',
+  email: 'aquabd112@gmail.com',
+  description: 'Founded in 2007 by Enjamamul Haque (Kiron), Aqua Point BD is Bangladesh’s trusted provider of domestic RO purifiers, cabinet filters, dispensers, genuine cartridges, and commercial RO plants.'
+};
+
+export const seedAquaPointDatabase = async (): Promise<{ success: boolean; seededCount: number; errors: any[] }> => {
+  const errors: any[] = [];
+  let seededCount = 0;
+
+  console.log('Beginning Firestore seeding for project aqua-point-bd...');
+
+  // 1. Seed Products
+  for (const product of REAL_PRODUCTS) {
+    try {
+      const docRef = doc(db, PRODUCTS_COLLECTION, product.id);
+      await setDoc(docRef, product, { merge: true });
+      seededCount++;
+    } catch (err) {
+      console.error(`Error seeding product ${product.id}:`, err);
+      errors.push({ type: 'product', id: product.id, error: err });
+    }
+  }
+
+  // 2. Seed Services
+  for (const service of REAL_SERVICES) {
+    try {
+      const docRef = doc(db, SERVICES_COLLECTION, service.id);
+      await setDoc(docRef, service, { merge: true });
+      seededCount++;
+    } catch (err) {
+      console.error(`Error seeding service ${service.id}:`, err);
+      errors.push({ type: 'service', id: service.id, error: err });
+    }
+  }
+
+  // 3. Seed FAQs
+  for (const faq of REAL_FAQS) {
+    try {
+      const docRef = doc(db, FAQS_COLLECTION, faq.id);
+      await setDoc(docRef, faq, { merge: true });
+      seededCount++;
+    } catch (err) {
+      console.error(`Error seeding faq ${faq.id}:`, err);
+      errors.push({ type: 'faq', id: faq.id, error: err });
+    }
+  }
+
+  // 4. Seed Company Info
+  try {
+    const docRef = doc(db, COMPANY_INFO_COLLECTION, REAL_COMPANY_INFO.id);
+    await setDoc(docRef, REAL_COMPANY_INFO, { merge: true });
+    seededCount++;
+  } catch (err) {
+    console.error('Error seeding company info:', err);
+    errors.push({ type: 'company_info', id: REAL_COMPANY_INFO.id, error: err });
+  }
+
+  console.log(`Seeding complete. Successfully wrote ${seededCount} items with ${errors.length} errors.`);
+  return { success: errors.length === 0, seededCount, errors };
+};
+
+// Self-executing CLI runner when executed via node / tsx
+if (typeof require !== 'undefined' && require.main === module) {
+  seedAquaPointDatabase()
+    .then((res) => {
+      console.log('Seeding result:', res);
+      process.exit(res.success ? 0 : 1);
+    })
+    .catch((err) => {
+      console.error('Unhandled seed error:', err);
+      process.exit(1);
+    });
+}

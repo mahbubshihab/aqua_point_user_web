@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
             </Link>
             
             <p className="text-xs text-slate-300 leading-relaxed">
-              Aqua Point is committed to providing 100% pure, healthy, and mineral-balanced drinking water solutions across Bangladesh. We offer premium 7-stage Woodistic glass RO purifiers, industrial plants, and 24/7 doorstep technician services.
+              Aqua Point is committed to providing 100% pure, healthy, and mineral-balanced drinking water solutions across Bangladesh. We offer premium 7-stage RO purifiers, cabinet filters, dispensers, industrial plants, and 24/7 doorstep technician services. Founded 2007 by Enjamamul Haque (Kiron).
             </p>
 
             <div className="pt-2">
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/contact#about" className="hover:text-[#00E5FF] transition-colors flex items-center gap-1">
+                <Link href="/about" className="hover:text-[#00E5FF] transition-colors flex items-center gap-1">
                   <span>About Aqua Point</span>
                 </Link>
               </li>
@@ -87,23 +87,23 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=Water+Filters" className="hover:text-[#10B981] transition-colors">
-                  Alkaline Water Filters
+                <Link href="/products?category=Cabinet+Purifiers" className="hover:text-[#10B981] transition-colors">
+                  Cabinet Purifiers
+                </Link>
+              </li>
+              <li>
+                <Link href="/products?category=Water+Dispensers" className="hover:text-[#10B981] transition-colors">
+                  Water Dispensers
+                </Link>
+              </li>
+              <li>
+                <Link href="/products?category=Filters+%26+Cartridges" className="hover:text-[#10B981] transition-colors">
+                  Filters & Cartridges
                 </Link>
               </li>
               <li>
                 <Link href="/products?category=Industrial+RO+Plants" className="hover:text-[#10B981] transition-colors">
-                  Industrial RO Plants (500+ LPH)
-                </Link>
-              </li>
-              <li>
-                <Link href="/products?category=Spare+Parts" className="hover:text-[#10B981] transition-colors">
-                  RO Membranes & Filter Cartridges
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-[#10B981] transition-colors">
-                  Annual Maintenance Contracts (AMC)
+                  Industrial RO Plants (500-1000 LPH)
                 </Link>
               </li>
             </ul>
@@ -121,19 +121,19 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <PhoneCall className="w-4 h-4 text-[#10B981] shrink-0" />
-                <a href="tel:09613700750" className="hover:text-[#00E5FF] font-bold">09613 700 750</a>
+                <a href="tel:01780885841" className="hover:text-[#00E5FF] font-bold">01780-885841 / 09613 700 750</a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                <span>support@aquapointbd.com</span>
+                <a href="mailto:aquabd112@gmail.com" className="hover:text-[#00E5FF]">aquabd112@gmail.com</a>
               </li>
             </ul>
 
             {/* Helpline CTA box inside column */}
             <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 space-y-1">
               <span className="text-[11px] text-slate-400 font-medium block">Need instant assistance?</span>
-              <a href="tel:09613700750" className="text-sm font-extrabold text-[#00E5FF] hover:underline block">
-                Call Helpline: 09613 700 750
+              <a href="tel:01780885841" className="text-sm font-extrabold text-[#00E5FF] hover:underline block">
+                Helpline: 01780-885841 / 09613 700 750
               </a>
             </div>
           </div>
@@ -145,7 +145,7 @@ export const Footer: React.FC = () => {
       <div className="border-t border-slate-800 bg-[#0B1120] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} Aqua Point BD. All rights reserved. Designed with Woodistic Clean White & Ocean Aqua Water Theme.
+            © {new Date().getFullYear()} Aqua Point BD. All rights reserved. Founded 2007 by Enjamamul Haque (Kiron).
           </div>
 
           {/* Payment Gateway Badges */}
