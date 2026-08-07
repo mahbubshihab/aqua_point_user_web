@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { 
   Droplets, 
   Search, 
@@ -85,21 +86,16 @@ export const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 gap-4">
             
-            {/* Logo: Aqua Point logo (Water Drop icon + "AQUA POINT" wordmark) */}
+            {/* Logo: Aqua Point brand logo */}
             <Link href="/" className="flex items-center gap-3 shrink-0 group">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#00BCE1] to-[#008BAA] p-0.5 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">
-                <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-                  <Droplets className="w-6 h-6 text-[#00BCE1] fill-[#00BCE1]/20 group-hover:scale-110 transition-transform duration-300" />
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0F172A] flex items-center gap-0.5 leading-none">
-                  AQUA<span className="text-[#00BCE1]">POINT</span>
-                </span>
-                <span className="text-[10px] font-bold text-[#008BAA] tracking-widest uppercase mt-1">
-                  Pure Water Solution
-                </span>
-              </div>
+              <Image
+                src="/app_logo.png"
+                alt="Aqua Point Logo"
+                width={160}
+                height={48}
+                className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                priority
+              />
             </Link>
 
             {/* Nav Pills: Active tab highlight pill ("Home", "Products", "Services", "TDS Meter", "About", "Contact") */}

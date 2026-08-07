@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Droplets, PhoneCall, Mail, MapPin, ShieldCheck, Lock } from 'lucide-react';
 import { fetchCompanyInfoFromFirestore, CompanyInfo } from '@/core/services/firebase';
 
@@ -32,14 +33,13 @@ export const Footer: React.FC = () => {
           {/* Column 1: Company Mission & Brand Info */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00BCE1] to-[#00E5FF] p-0.5 shadow-md">
-                <div className="w-full h-full bg-[#0F172A] rounded-[10px] flex items-center justify-center">
-                  <Droplets className="w-5 h-5 text-[#00E5FF]" />
-                </div>
-              </div>
-              <span className="text-xl font-extrabold text-white tracking-tight">
-                AQUA<span className="text-[#00E5FF]">POINT</span>
-              </span>
+              <Image
+                src="/app_logo.png"
+                alt="Aqua Point Logo"
+                width={150}
+                height={45}
+                className="h-10 w-auto object-contain"
+              />
             </Link>
             
             <p className="text-xs text-slate-300 leading-relaxed">

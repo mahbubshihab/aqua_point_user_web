@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   title: "Aqua Point | Pure Water Solution & Luxury RO Purifiers",
   description: "Bangladesh's leading water purification provider. 7-stage RO purifiers, commercial plants, genuine spare parts & 24/7 technician servicing.",
   keywords: ["RO Purifier", "Aqua Point", "Water Filter Bangladesh", "TDS Meter", "RO Servicing Dhaka"],
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/app_logo.png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/app_logo.png',
+  },
 };
 
 export default function RootLayout({
