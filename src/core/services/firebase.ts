@@ -44,7 +44,7 @@ export const USERS_COLLECTION = 'users';
 export interface ProductItem {
   id: string;
   name: string;
-  category: 'RO Purifiers' | 'Water Filters' | 'Spare Parts' | 'Industrial RO Plants';
+  category: string;
   price: number;
   originalPrice?: number;
   description: string;
