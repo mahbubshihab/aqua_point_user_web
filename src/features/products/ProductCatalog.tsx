@@ -89,7 +89,7 @@ export const ProductCatalog: React.FC = () => {
       <div className="p-4 rounded-2xl bg-white border border-[#E2E8F0] flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
         <div className="flex items-center gap-2 text-xs font-bold text-[#475569]">
           <span>Showing {filteredProducts.length} items for</span>
-          <span className="px-2.5 py-0.5 rounded-full bg-[#E0F2FE] text-[#0284C7] font-extrabold">
+          <span className="px-2.5 py-0.5 rounded-full bg-[#E0F7FA] text-[#00BCE1] font-extrabold">
             {selectedCategory}
           </span>
         </div>
@@ -102,7 +102,7 @@ export const ProductCatalog: React.FC = () => {
               placeholder="Search catalog..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2 pl-8 pr-8 text-xs text-[#0F172A] focus:outline-none focus:bg-white focus:border-[#0284C7]"
+              className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2 pl-8 pr-8 text-xs text-[#0F172A] focus:outline-none focus:bg-white focus:border-[#00BCE1]"
             />
             <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[#94A3B8]" />
             {searchQuery && (
@@ -116,7 +116,7 @@ export const ProductCatalog: React.FC = () => {
           <select
             value={priceSort}
             onChange={(e) => setPriceSort(e.target.value as any)}
-            className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2 px-3 text-xs font-bold text-[#475569] focus:outline-none focus:border-[#0284C7]"
+            className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2 px-3 text-xs font-bold text-[#475569] focus:outline-none focus:border-[#00BCE1]"
           >
             <option value="default">Sort by Default</option>
             <option value="low-to-high">Price: Low to High</option>
@@ -142,7 +142,7 @@ export const ProductCatalog: React.FC = () => {
           <p className="text-xs text-[#475569]">Try clearing your search query or selecting a different category filter.</p>
           <button
             onClick={() => { setSelectedCategory('All Products'); setSearchQuery(''); }}
-            className="px-4 py-2 rounded-xl bg-[#0284C7] text-white font-bold text-xs shadow-sm"
+            className="px-4 py-2 rounded-xl bg-[#00BCE1] text-white font-bold text-xs shadow-sm"
           >
             Reset Filters
           </button>

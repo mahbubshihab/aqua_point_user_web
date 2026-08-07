@@ -52,7 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="group rounded-[16px] bg-white border border-[#E2E8F0] shadow-sm hover:shadow-xl hover:border-[#0284C7]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-1">
+    <div className="group rounded-[16px] bg-white border border-[#E2E8F0] shadow-sm hover:shadow-xl hover:border-[#00BCE1]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-1">
       {/* Product Image Container */}
       <div className="relative w-full h-56 bg-[#F8FAFC] overflow-hidden border-b border-[#E2E8F0] flex items-center justify-center">
         <Link href={`/products/${product.id}`} className="w-full h-full block">
@@ -63,9 +63,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           />
         </Link>
 
-        {/* Top Right Badge: Rounded pill tag in #0284C7 */}
+        {/* Top Right Badge: Rounded pill tag in #00BCE1 */}
         <div className="absolute top-3 right-3 pointer-events-none">
-          <span className="px-3 py-1 rounded-full bg-[#0284C7] text-white text-[11px] font-extrabold shadow-md shadow-sky-500/20">
+          <span className="px-3 py-1 rounded-full bg-[#00BCE1] text-white text-[11px] font-extrabold shadow-md shadow-cyan-500/20">
             {getTopRightTag()}
           </span>
         </div>
@@ -103,13 +103,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           {/* Bold Product Title */}
           <Link href={`/products/${product.id}`}>
-            <h3 className="text-base font-extrabold text-[#0F172A] group-hover:text-[#0284C7] transition-colors line-clamp-2 leading-snug">
+            <h3 className="text-base font-extrabold text-[#0F172A] group-hover:text-[#00BCE1] transition-colors line-clamp-2 leading-snug">
               {product.name}
             </h3>
           </Link>
         </div>
 
-        {/* Bottom Row: Price on left, filled ocean blue + Add button on right */}
+        {/* Bottom Row: Price on left, filled cyan + Add button on right */}
         <div className="pt-3 border-t border-[#F1F5F9] flex items-center justify-between gap-2">
           <div className="flex flex-col">
             {product.originalPrice && (
@@ -127,7 +127,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all duration-200 flex items-center gap-1.5 shadow-md ${
               isAdded
                 ? 'bg-emerald-600 text-white shadow-emerald-500/25 scale-95'
-                : 'bg-[#0284C7] hover:bg-[#0369A1] text-white shadow-sky-500/25 active:scale-95'
+                : 'bg-[#00BCE1] hover:bg-[#00A3C7] text-white shadow-cyan-500/25 active:scale-95'
             }`}
           >
             {isAdded ? (

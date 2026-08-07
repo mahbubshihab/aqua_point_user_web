@@ -85,11 +85,11 @@ export const CategoryShowcaseGrid: React.FC = () => {
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F0F9FF] border border-[#BAE6FD] text-xs font-bold text-[#0284C7]">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F0F9FF] border border-[#BAE6FD] text-xs font-bold text-[#00BCE1]">
             <span>💧</span> EXPLORE WATER PURIFICATION CATEGORIES
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight mt-2">
-            Complete Purification <span className="text-[#0284C7]">Solutions</span>
+            Complete Purification <span className="text-[#00BCE1]">Solutions</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-[#64748B] max-w-md">
@@ -104,21 +104,21 @@ export const CategoryShowcaseGrid: React.FC = () => {
           return (
             <div
               key={cat.id}
-              className="group relative rounded-2xl bg-white border border-[#E2E8F0] p-4 flex flex-col justify-between hover:border-[#0284C7] hover:shadow-lg hover:shadow-sky-500/10 transition-all duration-300 hover:-translate-y-1"
+              className="group relative rounded-2xl bg-white border border-[#E2E8F0] p-4 flex flex-col justify-between hover:border-[#00BCE1] hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1"
             >
               <div>
                 {/* Top Row: Icon + Badge */}
                 <div className="flex items-center justify-between mb-3">
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cat.bgGradient} border border-[#BAE6FD]/40 flex items-center justify-center text-[#0284C7] group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300 shadow-sm`}>
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cat.bgGradient} border border-[#BAE6FD]/40 flex items-center justify-center text-[#00BCE1] group-hover:bg-[#00BCE1] group-hover:text-white transition-colors duration-300 shadow-sm`}>
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className="px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[10px] font-bold text-[#64748B] group-hover:bg-[#E0F2FE] group-hover:text-[#0284C7] transition-colors">
+                  <span className="px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[10px] font-bold text-[#64748B] group-hover:bg-[#E0F7FA] group-hover:text-[#00BCE1] transition-colors">
                     {cat.badge}
                   </span>
                 </div>
 
                 {/* Category Title */}
-                <h3 className="text-sm font-extrabold text-[#0F172A] group-hover:text-[#0284C7] transition-colors line-clamp-1">
+                <h3 className="text-sm font-extrabold text-[#0F172A] group-hover:text-[#00BCE1] transition-colors line-clamp-1">
                   {cat.title}
                 </h3>
 
@@ -132,7 +132,7 @@ export const CategoryShowcaseGrid: React.FC = () => {
               <div className="pt-4 mt-3 border-t border-[#F1F5F9]">
                 <Link
                   href={`/products?category=${encodeURIComponent(cat.categoryFilter)}`}
-                  className="inline-flex items-center gap-1 text-[11px] font-extrabold text-[#0284C7] hover:text-[#0369A1] transition-colors group/link"
+                  className="inline-flex items-center gap-1 text-[11px] font-extrabold text-[#00BCE1] hover:text-[#00A3C7] transition-colors group/link"
                 >
                   <span>Browse Catalog</span>
                   <ArrowRight className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />

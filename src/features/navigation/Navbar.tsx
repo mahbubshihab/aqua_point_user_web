@@ -44,8 +44,8 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-md transition-all duration-300">
-      {/* 1. Top Bar Component - Deep Ocean Emerald Teal background (#0369A1 / #0284C7) */}
-      <div className="bg-gradient-to-r from-[#0369A1] via-[#0284C7] to-[#0369A1] text-white py-2 px-4 text-xs font-medium border-b border-white/10">
+      {/* 1. Top Bar Component - Bright Electric Aqua Cyan background (#00BCE1 / #008BAA) */}
+      <div className="bg-gradient-to-r from-[#008BAA] via-[#00BCE1] to-[#008BAA] text-white py-2 px-4 text-xs font-medium border-b border-white/10">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           {/* Left Text */}
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
@@ -83,16 +83,16 @@ export const Navbar: React.FC = () => {
             
             {/* Logo: Aqua Point logo (Water Drop icon + "AQUA POINT" wordmark) */}
             <Link href="/" className="flex items-center gap-3 shrink-0 group">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#0284C7] to-[#0369A1] p-0.5 shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform duration-300">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#00BCE1] to-[#008BAA] p-0.5 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">
                 <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-                  <Droplets className="w-6 h-6 text-[#0284C7] fill-[#0284C7]/20 group-hover:scale-110 transition-transform duration-300" />
+                  <Droplets className="w-6 h-6 text-[#00BCE1] fill-[#00BCE1]/20 group-hover:scale-110 transition-transform duration-300" />
                 </div>
               </div>
               <div className="flex flex-col">
                 <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0F172A] flex items-center gap-0.5 leading-none">
-                  AQUA<span className="text-[#0284C7]">POINT</span>
+                  AQUA<span className="text-[#00BCE1]">POINT</span>
                 </span>
-                <span className="text-[10px] font-bold text-[#0369A1] tracking-widest uppercase mt-1">
+                <span className="text-[10px] font-bold text-[#008BAA] tracking-widest uppercase mt-1">
                   Pure Water Solution
                 </span>
               </div>
@@ -108,8 +108,8 @@ export const Navbar: React.FC = () => {
                     href={link.href}
                     className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 ${
                       isActive
-                        ? 'bg-[#0284C7] text-white shadow-sm shadow-sky-500/25'
-                        : 'text-[#475569] hover:text-[#0284C7] hover:bg-white'
+                        ? 'bg-[#00BCE1] text-white shadow-sm shadow-cyan-500/25'
+                        : 'text-[#475569] hover:text-[#00BCE1] hover:bg-white'
                     }`}
                   >
                     {link.name}
@@ -125,7 +125,7 @@ export const Navbar: React.FC = () => {
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
                 aria-label="Search catalog"
-                className="p-2.5 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] hover:text-[#0284C7] hover:bg-[#F0F9FF] hover:border-[#BAE6FD] transition-all"
+                className="p-2.5 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] hover:text-[#00BCE1] hover:bg-[#F0F9FF] hover:border-[#BAE6FD] transition-all"
               >
                 <Search className="w-4 h-4" />
               </button>
@@ -133,25 +133,25 @@ export const Navbar: React.FC = () => {
               {/* Account Button */}
               <Link
                 href="/contact"
-                className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] hover:text-[#0284C7] hover:bg-[#F0F9FF] hover:border-[#BAE6FD] text-xs font-bold transition-all"
+                className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] hover:text-[#00BCE1] hover:bg-[#F0F9FF] hover:border-[#BAE6FD] text-xs font-bold transition-all"
               >
-                <User className="w-4 h-4 text-[#0284C7]" />
+                <User className="w-4 h-4 text-[#00BCE1]" />
                 <span>Account</span>
               </Link>
 
               {/* Book Service Outline Button */}
               <Link
                 href="/services"
-                className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full border-2 border-[#0284C7] text-[#0284C7] hover:bg-[#0284C7] hover:text-white text-xs font-extrabold transition-all duration-200 shadow-sm"
+                className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full border-2 border-[#00BCE1] text-[#00BCE1] hover:bg-[#00BCE1] hover:text-white text-xs font-extrabold transition-all duration-200 shadow-sm"
               >
                 <Wrench className="w-3.5 h-3.5" />
                 <span>Book Service</span>
               </Link>
 
-              {/* Filled Cart (X) Ocean Blue Button (#0284C7) */}
+              {/* Filled Cart (X) Bright Electric Aqua Cyan Button (#00BCE1) */}
               <Link
                 href="/cart"
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-extrabold shadow-md shadow-sky-500/25 transition-all duration-200 group"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#00BCE1] hover:bg-[#00A3C7] text-white text-xs font-extrabold shadow-md shadow-cyan-500/25 transition-all duration-200 group"
               >
                 <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>Cart ({totalCount})</span>
@@ -172,7 +172,7 @@ export const Navbar: React.FC = () => {
           {isSearchOpen && (
             <div className="py-3 px-4 mb-3 bg-[#F8FAFC] border border-[#BAE6FD] rounded-2xl animate-in fade-in slide-in-from-top-2 duration-200">
               <form onSubmit={handleSearchSubmit} className="flex items-center gap-2">
-                <Search className="w-4 h-4 text-[#0284C7]" />
+                <Search className="w-4 h-4 text-[#00BCE1]" />
                 <input
                   type="text"
                   placeholder="Search RO purifiers, filters, cartridges, pumps..."
@@ -183,7 +183,7 @@ export const Navbar: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  className="px-4 py-1.5 rounded-full bg-[#0284C7] text-white text-xs font-bold hover:bg-[#0369A1] transition-colors"
+                  className="px-4 py-1.5 rounded-full bg-[#00BCE1] text-white text-xs font-bold hover:bg-[#00A3C7] transition-colors"
                 >
                   Search
                 </button>
@@ -211,7 +211,7 @@ export const Navbar: React.FC = () => {
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`px-4 py-3 rounded-2xl text-xs font-bold text-center transition-all ${
                         isActive
-                          ? 'bg-[#0284C7] text-white shadow-sm'
+                          ? 'bg-[#00BCE1] text-white shadow-sm'
                           : 'bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
                       }`}
                     >
@@ -226,14 +226,14 @@ export const Navbar: React.FC = () => {
                 <Link
                   href="/services"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full py-2.5 rounded-2xl border-2 border-[#0284C7] text-[#0284C7] font-extrabold text-xs text-center flex items-center justify-center gap-2"
+                  className="w-full py-2.5 rounded-2xl border-2 border-[#00BCE1] text-[#00BCE1] font-extrabold text-xs text-center flex items-center justify-center gap-2"
                 >
                   <Wrench className="w-4 h-4" />
                   <span>Book Service & Maintenance</span>
                 </Link>
                 <a
                   href="tel:09613700750"
-                  className="w-full py-2.5 rounded-2xl bg-[#F0F9FF] border border-[#BAE6FD] text-[#0284C7] font-bold text-xs text-center flex items-center justify-center gap-2"
+                  className="w-full py-2.5 rounded-2xl bg-[#F0F9FF] border border-[#BAE6FD] text-[#00BCE1] font-bold text-xs text-center flex items-center justify-center gap-2"
                 >
                   <Phone className="w-4 h-4" />
                   <span>Call Hotline: 09613 700 750</span>

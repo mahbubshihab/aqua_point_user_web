@@ -9,7 +9,7 @@ export const WhyUsAndTestimonials: React.FC = () => {
       title: '7-Stage Mineral RO',
       description: 'Retains essential calcium & magnesium while purifying 99.99% impurities.',
       icon: ShieldCheck,
-      color: 'text-[#0284C7]',
+      color: 'text-[#00BCE1]',
       bg: 'bg-[#F0F9FF]',
     },
     {
@@ -65,7 +65,7 @@ export const WhyUsAndTestimonials: React.FC = () => {
       {/* Why Aqua Point */}
       <div className="space-y-10">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs font-bold text-[#0284C7] uppercase tracking-widest">
+          <span className="text-xs font-bold text-[#00BCE1] uppercase tracking-widest">
             The Aqua Point Distinction
           </span>
           <h2 className="text-3xl font-extrabold text-[#0F172A]">
@@ -82,7 +82,7 @@ export const WhyUsAndTestimonials: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-white border border-[#E2E8F0] hover:border-[#0284C7]/40 transition-all duration-300 space-y-3 shadow-sm"
+                className="p-6 rounded-2xl bg-white border border-[#E2E8F0] hover:border-[#00BCE1]/40 transition-all duration-300 space-y-3 shadow-sm"
               >
                 <div className={`w-12 h-12 rounded-xl ${f.bg} flex items-center justify-center border border-[#E2E8F0]`}>
                   <Icon className={`w-6 h-6 ${f.color}`} />
@@ -130,7 +130,7 @@ export const WhyUsAndTestimonials: React.FC = () => {
                 <h4 className="text-sm font-bold text-[#0F172A]">{t.name}</h4>
                 <div className="flex items-center justify-between text-[11px] text-[#64748B] mt-0.5">
                   <span>{t.role}</span>
-                  <span className="text-[#0284C7] font-semibold">{t.location}</span>
+                  <span className="text-[#00BCE1] font-semibold">{t.location}</span>
                 </div>
               </div>
             </div>

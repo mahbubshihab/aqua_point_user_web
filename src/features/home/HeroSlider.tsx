@@ -71,7 +71,7 @@ export const HeroSlider: React.FC = () => {
       ))}
 
       {/* Decorative Light Water Glows */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#0284C7]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00BCE1]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#10B981]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Hero Content */}
@@ -81,18 +81,18 @@ export const HeroSlider: React.FC = () => {
           <div className="lg:col-span-8 space-y-6">
             {/* Guarantee Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#BAE6FD] shadow-sm">
-              <ShieldCheck className="w-4 h-4 text-[#0284C7]" />
-              <span className="text-xs font-extrabold text-[#0284C7] tracking-wider uppercase">
+              <ShieldCheck className="w-4 h-4 text-[#00BCE1]" />
+              <span className="text-xs font-extrabold text-[#00BCE1] tracking-wider uppercase">
                 {slide.badge}
               </span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
-              {slide.title.split(' ')[0]} <span className="bg-gradient-to-r from-[#0284C7] via-[#0369A1] to-[#10B981] bg-clip-text text-transparent">{slide.title.split(' ').slice(1).join(' ')}</span>
+              {slide.title.split(' ')[0]} <span className="bg-gradient-to-r from-[#00BCE1] via-[#008BAA] to-[#10B981] bg-clip-text text-transparent">{slide.title.split(' ').slice(1).join(' ')}</span>
             </h1>
 
-            <p className="text-lg sm:text-xl font-bold text-[#0369A1]">
+            <p className="text-lg sm:text-xl font-bold text-[#008BAA]">
               {slide.subtitle}
             </p>
 
@@ -104,16 +104,16 @@ export const HeroSlider: React.FC = () => {
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
               <Link
                 href={slide.primaryCta.href}
-                className="px-7 py-3.5 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                className="px-7 py-3.5 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
               >
                 <span>{slide.primaryCta.text}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href={slide.secondaryCta.href}
-                className="px-7 py-3.5 rounded-xl bg-white border border-[#0284C7]/40 hover:border-[#0284C7] text-[#0284C7] hover:bg-[#F0F9FF] font-bold text-sm shadow-sm transition-all duration-300 flex items-center gap-2"
+                className="px-7 py-3.5 rounded-xl bg-white border border-[#00BCE1]/40 hover:border-[#00BCE1] text-[#00BCE1] hover:bg-[#F0F9FF] font-bold text-sm shadow-sm transition-all duration-300 flex items-center gap-2"
               >
-                <TestTube className="w-4 h-4 text-[#0284C7]" />
+                <TestTube className="w-4 h-4 text-[#00BCE1]" />
                 <span>{slide.secondaryCta.text}</span>
               </Link>
             </div>
@@ -125,7 +125,7 @@ export const HeroSlider: React.FC = () => {
                 <span>Zero Installation Fee</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#0284C7]" />
+                <CheckCircle2 className="w-4 h-4 text-[#00BCE1]" />
                 <span>2 Years On-Site Warranty</span>
               </div>
               <div className="flex items-center gap-1.5">
@@ -148,12 +148,12 @@ export const HeroSlider: React.FC = () => {
                   onClick={() => setCurrentSlide(idx)}
                   className={`w-full text-left p-3 rounded-xl border transition-all duration-300 flex items-center justify-between ${
                     idx === currentSlide
-                      ? 'bg-[#F0F9FF] border-[#0284C7] text-[#0284C7] shadow-sm font-bold'
+                      ? 'bg-[#F0F9FF] border-[#00BCE1] text-[#00BCE1] shadow-sm font-bold'
                       : 'bg-[#F8FAFC] border-transparent text-[#64748B] hover:text-[#0F172A]'
                   }`}
                 >
                   <span className="text-xs font-semibold truncate max-w-[180px]">{s.subtitle}</span>
-                  <div className={`w-2 h-2 rounded-full ${idx === currentSlide ? 'bg-[#0284C7]' : 'bg-[#CBD5E1]'}`} />
+                  <div className={`w-2 h-2 rounded-full ${idx === currentSlide ? 'bg-[#00BCE1]' : 'bg-[#CBD5E1]'}`} />
                 </button>
               ))}
             </div>
@@ -161,13 +161,13 @@ export const HeroSlider: React.FC = () => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length)}
-                className="p-3 rounded-xl bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#0284C7] hover:border-[#0284C7]/50 shadow-sm transition-all"
+                className="p-3 rounded-xl bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#00BCE1] hover:border-[#00BCE1]/50 shadow-sm transition-all"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setCurrentSlide((prev) => (prev + 1) % SLIDES.length)}
-                className="p-3 rounded-xl bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#0284C7] hover:border-[#0284C7]/50 shadow-sm transition-all"
+                className="p-3 rounded-xl bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#00BCE1] hover:border-[#00BCE1]/50 shadow-sm transition-all"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

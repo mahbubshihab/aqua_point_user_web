@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} min-h-screen bg-white text-[#0F172A] antialiased flex flex-col justify-between selection:bg-[#0284C7] selection:text-white`}>
+      <body className={`${inter.className} min-h-screen bg-white text-[#0F172A] antialiased flex flex-col justify-between selection:bg-[#00BCE1] selection:text-white`}>
         <CartProvider>
           <Navbar />
           <main className="flex-grow">{children}</main>

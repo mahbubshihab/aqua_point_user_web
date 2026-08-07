@@ -88,7 +88,7 @@ export const ServiceBookingForm: React.FC = () => {
           <Wrench className="w-3.5 h-3.5" /> 2-Hour Doorstep Service Dispatch
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
-          Book Technician <span className="text-[#0284C7]">Maintenance & Repair</span>
+          Book Technician <span className="text-[#00BCE1]">Maintenance & Repair</span>
         </h1>
         <p className="text-sm text-[#475569] max-w-2xl leading-relaxed">
           Schedule an expert Aqua Point certified technician for RO filter replacement, leakage repair, membrane backwash, or comprehensive water quality auditing.
@@ -101,7 +101,7 @@ export const ServiceBookingForm: React.FC = () => {
         <div className="lg:col-span-8">
           <div className="p-8 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-6">
             <h2 className="text-xl font-bold text-[#0F172A] flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#0284C7]" />
+              <Sparkles className="w-5 h-5 text-[#00BCE1]" />
               <span>Service Booking Request Form</span>
             </h2>
 
@@ -116,7 +116,7 @@ export const ServiceBookingForm: React.FC = () => {
                 </p>
                 <button
                   onClick={() => setSuccess(false)}
-                  className="mt-2 text-xs font-bold text-[#0284C7] hover:underline"
+                  className="mt-2 text-xs font-bold text-[#00BCE1] hover:underline"
                 >
                   Book another service request
                 </button>
@@ -140,7 +140,7 @@ export const ServiceBookingForm: React.FC = () => {
                 <select
                   value={machineType}
                   onChange={(e) => setMachineType(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-3 px-4 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-3 px-4 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 >
                   {MACHINE_TYPES.map((m) => (
                     <option key={m} value={m}>{m}</option>
@@ -152,7 +152,7 @@ export const ServiceBookingForm: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1">
-                    <User className="w-3.5 h-3.5 text-[#0284C7]" /> Your Full Name *
+                    <User className="w-3.5 h-3.5 text-[#00BCE1]" /> Your Full Name *
                   </label>
                   <input
                     type="text"
@@ -160,7 +160,7 @@ export const ServiceBookingForm: React.FC = () => {
                     placeholder="e.g. Farhan Ahmed"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   />
                 </div>
 
@@ -174,7 +174,7 @@ export const ServiceBookingForm: React.FC = () => {
                     placeholder="e.g. 01812345678"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   />
                 </div>
               </div>
@@ -190,7 +190,7 @@ export const ServiceBookingForm: React.FC = () => {
                   placeholder="House #, Road #, Area (e.g. Uttara, Mirpur, Banani), City"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 />
               </div>
 
@@ -198,14 +198,14 @@ export const ServiceBookingForm: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-[#0284C7]" /> Preferred Date *
+                    <Calendar className="w-3.5 h-3.5 text-[#00BCE1]" /> Preferred Date *
                   </label>
                   <input
                     type="date"
                     required
                     value={preferredDate}
                     onChange={(e) => setPreferredDate(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   />
                 </div>
 
@@ -216,7 +216,7 @@ export const ServiceBookingForm: React.FC = () => {
                   <select
                     value={preferredSlot}
                     onChange={(e) => setPreferredSlot(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   >
                     {TIME_SLOTS.map((t) => (
                       <option key={t} value={t}>{t}</option>
@@ -235,7 +235,7 @@ export const ServiceBookingForm: React.FC = () => {
                   placeholder="e.g. Water taste bad, low flow rate, filter change required, water leaking from pipe..."
                   value={problemDescription}
                   onChange={(e) => setProblemDescription(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 />
               </div>
 
@@ -243,7 +243,7 @@ export const ServiceBookingForm: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.01] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.01] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 <Wrench className="w-4 h-4" />
                 <span>{loading ? 'Submitting Request...' : 'Confirm Doorstep Technician Booking'}</span>
@@ -257,7 +257,7 @@ export const ServiceBookingForm: React.FC = () => {
         <div className="lg:col-span-4 space-y-6">
           
           <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-4">
-            <div className="flex items-center gap-2 text-[#0284C7] font-bold text-sm">
+            <div className="flex items-center gap-2 text-[#00BCE1] font-bold text-sm">
               <ShieldCheck className="w-5 h-5" />
               <span>Service Standard Guarantee</span>
             </div>

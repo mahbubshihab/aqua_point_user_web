@@ -66,7 +66,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center text-[#475569]">
-        <div className="w-10 h-10 border-4 border-[#0284C7] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <div className="w-10 h-10 border-4 border-[#00BCE1] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
         Loading Aqua Point Product Details...
       </div>
     );
@@ -76,7 +76,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center text-[#475569] space-y-4">
         <h2 className="text-xl font-bold text-[#0F172A]">Product Not Found</h2>
-        <Link href="/products" className="px-4 py-2 rounded-xl bg-[#0284C7] text-white font-bold text-xs shadow-sm">
+        <Link href="/products" className="px-4 py-2 rounded-xl bg-[#00BCE1] text-white font-bold text-xs shadow-sm">
           Return to Catalog
         </Link>
       </div>
@@ -131,7 +131,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
       {/* Back button */}
       <Link
         href="/products"
-        className="inline-flex items-center gap-2 text-xs font-bold text-[#475569] hover:text-[#0284C7] transition-colors"
+        className="inline-flex items-center gap-2 text-xs font-bold text-[#475569] hover:text-[#00BCE1] transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Products Catalog</span>
@@ -148,7 +148,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
               className="w-full h-full object-cover transition-all duration-300"
             />
             <div className="absolute top-4 left-4">
-              <span className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#BAE6FD] text-xs font-bold text-[#0284C7] shadow-sm">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#BAE6FD] text-xs font-bold text-[#00BCE1] shadow-sm">
                 {product.category}
               </span>
             </div>
@@ -163,7 +163,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
                   onClick={() => setActiveImage(imgUrl)}
                   className={`w-20 h-20 rounded-xl bg-[#F8FAFC] border overflow-hidden transition-all ${
                     activeImage === imgUrl 
-                      ? 'border-[#0284C7] ring-2 ring-[#0284C7]/20 shadow-sm' 
+                      ? 'border-[#00BCE1] ring-2 ring-[#00BCE1]/20 shadow-sm' 
                       : 'border-[#E2E8F0] opacity-70 hover:opacity-100'
                   }`}
                 >
@@ -196,7 +196,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
           <div className="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm flex items-center justify-between">
             <div>
               <span className="text-xs text-[#64748B] block uppercase font-bold">Total Price</span>
-              <span className="text-3xl font-extrabold text-[#0284C7]">
+              <span className="text-3xl font-extrabold text-[#00BCE1]">
                 ৳{product.price.toLocaleString()}
               </span>
               {product.originalPrice && (
@@ -220,7 +220,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
               <span>{product.warranty}</span>
             </div>
             <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center gap-2 text-[#334155] font-semibold">
-              <Truck className="w-4 h-4 text-[#0284C7] shrink-0" />
+              <Truck className="w-4 h-4 text-[#00BCE1] shrink-0" />
               <span>Free Delivery & Installation</span>
             </div>
           </div>
@@ -254,7 +254,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
                 className={`flex-1 py-3.5 rounded-xl border font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
                   added 
                     ? 'bg-[#10B981] border-[#10B981] text-white'
-                    : 'bg-white border-[#0284C7] text-[#0284C7] hover:bg-[#F0F9FF] shadow-sm'
+                    : 'bg-white border-[#00BCE1] text-[#00BCE1] hover:bg-[#F0F9FF] shadow-sm'
                 }`}
               >
                 {added ? (
@@ -272,7 +272,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
 
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="flex-1 py-3.5 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-sm shadow-md hover:scale-[1.02] transition-transform flex items-center justify-center gap-2"
+                className="flex-1 py-3.5 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-sm shadow-md hover:scale-[1.02] transition-transform flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Order Now (Cash on Delivery)</span>
@@ -283,7 +283,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
           {/* Helpline shortcut */}
           <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between text-xs text-[#475569]">
             <span>Need advice selecting the right RO purifier?</span>
-            <a href="tel:09613700750" className="text-[#0284C7] font-bold flex items-center gap-1 hover:underline">
+            <a href="tel:09613700750" className="text-[#00BCE1] font-bold flex items-center gap-1 hover:underline">
               <PhoneCall className="w-3.5 h-3.5" /> 09613 700 750
             </a>
           </div>
@@ -295,7 +295,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
       {/* Specifications Table */}
       <div className="p-8 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-6">
         <h3 className="text-xl font-bold text-[#0F172A] flex items-center gap-2">
-          <Wrench className="w-5 h-5 text-[#0284C7]" />
+          <Wrench className="w-5 h-5 text-[#00BCE1]" />
           <span>Technical Specifications & Features</span>
         </h3>
 
@@ -321,7 +321,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
             </button>
 
             <div className="space-y-1">
-              <span className="text-xs font-bold text-[#0284C7] uppercase">Instant Order</span>
+              <span className="text-xs font-bold text-[#00BCE1] uppercase">Instant Order</span>
               <h3 className="text-xl font-extrabold text-[#0F172A]">Deliver to Your Doorstep</h3>
               <p className="text-xs text-[#475569]">{product.name} (Qty: {quantity})</p>
             </div>
@@ -342,7 +342,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
                     placeholder="Enter your name"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   />
                 </div>
 
@@ -354,7 +354,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
                     placeholder="e.g. 01711223344"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   />
                 </div>
 
@@ -366,19 +366,19 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
                     placeholder="House/Apartment, Road, Area, City"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   />
                 </div>
 
                 <div className="p-3 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between text-xs">
                   <span className="text-[#64748B]">Total Cash on Delivery:</span>
-                  <span className="text-base font-extrabold text-[#0284C7]">৳{(product.price * quantity).toLocaleString()}</span>
+                  <span className="text-base font-extrabold text-[#00BCE1]">৳{(product.price * quantity).toLocaleString()}</span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3.5 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] transition-all disabled:opacity-50"
+                  className="w-full py-3.5 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] transition-all disabled:opacity-50"
                 >
                   {submitting ? 'Placing Order...' : 'Confirm Cash On Delivery Order'}
                 </button>

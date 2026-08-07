@@ -23,7 +23,7 @@ export const WaterQualityMeter: React.FC = () => {
     } else if (tdsVal <= 300) {
       return {
         label: 'GOOD QUALITY',
-        color: 'text-[#0284C7]',
+        color: 'text-[#00BCE1]',
         bgColor: 'bg-[#F0F9FF]',
         borderColor: 'border-[#BAE6FD]',
         badge: 'Safe Drinking Water',
@@ -65,21 +65,21 @@ export const WaterQualityMeter: React.FC = () => {
     <section id="water-quality" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="p-8 sm:p-12 rounded-3xl bg-white border border-[#E2E8F0] shadow-xl relative overflow-hidden">
         {/* Soft Ocean Aqua Accent Background */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#0284C7]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#00BCE1]/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           
           {/* Header & Controls */}
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F0F9FF] border border-[#BAE6FD]">
-              <Activity className="w-4 h-4 text-[#0284C7] animate-pulse" />
-              <span className="text-xs font-bold text-[#0284C7] uppercase tracking-widest">
+              <Activity className="w-4 h-4 text-[#00BCE1] animate-pulse" />
+              <span className="text-xs font-bold text-[#00BCE1] uppercase tracking-widest">
                 Aqua Point Real-Time Water Quality Analyzer
               </span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
-              Test & Calculate Your <span className="text-[#0284C7]">Water Quality</span> Meter
+              Test & Calculate Your <span className="text-[#00BCE1]">Water Quality</span> Meter
             </h2>
 
             <p className="text-sm text-[#475569] leading-relaxed">
@@ -102,7 +102,7 @@ export const WaterQualityMeter: React.FC = () => {
                     onClick={() => setSource(s.id as any)}
                     className={`py-2.5 px-3 rounded-xl border text-xs font-bold transition-all ${
                       source === s.id
-                        ? 'bg-[#0284C7] border-[#0284C7] text-white shadow-sm'
+                        ? 'bg-[#00BCE1] border-[#00BCE1] text-white shadow-sm'
                         : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
                     }`}
                   >
@@ -116,11 +116,11 @@ export const WaterQualityMeter: React.FC = () => {
             <div className="space-y-4 pt-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm font-bold text-[#0F172A]">
-                  TDS Level Slider: <strong className="text-[#0284C7] text-lg">{tds} PPM</strong>
+                  TDS Level Slider: <strong className="text-[#00BCE1] text-lg">{tds} PPM</strong>
                 </span>
                 <button 
                   onClick={() => setTds(120)}
-                  className="flex items-center gap-1 text-xs font-semibold text-[#0284C7] hover:underline"
+                  className="flex items-center gap-1 text-xs font-semibold text-[#00BCE1] hover:underline"
                 >
                   <RefreshCw className="w-3.5 h-3.5" /> Reset to 120 PPM
                 </button>
@@ -133,7 +133,7 @@ export const WaterQualityMeter: React.FC = () => {
                 step="5"
                 value={tds}
                 onChange={(e) => setTds(Number(e.target.value))}
-                className="w-full h-3 bg-[#E2E8F0] rounded-lg appearance-none cursor-pointer accent-[#0284C7]"
+                className="w-full h-3 bg-[#E2E8F0] rounded-lg appearance-none cursor-pointer accent-[#00BCE1]"
               />
 
               <div className="flex justify-between text-[11px] font-bold text-[#64748B]">
@@ -185,7 +185,7 @@ export const WaterQualityMeter: React.FC = () => {
 
               {/* Recommendation Box */}
               <div className="p-4 rounded-xl bg-[#F0F9FF] border border-[#BAE6FD] text-xs space-y-2">
-                <div className="flex items-center gap-2 font-bold text-[#0284C7]">
+                <div className="flex items-center gap-2 font-bold text-[#00BCE1]">
                   <ShieldCheck className="w-4 h-4 text-[#10B981]" />
                   <span>Aqua Point Expert Verdict:</span>
                 </div>
@@ -196,7 +196,7 @@ export const WaterQualityMeter: React.FC = () => {
 
               <a
                 href="/services"
-                className="w-full py-3.5 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+                className="w-full py-3.5 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
               >
                 <span>Book Free Water Quality Test</span>
                 <CheckCircle2 className="w-4 h-4" />

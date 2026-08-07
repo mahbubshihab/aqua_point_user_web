@@ -13,8 +13,8 @@ export const QuickActionCards: React.FC = () => {
       href: '/services',
       badge: '2 Hour Dispatch',
       color: 'bg-white',
-      borderColor: 'hover:border-[#0284C7]',
-      iconColor: 'text-[#0284C7]',
+      borderColor: 'hover:border-[#00BCE1]',
+      iconColor: 'text-[#00BCE1]',
       bgIcon: 'bg-[#F0F9FF]',
     },
     {
@@ -73,9 +73,9 @@ export const QuickActionCards: React.FC = () => {
               </div>
 
               <div className="mt-4">
-                <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#0284C7] transition-colors flex items-center justify-between">
+                <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#00BCE1] transition-colors flex items-center justify-between">
                   <span>{action.title}</span>
-                  <ArrowUpRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#0284C7] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <ArrowUpRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#00BCE1] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </h3>
                 <p className="text-xs text-[#475569] mt-1">
                   {action.subtitle}

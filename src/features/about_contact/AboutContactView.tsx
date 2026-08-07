@@ -65,14 +65,14 @@ export const AboutContactView: React.FC = () => {
       
       {/* About Header */}
       <div id="about" className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#F0F9FF] via-white to-[#F8FAFC] border border-[#BAE6FD] shadow-sm space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#BAE6FD] text-xs font-bold text-[#0284C7] shadow-sm">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#BAE6FD] text-xs font-bold text-[#00BCE1] shadow-sm">
           <Droplets className="w-3.5 h-3.5" /> Pure Water Engineering Since 2018
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
             <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
-              About <span className="text-[#0284C7]">Aqua Point</span> Water Solutions
+              About <span className="text-[#00BCE1]">Aqua Point</span> Water Solutions
             </h1>
             <p className="text-sm text-[#475569] leading-relaxed">
               Aqua Point is Bangladesh’s pioneer in luxury Woodistic glass reverse osmosis purifiers, domestic drinking water plants, and industrial water treatment installations. Our mission is to guarantee pure, mineral-balanced, toxin-free water for every household and business.
@@ -83,7 +83,7 @@ export const AboutContactView: React.FC = () => {
                 <span className="block text-[#64748B]">Happy Homes Purified</span>
               </div>
               <div className="p-3.5 rounded-xl bg-white border border-[#E2E8F0] space-y-1 shadow-sm">
-                <span className="text-[#0284C7] font-extrabold text-lg">500+</span>
+                <span className="text-[#00BCE1] font-extrabold text-lg">500+</span>
                 <span className="block text-[#64748B]">Industrial RO Projects</span>
               </div>
               <div className="p-3.5 rounded-xl bg-white border border-[#E2E8F0] space-y-1 shadow-sm">
@@ -123,13 +123,13 @@ export const AboutContactView: React.FC = () => {
           
           {/* Card 1: Helpline */}
           <div className="p-6 rounded-2xl bg-white border border-[#E2E8F0] space-y-4 shadow-sm">
-            <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] border border-[#BAE6FD] flex items-center justify-center text-[#0284C7]">
+            <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] border border-[#BAE6FD] flex items-center justify-center text-[#00BCE1]">
               <PhoneCall className="w-6 h-6 animate-pulse" />
             </div>
             <h3 className="text-lg font-bold text-[#0F172A]">24/7 Phone Helpline</h3>
             <p className="text-xs text-[#475569]">Direct hotline for sales inquiries and emergency repair bookings.</p>
             <div className="space-y-1">
-              <a href="tel:09613700750" className="text-lg font-extrabold text-[#0284C7] hover:underline block">
+              <a href="tel:09613700750" className="text-lg font-extrabold text-[#00BCE1] hover:underline block">
                 09613 700 750
               </a>
               <span className="text-[11px] text-[#64748B] block">Tolled as local operator rate</span>
@@ -156,7 +156,7 @@ export const AboutContactView: React.FC = () => {
 
           {/* Card 3: Address */}
           <div className="p-6 rounded-2xl bg-white border border-[#E2E8F0] space-y-4 shadow-sm">
-            <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] border border-[#BAE6FD] flex items-center justify-center text-[#0284C7]">
+            <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] border border-[#BAE6FD] flex items-center justify-center text-[#00BCE1]">
               <MapPin className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-[#0F172A]">Dhaka Office / Showroom</h3>
@@ -203,7 +203,7 @@ export const AboutContactView: React.FC = () => {
                   placeholder="Full Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 />
               </div>
 
@@ -215,7 +215,7 @@ export const AboutContactView: React.FC = () => {
                   placeholder="017xxxxxxxx"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 />
               </div>
             </div>
@@ -228,7 +228,7 @@ export const AboutContactView: React.FC = () => {
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 />
               </div>
 
@@ -239,7 +239,7 @@ export const AboutContactView: React.FC = () => {
                   placeholder="e.g. Industrial RO Quote"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 />
               </div>
             </div>
@@ -252,14 +252,14 @@ export const AboutContactView: React.FC = () => {
                 placeholder="Write details about your requirement..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+              className="w-full py-3.5 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
             >
               <Send className="w-4 h-4" />
               <span>{loading ? 'Sending Message...' : 'Submit Inquiry'}</span>
@@ -270,13 +270,13 @@ export const AboutContactView: React.FC = () => {
         {/* Map / Location Box */}
         <div className="lg:col-span-5 p-8 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm space-y-4">
           <h3 className="text-xl font-bold text-[#0F172A] flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-[#0284C7]" />
+            <Building2 className="w-5 h-5 text-[#00BCE1]" />
             <span>Map & Service Reach</span>
           </h3>
 
           <div className="w-full h-72 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] overflow-hidden relative flex items-center justify-center text-center p-4">
             <div className="space-y-3">
-              <MapPin className="w-10 h-10 text-[#0284C7] mx-auto animate-bounce" />
+              <MapPin className="w-10 h-10 text-[#00BCE1] mx-auto animate-bounce" />
               <div className="text-sm font-bold text-[#0F172A]">3 Ring Road, Dhaka 1219</div>
               <p className="text-xs text-[#475569] max-w-xs mx-auto">
                 Aqua Point operates regional service hubs covering Dhaka North, Dhaka South, Gazipur, Narayanganj & Chittagong.
@@ -285,7 +285,7 @@ export const AboutContactView: React.FC = () => {
                 href="https://maps.google.com/?q=Ring+Road+Dhaka"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0284C7] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#00BCE1] hover:underline"
               >
                 <Globe className="w-3.5 h-3.5" /> Open Google Maps
               </a>

@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
           {/* Column 1: Company Mission & Brand Info */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0284C7] to-[#00E5FF] p-0.5 shadow-md">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00BCE1] to-[#00E5FF] p-0.5 shadow-md">
                 <div className="w-full h-full bg-[#0F172A] rounded-[10px] flex items-center justify-center">
                   <Droplets className="w-5 h-5 text-[#00E5FF]" />
                 </div>

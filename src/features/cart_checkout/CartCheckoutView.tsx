@@ -93,7 +93,7 @@ export const CartCheckoutView: React.FC = () => {
           <CheckCircle2 className="w-16 h-16 text-[#10B981] mx-auto animate-bounce" />
           <h1 className="text-3xl font-extrabold text-[#0F172A]">Order Confirmed Successfully!</h1>
           <p className="text-sm text-[#475569]">
-            Thank you for trusting Aqua Point BD. Your order ticket ID is <strong className="text-[#0284C7] font-mono">{placedOrderId}</strong>.
+            Thank you for trusting Aqua Point BD. Your order ticket ID is <strong className="text-[#00BCE1] font-mono">{placedOrderId}</strong>.
           </p>
           <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-xs text-[#475569] max-w-md mx-auto text-left space-y-2">
             <div className="flex justify-between">
@@ -106,13 +106,13 @@ export const CartCheckoutView: React.FC = () => {
               <span>Payment Method:</span> <strong className="text-[#10B981]">{paymentMethod}</strong>
             </div>
             <div className="flex justify-between">
-              <span>Grand Total:</span> <strong className="text-[#0284C7]">৳{grandTotal.toLocaleString()}</strong>
+              <span>Grand Total:</span> <strong className="text-[#00BCE1]">৳{grandTotal.toLocaleString()}</strong>
             </div>
           </div>
           <div className="pt-4 flex justify-center gap-4">
             <Link
               href="/products"
-              className="px-6 py-3 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase shadow-sm"
+              className="px-6 py-3 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase shadow-sm"
             >
               Continue Shopping
             </Link>
@@ -133,7 +133,7 @@ export const CartCheckoutView: React.FC = () => {
           </p>
           <Link
             href="/products"
-            className="inline-block px-6 py-3 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase tracking-wider shadow-sm"
+            className="inline-block px-6 py-3 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase tracking-wider shadow-sm"
           >
             Explore Product Catalog
           </Link>
@@ -147,9 +147,9 @@ export const CartCheckoutView: React.FC = () => {
       
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-extrabold text-[#0F172A]">
-          Shopping Cart <span className="text-[#0284C7]">({totalCount} Items)</span>
+          Shopping Cart <span className="text-[#00BCE1]">({totalCount} Items)</span>
         </h1>
-        <Link href="/products" className="text-xs font-bold text-[#475569] hover:text-[#0284C7] flex items-center gap-1">
+        <Link href="/products" className="text-xs font-bold text-[#475569] hover:text-[#00BCE1] flex items-center gap-1">
           <ArrowLeft className="w-4 h-4" /> Continue Shopping
         </Link>
       </div>
@@ -171,7 +171,7 @@ export const CartCheckoutView: React.FC = () => {
                 />
                 <div>
                   <h3 className="text-sm font-bold text-[#0F172A] line-clamp-1">{item.product.name}</h3>
-                  <span className="text-xs font-extrabold text-[#0284C7] block mt-1">
+                  <span className="text-xs font-extrabold text-[#00BCE1] block mt-1">
                     ৳{item.product.price.toLocaleString()}
                   </span>
                   <span className="text-[11px] text-[#64748B] block">{item.product.warranty}</span>
@@ -233,7 +233,7 @@ export const CartCheckoutView: React.FC = () => {
                   placeholder="Enter full name"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 />
               </div>
 
@@ -246,7 +246,7 @@ export const CartCheckoutView: React.FC = () => {
                     placeholder="01711223344"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   />
                 </div>
 
@@ -255,7 +255,7 @@ export const CartCheckoutView: React.FC = () => {
                   <select
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2.5 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                   >
                     {DISTRICTS.map((d) => (
                       <option key={d} value={d}>{d}</option>
@@ -272,7 +272,7 @@ export const CartCheckoutView: React.FC = () => {
                   placeholder="House #, Road #, Area..."
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-2 px-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#00BCE1]"
                 />
               </div>
 
@@ -291,7 +291,7 @@ export const CartCheckoutView: React.FC = () => {
                       onClick={() => setPaymentMethod(m.id as any)}
                       className={`py-2 px-2 rounded-xl border text-[11px] font-bold transition-all ${
                         paymentMethod === m.id
-                          ? 'bg-[#F0F9FF] border-[#0284C7] text-[#0284C7]'
+                          ? 'bg-[#F0F9FF] border-[#00BCE1] text-[#00BCE1]'
                           : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#64748B]'
                       }`}
                     >
@@ -315,14 +315,14 @@ export const CartCheckoutView: React.FC = () => {
                 </div>
                 <div className="flex justify-between text-sm font-extrabold text-[#0F172A] pt-2 border-t border-[#E2E8F0]">
                   <span>Grand Total:</span>
-                  <span className="text-[#0284C7]">৳{grandTotal.toLocaleString()}</span>
+                  <span className="text-[#00BCE1]">৳{grandTotal.toLocaleString()}</span>
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.01] transition-transform disabled:opacity-50"
+                className="w-full py-4 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.01] transition-transform disabled:opacity-50"
               >
                 {loading ? 'Processing Order...' : `Place Order (৳${grandTotal.toLocaleString()})`}
               </button>

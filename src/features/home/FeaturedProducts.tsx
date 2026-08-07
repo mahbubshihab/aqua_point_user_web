@@ -29,16 +29,16 @@ export const FeaturedProducts: React.FC = () => {
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <span className="text-xs font-extrabold text-[#0284C7] uppercase tracking-widest bg-[#F0F9FF] px-3 py-1 rounded-full border border-[#BAE6FD]">
+          <span className="text-xs font-extrabold text-[#00BCE1] uppercase tracking-widest bg-[#F0F9FF] px-3 py-1 rounded-full border border-[#BAE6FD]">
             BEST SELLERS & POPULAR PURIFIERS
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight mt-2">
-            Featured <span className="text-[#0284C7]">RO Water Systems</span> & Parts
+            Featured <span className="text-[#00BCE1]">RO Water Systems</span> & Parts
           </h2>
         </div>
         <Link
           href="/products"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold text-[#0284C7] hover:text-[#0369A1] transition-colors"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold text-[#00BCE1] hover:text-[#00A3C7] transition-colors"
         >
           <span>Explore All Products Catalog</span>
           <ArrowRight className="w-4 h-4" />

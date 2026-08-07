@@ -10,7 +10,7 @@ export const ServicesHighlight: React.FC = () => {
       title: 'Free Installation',
       description: 'Expert technician setup for all home & commercial RO purifiers with free plumbing check.',
       icon: Cpu,
-      color: 'text-[#0284C7]',
+      color: 'text-[#00BCE1]',
       bg: 'bg-[#F0F9FF]',
     },
     {
@@ -45,12 +45,12 @@ export const ServicesHighlight: React.FC = () => {
               End-to-End Care
             </span>
             <h2 className="text-3xl font-extrabold text-[#0F172A] mt-1">
-              Professional <span className="text-[#0284C7]">Aqua Services</span> & Doorstep Support
+              Professional <span className="text-[#00BCE1]">Aqua Services</span> & Doorstep Support
             </h2>
           </div>
           <Link
             href="/services"
-            className="px-6 py-3 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2"
+            className="px-6 py-3 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2"
           >
             <span>Book A Technician Service</span>
             <ArrowRight className="w-4 h-4" />
@@ -63,7 +63,7 @@ export const ServicesHighlight: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#0284C7]/40 transition-all duration-300 space-y-4 hover:-translate-y-1"
+                className="p-6 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#00BCE1]/40 transition-all duration-300 space-y-4 hover:-translate-y-1"
               >
                 <div className={`w-12 h-12 rounded-xl ${service.bg} flex items-center justify-center border border-[#E2E8F0]`}>
                   <Icon className={`w-6 h-6 ${service.color}`} />
