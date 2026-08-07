@@ -12,16 +12,14 @@ export const FeaturedProducts: React.FC = () => {
 
   useEffect(() => {
     const loadProducts = async () => {
-      const dbProducts = await fetchProductsFromFirestore();
+      const dbProducts = await fetchProductsFromFirestore(undefined, 12);
       setProducts(dbProducts || []);
       setLoading(false);
     };
     loadProducts();
   }, []);
 
-  const displayProducts = products.filter(p => p.featured).length > 0 
-    ? products.filter(p => p.featured).slice(0, 4) 
-    : products.slice(0, 4);
+  const displayProducts = products.slice(0, 4);
 
   return (
     <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

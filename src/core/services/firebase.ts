@@ -29,7 +29,7 @@ const firebaseConfig = {
 
 export const fetchClientsFromFirestore = async (): Promise<ClientItem[]> => {
   try {
-    const q = query(collection(db, CLIENTS_COLLECTION), orderBy('createdAt', 'desc'));
+    const q = query(collection(db, CLIENTS_COLLECTION), limit(10));
     const querySnapshot = await getDocs(q);
     const clients: ClientItem[] = [];
     querySnapshot.forEach((docSnap) => {
@@ -46,7 +46,7 @@ export const fetchClientsFromFirestore = async (): Promise<ClientItem[]> => {
   } catch (error) {
     console.warn("Firestore fetch clients error, falling back to simple query:", error);
     try {
-      const fallbackQ = collection(db, CLIENTS_COLLECTION);
+      const fallbackQ = query(collection(db, CLIENTS_COLLECTION), limit(10));
       const querySnapshot = await getDocs(fallbackQ);
       const clients: ClientItem[] = [];
       querySnapshot.forEach((docSnap) => {
@@ -68,7 +68,7 @@ export const fetchClientsFromFirestore = async (): Promise<ClientItem[]> => {
 };
 
 export const subscribeToClientsFromFirestore = (callback: (clients: ClientItem[]) => void) => {
-  const q = query(collection(db, CLIENTS_COLLECTION), orderBy('createdAt', 'desc'));
+  const q = query(collection(db, CLIENTS_COLLECTION), limit(10));
   return onSnapshot(q, (snapshot) => {
     const list: ClientItem[] = snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
@@ -83,7 +83,7 @@ export const subscribeToClientsFromFirestore = (callback: (clients: ClientItem[]
     callback(list);
   }, (error) => {
     console.warn("Firestore clients snapshot error:", error);
-    const fallbackQ = collection(db, CLIENTS_COLLECTION);
+    const fallbackQ = query(collection(db, CLIENTS_COLLECTION), limit(10));
     onSnapshot(fallbackQ, (snapshot) => {
       const list: ClientItem[] = snapshot.docs.map((docSnap) => {
         const data = docSnap.data();
@@ -240,11 +240,14 @@ export interface ReviewItem {
 }
 
 // Firestore Helper API
-export const fetchProductsFromFirestore = async (categoryFilter?: string): Promise<ProductItem[]> => {
+export const fetchProductsFromFirestore = async (categoryFilter?: string, limitCount: number = 12): Promise<ProductItem[]> => {
   try {
     const constraints: QueryConstraint[] = [];
-    if (categoryFilter && categoryFilter !== 'All') {
+    if (categoryFilter && categoryFilter !== 'All' && categoryFilter !== 'All Products') {
       constraints.push(where('category', '==', categoryFilter));
+    }
+    if (limitCount > 0) {
+      constraints.push(limit(limitCount));
     }
     const q = query(collection(db, PRODUCTS_COLLECTION), ...constraints);
     const querySnapshot = await getDocs(q);
@@ -342,7 +345,7 @@ export const submitInquiryToFirestore = async (data: Omit<InquiryPayload, 'id' |
 
 export const fetchApprovedReviewsFromFirestore = async (): Promise<ReviewItem[]> => {
   try {
-    const q = query(collection(db, REVIEWS_COLLECTION), where('isApproved', '==', true));
+    const q = query(collection(db, REVIEWS_COLLECTION), where('isApproved', '==', true), limit(6));
     const querySnapshot = await getDocs(q);
     const reviews: ReviewItem[] = [];
     querySnapshot.forEach((docSnap) => {
@@ -365,7 +368,7 @@ export const fetchApprovedReviewsFromFirestore = async (): Promise<ReviewItem[]>
 };
 
 export const subscribeToApprovedReviewsFromFirestore = (callback: (reviews: ReviewItem[]) => void) => {
-  const q = query(collection(db, REVIEWS_COLLECTION), where('isApproved', '==', true));
+  const q = query(collection(db, REVIEWS_COLLECTION), where('isApproved', '==', true), limit(6));
   return onSnapshot(q, (snapshot) => {
     const list: ReviewItem[] = snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
@@ -382,22 +385,20 @@ export const subscribeToApprovedReviewsFromFirestore = (callback: (reviews: Revi
     callback(list);
   }, (error) => {
     console.warn("Firestore reviews snapshot error:", error);
-    const fallbackQ = collection(db, REVIEWS_COLLECTION);
+    const fallbackQ = query(collection(db, REVIEWS_COLLECTION), limit(6));
     onSnapshot(fallbackQ, (snapshot) => {
-      const list: ReviewItem[] = snapshot.docs
-        .map((docSnap) => {
-          const data = docSnap.data();
-          return {
-            id: docSnap.id,
-            customerName: data.customerName || data.name || 'Valued Customer',
-            location: data.location || 'Dhaka',
-            rating: Number(data.rating) || 5,
-            comment: data.comment || '',
-            isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
-            createdAt: data.createdAt,
-          };
-        })
-        .filter(r => r.isApproved);
+      const list: ReviewItem[] = snapshot.docs.map((docSnap) => {
+        const data = docSnap.data();
+        return {
+          id: docSnap.id,
+          customerName: data.customerName || data.name || 'Valued Customer',
+          location: data.location || 'Dhaka',
+          rating: Number(data.rating) || 5,
+          comment: data.comment || '',
+          isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+          createdAt: data.createdAt,
+        };
+      });
       callback(list);
     });
   });
@@ -405,13 +406,30 @@ export const subscribeToApprovedReviewsFromFirestore = (callback: (reviews: Revi
 
 export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
   try {
-    const q = query(collection(db, BANNERS_COLLECTION), orderBy('createdAt', 'desc'));
+    const q = query(collection(db, BANNERS_COLLECTION), where('isActive', '==', true), limit(5));
     const querySnapshot = await getDocs(q);
     const banners: BannerItem[] = [];
     querySnapshot.forEach((docSnap) => {
       const data = docSnap.data();
-      const isActive = data.isActive !== undefined ? Boolean(data.isActive) : true;
-      if (isActive) {
+      banners.push({
+        id: docSnap.id,
+        title: data.title || 'Untitled Banner',
+        tag: data.tag || data.badge || '',
+        imageUrl: data.imageUrl || data.image || '',
+        ctaLink: data.ctaLink || data.link || '',
+        isActive: true,
+        createdAt: data.createdAt,
+      });
+    });
+    return banners;
+  } catch (error) {
+    console.warn("Firestore fetch banners error, falling back to simple query:", error);
+    try {
+      const fallbackQ = query(collection(db, BANNERS_COLLECTION), limit(5));
+      const querySnapshot = await getDocs(fallbackQ);
+      const banners: BannerItem[] = [];
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
         banners.push({
           id: docSnap.id,
           title: data.title || 'Untitled Banner',
@@ -421,29 +439,6 @@ export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
           isActive: true,
           createdAt: data.createdAt,
         });
-      }
-    });
-    return banners;
-  } catch (error) {
-    console.warn("Firestore fetch banners error, falling back to simple query:", error);
-    try {
-      const fallbackQ = collection(db, BANNERS_COLLECTION);
-      const querySnapshot = await getDocs(fallbackQ);
-      const banners: BannerItem[] = [];
-      querySnapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        const isActive = data.isActive !== undefined ? Boolean(data.isActive) : true;
-        if (isActive) {
-          banners.push({
-            id: docSnap.id,
-            title: data.title || 'Untitled Banner',
-            tag: data.tag || data.badge || '',
-            imageUrl: data.imageUrl || data.image || '',
-            ctaLink: data.ctaLink || data.link || '',
-            isActive: true,
-            createdAt: data.createdAt,
-          });
-        }
       });
       return banners;
     } catch (e) {
@@ -454,10 +449,26 @@ export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
 };
 
 export const subscribeToBannersFromFirestore = (callback: (banners: BannerItem[]) => void) => {
-  const q = query(collection(db, BANNERS_COLLECTION), orderBy('createdAt', 'desc'));
+  const q = query(collection(db, BANNERS_COLLECTION), where('isActive', '==', true), limit(5));
   return onSnapshot(q, (snapshot) => {
-    const list: BannerItem[] = snapshot.docs
-      .map((docSnap) => {
+    const list: BannerItem[] = snapshot.docs.map((docSnap) => {
+      const data = docSnap.data();
+      return {
+        id: docSnap.id,
+        title: data.title || 'Untitled Banner',
+        tag: data.tag || data.badge || '',
+        imageUrl: data.imageUrl || data.image || '',
+        ctaLink: data.ctaLink || data.link || '',
+        isActive: true,
+        createdAt: data.createdAt,
+      };
+    });
+    callback(list);
+  }, (error) => {
+    console.warn("Firestore banners snapshot error, falling back:", error);
+    const fallbackQ = query(collection(db, BANNERS_COLLECTION), limit(5));
+    onSnapshot(fallbackQ, (snapshot) => {
+      const list: BannerItem[] = snapshot.docs.map((docSnap) => {
         const data = docSnap.data();
         return {
           id: docSnap.id,
@@ -465,30 +476,10 @@ export const subscribeToBannersFromFirestore = (callback: (banners: BannerItem[]
           tag: data.tag || data.badge || '',
           imageUrl: data.imageUrl || data.image || '',
           ctaLink: data.ctaLink || data.link || '',
-          isActive: data.isActive !== undefined ? Boolean(data.isActive) : true,
+          isActive: true,
           createdAt: data.createdAt,
         };
-      })
-      .filter(b => b.isActive && b.imageUrl);
-    callback(list);
-  }, (error) => {
-    console.warn("Firestore banners snapshot error, falling back:", error);
-    const fallbackQ = collection(db, BANNERS_COLLECTION);
-    onSnapshot(fallbackQ, (snapshot) => {
-      const list: BannerItem[] = snapshot.docs
-        .map((docSnap) => {
-          const data = docSnap.data();
-          return {
-            id: docSnap.id,
-            title: data.title || 'Untitled Banner',
-            tag: data.tag || data.badge || '',
-            imageUrl: data.imageUrl || data.image || '',
-            ctaLink: data.ctaLink || data.link || '',
-            isActive: data.isActive !== undefined ? Boolean(data.isActive) : true,
-            createdAt: data.createdAt,
-          };
-        })
-        .filter(b => b.isActive && b.imageUrl);
+      });
       callback(list);
     });
   });
