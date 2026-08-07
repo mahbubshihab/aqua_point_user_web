@@ -45,9 +45,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const getBottomLeftBadge = () => {
     if (bottomLeftBadge) return bottomLeftBadge;
-    if (product.category === 'Spare Parts') return '75 GPD';
-    if (product.category === 'Water Filters' || product.category === 'Filters & Media') return '5 Micron';
-    if (product.category === 'Industrial RO Plants') return '500 LPH';
+    if (product.category === 'Spare Parts') return 'Cap: 75 GPD';
+    if (product.category === 'Water Filters' || product.category === 'Filters & Media') return 'Flow: 12L/h';
+    if (product.category === 'Industrial RO Plants') return 'Cap: 500 LPH';
     return 'TDS: < 50 PPM';
   };
 
@@ -65,19 +65,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Top Right Badge: Rounded pill tag in #00BCE1 */}
         <div className="absolute top-3 right-3 pointer-events-none">
-          <span className="px-3 py-1 rounded-full bg-[#00BCE1] text-white text-[11px] font-extrabold shadow-md shadow-cyan-500/20">
+          <span className="px-3 py-1 rounded-full bg-[#00BCE1] text-white text-[11px] font-extrabold shadow-sm">
             {getTopRightTag()}
           </span>
         </div>
 
-        {/* Bottom Left Badge: "TDS: < 50 PPM" or "75 GPD" */}
+        {/* Bottom Left Badge: White pill tag */}
         <div className="absolute bottom-3 left-3 pointer-events-none">
-          <span className="px-2.5 py-1 rounded-lg bg-slate-900/85 backdrop-blur-md text-white text-[10px] font-bold tracking-wide shadow-sm border border-white/10">
+          <span className="px-2.5 py-1 rounded-full bg-white text-[#0F172A] border border-[#E2E8F0] text-[10px] font-bold shadow-sm">
             {getBottomLeftBadge()}
           </span>
         </div>
 
-        {/* Bottom Right Badge: "NEW" (Orange #F97316) */}
+        {/* Bottom Right Badge: "NEW" (Orange #F97316 pill) */}
         {isNew && (
           <div className="absolute bottom-3 right-3 pointer-events-none">
             <span className="px-2.5 py-0.5 rounded-full bg-[#F97316] text-white text-[10px] font-black uppercase tracking-wider shadow-sm">
@@ -89,19 +89,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       {/* Card Body */}
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-        {/* Top Row: Category name on left, Star Rating on right */}
+        {/* Row 1: Category Name on left, Star Rating on right */}
         <div>
           <div className="flex items-center justify-between text-xs mb-1.5">
-            <span className="font-bold text-[#64748B] uppercase tracking-wider text-[11px]">
+            <span className="font-semibold text-[#64748B] uppercase tracking-wider text-[11px]">
               {product.category || 'RO Water Purifiers'}
             </span>
-            <div className="flex items-center gap-1 font-extrabold text-[#0F172A] bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/60">
-              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+            <div className="flex items-center gap-1 font-extrabold text-[#F59E0B]">
+              <Star className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]" />
               <span>{product.rating ? product.rating.toFixed(1) : '4.9'}</span>
             </div>
           </div>
 
-          {/* Bold Product Title */}
+          {/* Row 2: Bold Product Title */}
           <Link href={`/products/${product.id}`}>
             <h3 className="text-base font-extrabold text-[#0F172A] group-hover:text-[#00BCE1] transition-colors line-clamp-2 leading-snug">
               {product.name}
@@ -109,7 +109,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </Link>
         </div>
 
-        {/* Bottom Row: Price on left, filled cyan + Add button on right */}
+        {/* Row 3: Price on left, filled #00BCE1 + Add button on right */}
         <div className="pt-3 border-t border-[#F1F5F9] flex items-center justify-between gap-2">
           <div className="flex flex-col">
             {product.originalPrice && (
@@ -124,27 +124,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           <button
             onClick={handleAdd}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all duration-200 flex items-center gap-1.5 shadow-md ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all duration-200 flex items-center gap-1 shadow-sm ${
               isAdded
                 ? 'bg-emerald-600 text-white shadow-emerald-500/25 scale-95'
-                : 'bg-[#00BCE1] hover:bg-[#00A3C7] text-white shadow-cyan-500/25 active:scale-95'
+                : 'bg-[#00BCE1] hover:bg-[#00A3C7] text-white shadow-cyan-500/20 active:scale-95'
             }`}
           >
             {isAdded ? (
               <>
-                <Check className="w-4 h-4" />
+                <Check className="w-3.5 h-3.5" />
                 <span>Added</span>
               </>
             ) : (
               <>
-                <Plus className="w-4 h-4 stroke-[3]" />
-                <span>Add</span>
+                <Plus className="w-3.5 h-3.5 stroke-[3]" />
+                <span>+ Add</span>
               </>
             )}
           </button>
         </div>
-
       </div>
     </div>
   );
 };
+

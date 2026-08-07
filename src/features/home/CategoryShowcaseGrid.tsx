@@ -4,11 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 import { 
   Droplet, 
-  Box, 
+  Shield, 
   Flame, 
-  Filter, 
-  Cpu, 
-  Factory,
+  Wrench, 
+  Package, 
+  Building,
   ArrowRight
 } from 'lucide-react';
 
@@ -18,8 +18,8 @@ interface CategoryItem {
   categoryFilter: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
-  badge: string;
-  bgGradient: string;
+  itemCount: string;
+  imageUrl: string;
 }
 
 const CATEGORIES: CategoryItem[] = [
@@ -29,17 +29,17 @@ const CATEGORIES: CategoryItem[] = [
     categoryFilter: 'RO Purifiers',
     description: '7-Stage Livotec, Eureka Classic, open & stand frames...',
     icon: Droplet,
-    badge: 'Best Seller',
-    bgGradient: 'from-sky-50 to-blue-50/50',
+    itemCount: '12 Items',
+    imageUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1cf4e?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 'cabinet-purifiers',
     title: 'Cabinet Purifiers',
     categoryFilter: 'Cabinet Purifiers',
     description: 'Glass Door Cabinet, Slim Cabinet, automated flushing...',
-    icon: Box,
-    badge: 'Modern Glass',
-    bgGradient: 'from-blue-50 to-indigo-50/50',
+    icon: Shield,
+    itemCount: '8 Items',
+    imageUrl: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 'water-dispensers',
@@ -47,95 +47,115 @@ const CATEGORIES: CategoryItem[] = [
     categoryFilter: 'Dispensers',
     description: 'Pure X 100 GPD, Heron Hot & Cold, desktop & standing...',
     icon: Flame,
-    badge: 'Hot & Cold',
-    bgGradient: 'from-cyan-50 to-sky-50/50',
+    itemCount: '15 Items',
+    imageUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=600&q=80',
   },
   {
-    id: 'filters-cartridges',
-    title: 'Filters & Cartridges',
+    id: 'filter-cartridges',
+    title: 'Filter Cartridges',
     categoryFilter: 'Filters & Media',
     description: '10"/20" PP Sediment, CTO Carbon, RO Membranes 75/100GPD...',
-    icon: Filter,
-    badge: 'Replacement',
-    bgGradient: 'from-teal-50 to-emerald-50/50',
+    icon: Wrench,
+    itemCount: '24 Items',
+    imageUrl: 'https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 'spare-parts-pumps',
     title: 'Spare Parts & Pumps',
     categoryFilter: 'Spare Parts',
     description: '24V Booster Pumps, Faucets, Solenoid Valves, Tanks...',
-    icon: Cpu,
-    badge: 'Original Parts',
-    bgGradient: 'from-slate-50 to-sky-50/50',
+    icon: Package,
+    itemCount: '32 Items',
+    imageUrl: 'https://images.unsplash.com/photo-1585832770485-e68a5fcffd69?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 'industrial-ro',
     title: 'Industrial RO Plants',
     categoryFilter: 'Industrial RO',
     description: '500 LPH to 5000 LPH plants, Iron Removal, Softeners...',
-    icon: Factory,
-    badge: 'Commercial',
-    bgGradient: 'from-indigo-50 to-slate-50/50',
+    icon: Building,
+    itemCount: '6 Items',
+    imageUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
   },
 ];
 
 export const CategoryShowcaseGrid: React.FC = () => {
   return (
     <section className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Section Header */}
+      {/* Header Layout */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F0F9FF] border border-[#BAE6FD] text-xs font-bold text-[#00BCE1]">
-            <span>💧</span> EXPLORE WATER PURIFICATION CATEGORIES
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00BCE1]/10 text-[#00BCE1] border border-[#00BCE1]/20 text-xs font-extrabold uppercase tracking-wide">
+            🏷 STORE COLLECTIONS
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight mt-2">
-            Complete Purification <span className="text-[#00BCE1]">Solutions</span>
+            Explore By Water Category
           </h2>
+          <p className="text-xs sm:text-sm text-[#64748B] max-w-xl mt-1.5">
+            Hand-finished RO purifiers, cabinet filters, water dispensers, filter media, spare parts, and industrial RO plants.
+          </p>
         </div>
-        <p className="text-xs sm:text-sm text-[#64748B] max-w-md">
-          Explore our certified range of domestic drinking RO systems, luxury glass cabinets, commercial dispensers, and industrial water treatment plants.
-        </p>
+        <Link
+          href="/products"
+          className="inline-flex items-center gap-1 text-sm font-extrabold text-[#00BCE1] hover:text-[#00A3C7] transition-colors shrink-0 group"
+        >
+          <span>View All Products</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </Link>
       </div>
 
-      {/* 6-Category Feature Grid: Exactly 6 white cards in a row (or 3x2 / 6-col responsive grid) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      {/* 6 Vertical Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
         {CATEGORIES.map((cat) => {
           const Icon = cat.icon;
           return (
             <div
               key={cat.id}
-              className="group relative rounded-2xl bg-white border border-[#E2E8F0] p-4 flex flex-col justify-between hover:border-[#00BCE1] hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1"
+              className="group relative rounded-2xl bg-white border border-[#E2E8F0] hover:border-[#00BCE1] transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 flex flex-col justify-between overflow-hidden hover:-translate-y-1"
             >
               <div>
-                {/* Top Row: Icon + Badge */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cat.bgGradient} border border-[#BAE6FD]/40 flex items-center justify-center text-[#00BCE1] group-hover:bg-[#00BCE1] group-hover:text-white transition-colors duration-300 shadow-sm`}>
-                    <Icon className="w-5 h-5" />
+                {/* Image Container */}
+                <div className="relative w-full h-44 bg-[#F8FAFC] overflow-hidden">
+                  <img
+                    src={cat.imageUrl}
+                    alt={cat.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Top Right Pill Badge: White pill showing item count */}
+                  <div className="absolute top-3 right-3 pointer-events-none">
+                    <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm text-slate-800 text-[11px] font-extrabold shadow-sm border border-slate-100">
+                      {cat.itemCount}
+                    </span>
                   </div>
-                  <span className="px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[10px] font-bold text-[#64748B] group-hover:bg-[#E0F7FA] group-hover:text-[#00BCE1] transition-colors">
-                    {cat.badge}
-                  </span>
+                  {/* Bottom Left Badge: Circular Aqua Cyan (#00BCE1) icon button */}
+                  <div className="absolute bottom-3 left-3 pointer-events-none">
+                    <div className="w-9 h-9 rounded-full bg-[#00BCE1] text-white flex items-center justify-center shadow-md border-2 border-white">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
                 </div>
 
-                {/* Category Title */}
-                <h3 className="text-sm font-extrabold text-[#0F172A] group-hover:text-[#00BCE1] transition-colors line-clamp-1">
-                  {cat.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-[11px] text-[#64748B] mt-1.5 line-clamp-2 leading-relaxed">
-                  {cat.description}
-                </p>
+                {/* Card Body */}
+                <div className="p-4">
+                  {/* Category Title */}
+                  <h3 className="text-sm font-extrabold text-[#0F172A] group-hover:text-[#00BCE1] transition-colors line-clamp-1">
+                    {cat.title}
+                  </h3>
+                  {/* Subtitle (2 lines) */}
+                  <p className="text-[11px] text-[#64748B] mt-1.5 line-clamp-2 leading-relaxed">
+                    {cat.description}
+                  </p>
+                </div>
               </div>
 
-              {/* Browse Catalog Button Link */}
-              <div className="pt-4 mt-3 border-t border-[#F1F5F9]">
+              {/* Bottom Link */}
+              <div className="p-4 pt-0">
                 <Link
                   href={`/products?category=${encodeURIComponent(cat.categoryFilter)}`}
                   className="inline-flex items-center gap-1 text-[11px] font-extrabold text-[#00BCE1] hover:text-[#00A3C7] transition-colors group/link"
                 >
                   <span>Browse Catalog</span>
-                  <ArrowRight className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
@@ -145,3 +165,4 @@ export const CategoryShowcaseGrid: React.FC = () => {
     </section>
   );
 };
+
