@@ -1,10 +1,28 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Droplets, PhoneCall, Mail, MapPin, ShieldCheck, CreditCard, Lock, ArrowUpRight } from 'lucide-react';
+import { Droplets, PhoneCall, Mail, MapPin, ShieldCheck, Lock } from 'lucide-react';
+import { fetchCompanyInfoFromFirestore, CompanyInfo } from '@/core/services/firebase';
 
 export const Footer: React.FC = () => {
+  const [info, setInfo] = useState<CompanyInfo | null>(null);
+
+  useEffect(() => {
+    const loadInfo = async () => {
+      const dbInfo = await fetchCompanyInfoFromFirestore();
+      setInfo(dbInfo);
+    };
+    loadInfo();
+  }, []);
+
+  const founder = info?.founder || 'Enjamamul Haque (Kiron)';
+  const foundedYear = info?.foundedYear || '2007';
+  const address = info?.address || 'House 72, Janata Housing Road, 3 Ring Road, Dhaka 1219';
+  const helpline = info?.helpline || '01780-885841 / 09613 700 750';
+  const email = info?.email || 'aquabd112@gmail.com';
+  const description = info?.description || 'Aqua Point is committed to providing 100% pure, healthy, and mineral-balanced drinking water solutions across Bangladesh.';
+
   return (
     <footer className="mt-20 bg-[#0F172A] text-white text-sm">
       {/* 4-Column Deep Navy Footer Section */}
@@ -25,7 +43,7 @@ export const Footer: React.FC = () => {
             </Link>
             
             <p className="text-xs text-slate-300 leading-relaxed">
-              Aqua Point is committed to providing 100% pure, healthy, and mineral-balanced drinking water solutions across Bangladesh. We offer premium 7-stage RO purifiers, cabinet filters, dispensers, industrial plants, and 24/7 doorstep technician services. Founded 2007 by Enjamamul Haque (Kiron).
+              {description} Founded {foundedYear} by {founder}.
             </p>
 
             <div className="pt-2">
@@ -117,23 +135,23 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3 text-xs text-slate-300">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#00E5FF] shrink-0 mt-0.5" />
-                <span>House 72, Janata Housing Road, 3 Ring Road, Dhaka 1219</span>
+                <span>{address}</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <PhoneCall className="w-4 h-4 text-[#10B981] shrink-0" />
-                <a href="tel:01780885841" className="hover:text-[#00E5FF] font-bold">01780-885841 / 09613 700 750</a>
+                <a href={`tel:${helpline.split('/')[0].trim()}`} className="hover:text-[#00E5FF] font-bold">{helpline}</a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                <a href="mailto:aquabd112@gmail.com" className="hover:text-[#00E5FF]">aquabd112@gmail.com</a>
+                <a href={`mailto:${email}`} className="hover:text-[#00E5FF]">{email}</a>
               </li>
             </ul>
 
             {/* Helpline CTA box inside column */}
             <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 space-y-1">
               <span className="text-[11px] text-slate-400 font-medium block">Need instant assistance?</span>
-              <a href="tel:01780885841" className="text-sm font-extrabold text-[#00E5FF] hover:underline block">
-                Helpline: 01780-885841 / 09613 700 750
+              <a href={`tel:${helpline.split('/')[0].trim()}`} className="text-sm font-extrabold text-[#00E5FF] hover:underline block">
+                Helpline: {helpline}
               </a>
             </div>
           </div>
@@ -145,7 +163,7 @@ export const Footer: React.FC = () => {
       <div className="border-t border-slate-800 bg-[#0B1120] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} Aqua Point BD. All rights reserved. Founded 2007 by Enjamamul Haque (Kiron).
+            © {new Date().getFullYear()} {info?.name || 'Aqua Point BD'}. All rights reserved. Founded {foundedYear} by {founder}.
           </div>
 
           {/* Payment Gateway Badges */}

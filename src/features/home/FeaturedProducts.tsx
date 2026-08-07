@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { fetchProductsFromFirestore, ProductItem } from '@/core/services/firebase';
-import { SAMPLE_PRODUCTS } from '@/core/data/sampleProducts';
 import { ProductCard } from '@/features/products/ProductCard';
 
 export const FeaturedProducts: React.FC = () => {
@@ -14,15 +13,15 @@ export const FeaturedProducts: React.FC = () => {
   useEffect(() => {
     const loadProducts = async () => {
       const dbProducts = await fetchProductsFromFirestore();
-      if (dbProducts && dbProducts.length > 0) {
-        setProducts(dbProducts);
-      } else {
-        setProducts(SAMPLE_PRODUCTS);
-      }
+      setProducts(dbProducts || []);
       setLoading(false);
     };
     loadProducts();
   }, []);
+
+  const displayProducts = products.filter(p => p.featured).length > 0 
+    ? products.filter(p => p.featured).slice(0, 4) 
+    : products.slice(0, 4);
 
   return (
     <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,9 +55,13 @@ export const FeaturedProducts: React.FC = () => {
             </div>
           ))}
         </div>
+      ) : displayProducts.length === 0 ? (
+        <div className="p-8 text-center bg-white rounded-2xl border border-[#E2E8F0] text-xs text-[#64748B]">
+          No products available at the moment.
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {displayProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

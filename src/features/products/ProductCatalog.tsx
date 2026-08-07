@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Search, X, Droplets } from 'lucide-react';
 import { fetchProductsFromFirestore, ProductItem } from '@/core/services/firebase';
-import { SAMPLE_PRODUCTS } from '@/core/data/sampleProducts';
 import { ProductCatalogHeader } from './ProductCatalogHeader';
 import { ProductCard } from './ProductCard';
 
@@ -23,11 +22,7 @@ export const ProductCatalog: React.FC = () => {
     const loadData = async () => {
       setLoading(true);
       const dbData = await fetchProductsFromFirestore();
-      if (dbData && dbData.length > 0) {
-        setProducts(dbData);
-      } else {
-        setProducts(SAMPLE_PRODUCTS);
-      }
+      setProducts(dbData || []);
       setLoading(false);
     };
     loadData();

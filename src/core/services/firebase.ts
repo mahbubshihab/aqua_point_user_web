@@ -125,6 +125,16 @@ export interface CompanyInfo {
   description: string;
 }
 
+export interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  badge?: string;
+  icon?: string;
+  color?: string;
+  bg?: string;
+}
+
 // Firestore Helper API
 export const fetchProductsFromFirestore = async (categoryFilter?: string): Promise<ProductItem[]> => {
   try {
@@ -140,7 +150,7 @@ export const fetchProductsFromFirestore = async (categoryFilter?: string): Promi
     });
     return products;
   } catch (error) {
-    console.warn("Firestore fetch error, falling back to local dataset:", error);
+    console.warn("Firestore fetch error:", error);
     return [];
   }
 };
@@ -156,6 +166,21 @@ export const fetchProductByIdFromFirestore = async (id: string): Promise<Product
   } catch (error) {
     console.warn("Firestore fetch single product error:", error);
     return null;
+  }
+};
+
+export const fetchServicesFromFirestore = async (): Promise<ServiceItem[]> => {
+  try {
+    const q = query(collection(db, SERVICES_COLLECTION));
+    const querySnapshot = await getDocs(q);
+    const services: ServiceItem[] = [];
+    querySnapshot.forEach((docSnap) => {
+      services.push({ id: docSnap.id, ...docSnap.data() } as ServiceItem);
+    });
+    return services;
+  } catch (error) {
+    console.warn("Firestore fetch services error:", error);
+    return [];
   }
 };
 

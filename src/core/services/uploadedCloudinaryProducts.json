@@ -1,0 +1,116 @@
+{
+  "livotec-open-7-stage": {
+    "id": "livotec-open-7-stage",
+    "slug": "livotec_open",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130065/products/livotec_open.webp",
+    "public_id": "products/livotec_open"
+  },
+  "livotec-stand-7-stage": {
+    "id": "livotec-stand-7-stage",
+    "slug": "livotec_stand",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130066/products/livotec_stand.webp",
+    "public_id": "products/livotec_stand"
+  },
+  "eureka-classic-7-stage": {
+    "id": "eureka-classic-7-stage",
+    "slug": "eureka_classic",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130067/products/eureka_classic.webp",
+    "public_id": "products/eureka_classic"
+  },
+  "puro-plus-6-stage": {
+    "id": "puro-plus-6-stage",
+    "slug": "puro_plus",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130068/products/puro_plus.webp",
+    "public_id": "products/puro_plus"
+  },
+  "fighter-elite-7-stage": {
+    "id": "fighter-elite-7-stage",
+    "slug": "fighter_elite",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130069/products/fighter_elite.webp",
+    "public_id": "products/fighter_elite"
+  },
+  "fighter-1-0-7-stage": {
+    "id": "fighter-1-0-7-stage",
+    "slug": "fighter_1_0",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130070/products/fighter_1_0.webp",
+    "public_id": "products/fighter_1_0"
+  },
+  "livotec-7-stage-cabinet-ro": {
+    "id": "livotec-7-stage-cabinet-ro",
+    "slug": "livotec_7_stage_cabinet",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130072/products/livotec_7_stage_cabinet.webp",
+    "public_id": "products/livotec_7_stage_cabinet"
+  },
+  "glass-door-cabinet-ro": {
+    "id": "glass-door-cabinet-ro",
+    "slug": "glass_door_cabinet",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130072/products/glass_door_cabinet.webp",
+    "public_id": "products/glass_door_cabinet"
+  },
+  "modern-cabinet-filter": {
+    "id": "modern-cabinet-filter",
+    "slug": "modern_cabinet_filter",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130073/products/modern_cabinet_filter.webp",
+    "public_id": "products/modern_cabinet_filter"
+  },
+  "slim-cabinet-purifier": {
+    "id": "slim-cabinet-purifier",
+    "slug": "slim_cabinet_purifier",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130074/products/slim_cabinet_purifier.webp",
+    "public_id": "products/slim_cabinet_purifier"
+  },
+  "pure-x-100-gpd-ro-dispenser": {
+    "id": "pure-x-100-gpd-ro-dispenser",
+    "slug": "pure_x_100_gpd",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130075/products/pure_x_100_gpd.webp",
+    "public_id": "products/pure_x_100_gpd"
+  },
+  "heron-hot-cold-filter-dispenser": {
+    "id": "heron-hot-cold-filter-dispenser",
+    "slug": "heron_hot_cold",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130076/products/heron_hot_cold.webp",
+    "public_id": "products/heron_hot_cold"
+  },
+  "table-top-water-dispenser": {
+    "id": "table-top-water-dispenser",
+    "slug": "table_top_dispenser",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130077/products/table_top_dispenser.webp",
+    "public_id": "products/table_top_dispenser"
+  },
+  "puryca-premium-water-filter": {
+    "id": "puryca-premium-water-filter",
+    "slug": "puryca_premium",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130078/products/puryca_premium.webp",
+    "public_id": "products/puryca_premium"
+  },
+  "pp-sediment-filter-cartridge": {
+    "id": "pp-sediment-filter-cartridge",
+    "slug": "pp_sediment_filter",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130079/products/pp_sediment_filter.webp",
+    "public_id": "products/pp_sediment_filter"
+  },
+  "cto-carbon-block-filter-cartridge": {
+    "id": "cto-carbon-block-filter-cartridge",
+    "slug": "cto_carbon_block",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130079/products/cto_carbon_block.webp",
+    "public_id": "products/cto_carbon_block"
+  },
+  "high-quality-ro-membrane-75-gpd": {
+    "id": "high-quality-ro-membrane-75-gpd",
+    "slug": "ro_membrane_75_gpd",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130080/products/ro_membrane_75_gpd.webp",
+    "public_id": "products/ro_membrane_75_gpd"
+  },
+  "500-lph-commercial-ro-plant": {
+    "id": "500-lph-commercial-ro-plant",
+    "slug": "500_lph_commercial_ro",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130081/products/500_lph_commercial_ro.webp",
+    "public_id": "products/500_lph_commercial_ro"
+  },
+  "1000-lph-industrial-ro-plant": {
+    "id": "1000-lph-industrial-ro-plant",
+    "slug": "1000_lph_industrial_ro",
+    "secure_url": "https://res.cloudinary.com/rvoym2gw/image/upload/v1786130082/products/1000_lph_industrial_ro.webp",
+    "public_id": "products/1000_lph_industrial_ro"
+  }
+}

@@ -8,7 +8,6 @@ import {
   submitOrderToFirestore, 
   ProductItem 
 } from '@/core/services/firebase';
-import { SAMPLE_PRODUCTS } from '@/core/data/sampleProducts';
 import { getCloudinaryUrl } from '@/core/services/cloudinary';
 import { useCart } from '@/core/context/CartContext';
 import { 
@@ -54,9 +53,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
         setProduct(dbProduct);
         setActiveImage(dbProduct.imageUrl);
       } else {
-        const local = SAMPLE_PRODUCTS.find((p) => p.id === productId) || SAMPLE_PRODUCTS[0];
-        setProduct(local);
-        setActiveImage(local.imageUrl);
+        setProduct(null);
       }
       setLoading(false);
     };
