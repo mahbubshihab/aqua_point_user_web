@@ -26,11 +26,13 @@ export const AboutCompanySection: React.FC = () => {
     loadInfo();
   }, []);
 
-  const founder = info?.founder || 'Enjamamul Haque (Kiron)';
-  const foundedYear = info?.foundedYear || '2007';
-  const address = info?.address || 'House 72, Janata Housing Road, 3 Ring Road, Dhaka 1219';
-  const description = info?.description || 'Founded in 2007 by Enjamamul Haque (Kiron), Aqua Point BD has grown into one of Bangladesh\'s most trusted water purification providers.';
-  const helpline = info?.helpline || '01780-885841 / 09613 700 750';
+  const founder = info?.founder;
+  const foundedYear = info?.foundedYear;
+  const address = info?.address;
+  const description = info?.description;
+  const helpline = info?.helpline;
+  
+  const yearsOfPurity = foundedYear ? new Date().getFullYear() - Number(foundedYear) : null;
 
   return (
     <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,13 +54,17 @@ export const AboutCompanySection: React.FC = () => {
                 </span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight">
-                17+ Years of Purity — <span className="text-[#00BCE1]">{info?.name || 'Aqua Point BD'}</span>
-              </h2>
+              {info?.name && (
+                <h2 className="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight">
+                  {yearsOfPurity ? `${yearsOfPurity}+ Years of Purity — ` : ''}<span className="text-[#00BCE1]">{info.name}</span>
+                </h2>
+              )}
 
-              <p className="text-sm text-[#475569] leading-relaxed">
-                {description}
-              </p>
+              {description && (
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  {description}
+                </p>
+              )}
 
               {/* Key Pillars Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -88,13 +94,15 @@ export const AboutCompanySection: React.FC = () => {
                   <span>Learn More About Us</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <a
-                  href={`tel:${helpline.split('/')[0].trim()}`}
-                  className="px-6 py-3 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#F1F5F9] text-[#0F172A] font-extrabold text-xs flex items-center gap-2 transition-all"
-                >
-                  <Phone className="w-4 h-4 text-[#00BCE1]" />
-                  <span>Call Hotline: {helpline}</span>
-                </a>
+                {helpline && (
+                  <a
+                    href={`tel:${helpline.split('/')[0].trim()}`}
+                    className="px-6 py-3 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#F1F5F9] text-[#0F172A] font-extrabold text-xs flex items-center gap-2 transition-all"
+                  >
+                    <Phone className="w-4 h-4 text-[#00BCE1]" />
+                    <span>Call Hotline: {helpline}</span>
+                  </a>
+                )}
               </div>
             </div>
 
@@ -107,20 +115,26 @@ export const AboutCompanySection: React.FC = () => {
                 </h3>
 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-[#E2E8F0]">
-                    <span className="text-xs font-bold text-[#64748B]">Established</span>
-                    <span className="text-sm font-extrabold text-[#00BCE1]">{foundedYear} (17+ Years)</span>
-                  </div>
+                  {foundedYear && (
+                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-[#E2E8F0]">
+                      <span className="text-xs font-bold text-[#64748B]">Established</span>
+                      <span className="text-sm font-extrabold text-[#00BCE1]">{foundedYear} {yearsOfPurity ? `(${yearsOfPurity}+ Years)` : ''}</span>
+                    </div>
+                  )}
 
-                  <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-[#E2E8F0]">
-                    <span className="text-xs font-bold text-[#64748B]">Founder & CEO</span>
-                    <span className="text-sm font-extrabold text-[#0F172A]">{founder}</span>
-                  </div>
+                  {founder && (
+                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-[#E2E8F0]">
+                      <span className="text-xs font-bold text-[#64748B]">Founder & CEO</span>
+                      <span className="text-sm font-extrabold text-[#0F172A]">{founder}</span>
+                    </div>
+                  )}
 
-                  <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-[#E2E8F0]">
-                    <span className="text-xs font-bold text-[#64748B]">Headquarters</span>
-                    <span className="text-xs font-extrabold text-[#0F172A] text-right">{address}</span>
-                  </div>
+                  {address && (
+                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-[#E2E8F0]">
+                      <span className="text-xs font-bold text-[#64748B]">Headquarters</span>
+                      <span className="text-xs font-extrabold text-[#0F172A] text-right">{address}</span>
+                    </div>
+                  )}
 
                   <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-[#E2E8F0]">
                     <span className="text-xs font-bold text-[#64748B]">Satisfied Clients</span>

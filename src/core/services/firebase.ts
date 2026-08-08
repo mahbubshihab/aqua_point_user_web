@@ -231,6 +231,7 @@ export interface CompanyInfo {
   address: string;
   helpline: string;
   email: string;
+  whatsapp?: string;
   description: string;
 }
 

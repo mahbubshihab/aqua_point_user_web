@@ -13,7 +13,7 @@ import {
   ShieldCheck,
   Sparkles
 } from 'lucide-react';
-import { submitServiceRequestToFirestore } from '@/core/services/firebase';
+import { submitServiceRequestToFirestore, fetchCompanyInfoFromFirestore, CompanyInfo } from '@/core/services/firebase';
 
 const MACHINE_TYPES = [
   'Aqua Point Supreme 7-Stage RO',
@@ -43,6 +43,13 @@ export const ServiceBookingForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
+
+  React.useEffect(() => {
+    fetchCompanyInfoFromFirestore().then(info => {
+      if (info) setCompanyInfo(info);
+    }).catch(() => {});
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,7 +80,7 @@ export const ServiceBookingForm: React.FC = () => {
       setProblemDescription('');
     } catch (err: any) {
       console.error("Failed to submit service request:", err);
-      setErrorMsg('Failed to submit request. Please try calling our helpline 09613 700 750 directly.');
+      setErrorMsg('Failed to submit request. Please try calling our helpline directly.');
     } finally {
       setLoading(false);
     }
@@ -281,19 +288,21 @@ export const ServiceBookingForm: React.FC = () => {
             </ul>
           </div>
 
-          <div className="p-6 rounded-3xl bg-[#ECFDF5] border border-[#A7F3D0] text-center space-y-3 shadow-sm">
-            <PhoneCall className="w-8 h-8 text-[#10B981] mx-auto animate-pulse" />
-            <h3 className="text-base font-bold text-[#0F172A]">Need Emergency Service?</h3>
-            <p className="text-xs text-[#334155]">
-              For urgent pipe leaks or water contamination emergencies, call our hotline directly:
-            </p>
-            <a
-              href="tel:09613700750"
-              className="inline-block py-2.5 px-6 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-extrabold text-sm shadow-sm transition-all"
-            >
-              09613 700 750
-            </a>
-          </div>
+          {companyInfo?.helpline && (
+            <div className="p-6 rounded-3xl bg-[#ECFDF5] border border-[#A7F3D0] text-center space-y-3 shadow-sm">
+              <PhoneCall className="w-8 h-8 text-[#10B981] mx-auto animate-pulse" />
+              <h3 className="text-base font-bold text-[#0F172A]">Need Emergency Service?</h3>
+              <p className="text-xs text-[#334155]">
+                For urgent pipe leaks or water contamination emergencies, call our hotline directly:
+              </p>
+              <a
+                href={`tel:${companyInfo.helpline.split('/')[0].trim()}`}
+                className="inline-block py-2.5 px-6 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-extrabold text-sm shadow-sm transition-all"
+              >
+                {companyInfo.helpline}
+              </a>
+            </div>
+          )}
 
         </div>
 

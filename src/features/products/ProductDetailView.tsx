@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { 
   fetchProductByIdFromFirestore, 
   submitOrderToFirestore, 
+  fetchCompanyInfoFromFirestore,
+  CompanyInfo,
   ProductItem 
 } from '@/core/services/firebase';
 import { getCloudinaryUrl } from '@/core/services/cloudinary';
@@ -39,6 +41,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
+
+  useEffect(() => {
+    fetchCompanyInfoFromFirestore().then(info => {
+      if (info) setCompanyInfo(info);
+    }).catch(() => {});
+  }, []);
 
   // Quick Checkout Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -270,12 +279,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
           </div>
 
           {/* Helpline shortcut */}
-          <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between text-xs text-[#475569]">
-            <span>Need advice selecting the right RO purifier?</span>
-            <a href="tel:09613700750" className="text-[#00BCE1] font-bold flex items-center gap-1 hover:underline">
-              <PhoneCall className="w-3.5 h-3.5" /> 09613 700 750
-            </a>
-          </div>
+          {companyInfo?.helpline && (
+            <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between text-xs text-[#475569]">
+              <span>Need advice selecting the right RO purifier?</span>
+              <a href={`tel:${companyInfo.helpline.split('/')[0].trim()}`} className="text-[#00BCE1] font-bold flex items-center gap-1 hover:underline">
+                <PhoneCall className="w-3.5 h-3.5" /> {companyInfo.helpline}
+              </a>
+            </div>
+          )}
 
         </div>
 
