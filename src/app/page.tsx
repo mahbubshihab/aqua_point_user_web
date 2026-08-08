@@ -1,6 +1,6 @@
 import React from 'react';
 import { HeroSlider } from '@/features/home/HeroSlider';
-import { CategoryShowcaseGrid } from '@/features/home/CategoryShowcaseGrid';
+import { CategoriesSection } from '@/features/home/CategoriesSection';
 import { FeaturedProducts } from '@/features/home/FeaturedProducts';
 import { ServicesHighlight } from '@/features/home/ServicesHighlight';
 import { WaterQualityMeter } from '@/features/home/WaterQualityMeter';
@@ -16,7 +16,7 @@ export default function HomePage() {
       <HeroSlider />
 
       {/* 3. Product Categories Showcase */}
-      <CategoryShowcaseGrid />
+      <CategoriesSection />
 
       {/* 4. Featured Products Catalog (19 Authentic Products) */}
       <FeaturedProducts />

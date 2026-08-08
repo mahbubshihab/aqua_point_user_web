@@ -118,8 +118,19 @@ export const COMPANY_INFO_COLLECTION = 'company_info';
 export const REVIEWS_COLLECTION = 'reviews';
 export const CLIENTS_COLLECTION = 'clients';
 export const BANNERS_COLLECTION = 'banners';
+export const CATEGORIES_COLLECTION = 'categories';
 
 // Helper Types
+export interface CategoryItem {
+  id: string;
+  name: string;
+  slug?: string;
+  imageUrl: string;
+  description?: string;
+  productCount?: number;
+  createdAt?: DocumentData;
+}
+
 export interface BannerItem {
   id: string;
   title: string;
@@ -143,6 +154,7 @@ export interface ProductItem {
   id: string;
   name: string;
   category: string;
+  type?: string;
   price: number;
   originalPrice?: number;
   description: string;
@@ -257,12 +269,54 @@ export const fetchProductsFromFirestore = async (categoryFilter?: string, limitC
     querySnapshot.forEach((docSnap) => {
       products.push({ id: docSnap.id, ...docSnap.data() } as ProductItem);
     });
+  }
+};
+
+export const fetchProductsByTypeFromFirestore = async (type: string, limitCount: number = 12): Promise<ProductItem[]> => {
+  try {
+    const q = query(
+      collection(db, PRODUCTS_COLLECTION),
+      where('type', '==', type),
+      limit(limitCount)
+    );
+    const querySnapshot = await getDocs(q);
+    const products: ProductItem[] = [];
+    querySnapshot.forEach((docSnap) => {
+      products.push({ id: docSnap.id, ...docSnap.data() } as ProductItem);
+    });
     return products;
   } catch (error) {
-    console.warn("Firestore fetch error:", error);
+    console.warn(`Firestore fetch products by type (${type}) error:`, error);
     return [];
   }
 };
+
+export const subscribeToProductsByTypeFromFirestore = (
+  type: string,
+  callback: (products: ProductItem[]) => void,
+  limitCount: number = 12
+) => {
+  const q = query(
+    collection(db, PRODUCTS_COLLECTION),
+    where('type', '==', type),
+    limit(limitCount)
+  );
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const list: ProductItem[] = snapshot.docs.map((docSnap) => ({
+        id: docSnap.id,
+        ...docSnap.data(),
+      })) as ProductItem[];
+      callback(list);
+    },
+    (error) => {
+      console.warn(`Firestore snapshot products by type (${type}) error:`, error);
+      fetchProductsByTypeFromFirestore(type, limitCount).then(callback);
+    }
+  );
+};
+
 
 export const fetchProductByIdFromFirestore = async (id: string): Promise<ProductItem | null> => {
   try {
@@ -494,5 +548,52 @@ export const subscribeToBannersFromFirestore = (callback: (banners: BannerItem[]
     });
   });
 };
+
+export const fetchCategoriesFromFirestore = async (): Promise<CategoryItem[]> => {
+  try {
+    const q = query(collection(db, CATEGORIES_COLLECTION), limit(30));
+    const querySnapshot = await getDocs(q);
+    const categories: CategoryItem[] = [];
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      categories.push({
+        id: docSnap.id,
+        name: data.name || data.title || 'Unnamed Category',
+        slug: data.slug || '',
+        imageUrl: data.imageUrl || data.image || data.cloudinary_url || '',
+        description: data.description || '',
+        productCount: Number(data.productCount) || 0,
+        createdAt: data.createdAt,
+      });
+    });
+    return categories;
+  } catch (error) {
+    console.warn("Firestore fetch categories error:", error);
+    return [];
+  }
+};
+
+export const subscribeToCategoriesFromFirestore = (callback: (categories: CategoryItem[]) => void) => {
+  const q = query(collection(db, CATEGORIES_COLLECTION), limit(30));
+  return onSnapshot(q, (snapshot) => {
+    const list: CategoryItem[] = snapshot.docs.map((docSnap) => {
+      const data = docSnap.data();
+      return {
+        id: docSnap.id,
+        name: data.name || data.title || 'Unnamed Category',
+        slug: data.slug || '',
+        imageUrl: data.imageUrl || data.image || data.cloudinary_url || '',
+        description: data.description || '',
+        productCount: Number(data.productCount) || 0,
+        createdAt: data.createdAt,
+      };
+    });
+    callback(list);
+  }, (error) => {
+    console.warn("Firestore categories snapshot error:", error);
+    callback([]);
+  });
+};
+
 
 
