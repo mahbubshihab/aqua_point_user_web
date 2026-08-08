@@ -569,6 +569,43 @@ export const fetchApprovedReviewsFromFirestore = async (): Promise<ReviewItem[]>
   }
 };
 
+export const subscribeToReviewsFromFirestore = (callback: (reviews: ReviewItem[]) => void) => {
+  const q = query(collection(db, REVIEWS_COLLECTION), orderBy('createdAt', 'desc'));
+  return onSnapshot(q, (snapshot) => {
+    const list: ReviewItem[] = snapshot.docs.map((docSnap) => {
+      const data = docSnap.data();
+      return {
+        id: docSnap.id,
+        customerName: data.customerName || data.name || 'Valued Customer',
+        location: data.location || '',
+        rating: Number(data.rating) || 5,
+        comment: data.comment || '',
+        isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+        createdAt: data.createdAt,
+      };
+    });
+    callback(list);
+  }, (error) => {
+    console.warn("Firestore reviews snapshot error with orderBy, trying fallback:", error);
+    const fallbackQ = query(collection(db, REVIEWS_COLLECTION));
+    return onSnapshot(fallbackQ, (snapshot) => {
+      const list: ReviewItem[] = snapshot.docs.map((docSnap) => {
+        const data = docSnap.data();
+        return {
+          id: docSnap.id,
+          customerName: data.customerName || data.name || 'Valued Customer',
+          location: data.location || '',
+          rating: Number(data.rating) || 5,
+          comment: data.comment || '',
+          isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+          createdAt: data.createdAt,
+        };
+      });
+      callback(list);
+    });
+  });
+};
+
 export const subscribeToApprovedReviewsFromFirestore = (callback: (reviews: ReviewItem[]) => void) => {
   const q = query(collection(db, REVIEWS_COLLECTION), where('isApproved', '==', true), limit(6));
   return onSnapshot(q, (snapshot) => {
