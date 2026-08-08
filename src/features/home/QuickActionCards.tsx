@@ -1,10 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Wrench, ShoppingBag, Receipt, Headset, ArrowUpRight } from 'lucide-react';
+import { fetchCompanyInfoFromFirestore, CompanyInfo } from '@/core/services/firebase';
 
 export const QuickActionCards: React.FC = () => {
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
+
+  useEffect(() => {
+    fetchCompanyInfoFromFirestore().then(info => {
+      if (info) setCompanyInfo(info);
+    }).catch(() => {});
+  }, []);
+
   const actions = [
     {
       title: 'Service Request',
@@ -44,7 +53,7 @@ export const QuickActionCards: React.FC = () => {
       subtitle: 'Talk to water specialist',
       icon: Headset,
       href: '/contact',
-      badge: '09613 700 750',
+      badge: companyInfo?.helpline ? companyInfo.helpline.split('/')[0].trim() : 'Live Support',
       color: 'bg-white',
       borderColor: 'hover:border-purple-500',
       iconColor: 'text-purple-600',

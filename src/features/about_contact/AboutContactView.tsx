@@ -11,6 +11,7 @@ import {
   CheckCircle2, 
   Building2,
   Droplets,
+  ShieldCheck,
   Globe
 } from 'lucide-react';
 import { submitInquiryToFirestore, fetchCompanyInfoFromFirestore, CompanyInfo } from '@/core/services/firebase';
