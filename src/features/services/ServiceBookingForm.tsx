@@ -8,15 +8,21 @@ export const ServiceBookingForm: React.FC = () => {
   const [customerName, setCustomerName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const [preferredDate, setPreferredDate] = useState('');
+  const [preferredSlot, setPreferredSlot] = useState('');
+  const [problemDescription, setProblemDescription] = useState('');
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const today = new Date().toISOString().split('T')[0];
+  const maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customerName.trim() || !phone.trim() || !address.trim()) {
-      setErrorMsg('Please fill in all fields.');
+    if (!customerName.trim() || !phone.trim() || !address.trim() || !preferredDate || !preferredSlot) {
+      setErrorMsg('Please fill in all required fields.');
       return;
     }
 
@@ -29,15 +35,18 @@ export const ServiceBookingForm: React.FC = () => {
         phone: phone.trim(),
         address: address.trim(),
         machineType: '',
-        preferredDate: '',
-        preferredSlot: '',
-        problemDescription: '',
+        preferredDate,
+        preferredSlot,
+        problemDescription: problemDescription.trim(),
       });
 
       setSuccess(true);
       setCustomerName('');
       setPhone('');
       setAddress('');
+      setPreferredDate('');
+      setPreferredSlot('');
+      setProblemDescription('');
     } catch (err: any) {
       console.error('Failed to submit service request:', err);
       setErrorMsg('Failed to submit. Please try again.');
@@ -139,11 +148,60 @@ export const ServiceBookingForm: React.FC = () => {
                 />
               </div>
 
+              {/* Preferred Date */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-bold text-[#475569] uppercase tracking-wider">
+                  Preferred Date
+                </label>
+                <input
+                  type="date"
+                  required
+                  min={today}
+                  max={maxDate}
+                  value={preferredDate}
+                  onChange={(e) => setPreferredDate(e.target.value)}
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-3 px-4 text-sm text-[#0F172A] focus:outline-none focus:border-[#00BCE1] focus:ring-2 focus:ring-[#00BCE1]/10 transition-all"
+                />
+              </div>
+
+              {/* Preferred Time */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-bold text-[#475569] uppercase tracking-wider">
+                  Preferred Time
+                </label>
+                <select
+                  required
+                  value={preferredSlot}
+                  onChange={(e) => setPreferredSlot(e.target.value)}
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-3 px-4 text-sm text-[#0F172A] focus:outline-none focus:border-[#00BCE1] focus:ring-2 focus:ring-[#00BCE1]/10 transition-all"
+                >
+                  <option value="" disabled>Select a time slot</option>
+                  <option value="Morning (9AM-12PM)">Morning (9AM-12PM)</option>
+                  <option value="Afternoon (12PM-3PM)">Afternoon (12PM-3PM)</option>
+                  <option value="Late Afternoon (3PM-6PM)">Late Afternoon (3PM-6PM)</option>
+                  <option value="Evening (6PM-8:30PM)">Evening (6PM-8:30PM)</option>
+                </select>
+              </div>
+
+              {/* Problem Description */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-bold text-[#475569] uppercase tracking-wider">
+                  Problem Description <span className="text-[#94A3B8] font-normal lowercase tracking-normal">(optional)</span>
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="Describe the issue you are facing..."
+                  value={problemDescription}
+                  onChange={(e) => setProblemDescription(e.target.value)}
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl py-3 px-4 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#00BCE1] focus:ring-2 focus:ring-[#00BCE1]/10 transition-all resize-none"
+                />
+              </div>
+
               {/* Submit */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-sm shadow-md shadow-[#00BCE1]/20 hover:shadow-lg hover:shadow-[#00BCE1]/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl bg-[#00BCE1] hover:bg-[#00A3C7] text-white font-bold text-sm shadow-md shadow-[#00BCE1]/20 hover:shadow-lg hover:shadow-[#00BCE1]/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2 mt-2"
               >
                 {loading ? (
                   <>
@@ -163,3 +221,4 @@ export const ServiceBookingForm: React.FC = () => {
     </div>
   );
 };
+
