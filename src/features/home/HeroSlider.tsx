@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, ArrowRight, Tag } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { subscribeToBannersFromFirestore, BannerItem } from '@/core/services/firebase';
 
 const DEFAULT_MAIN_BANNERS: BannerItem[] = [
@@ -121,71 +121,14 @@ export const HeroSlider: React.FC = () => {
   };
 
   // Helper for rendering banner image container with link
-  const renderBannerContent = (banner: BannerItem, isMain: boolean) => {
+  const renderBannerContent = (banner: BannerItem) => {
     const content = (
-      <div className="relative w-full h-full group overflow-hidden">
+      <div className="relative w-full h-full group overflow-hidden rounded-2xl">
         <img
           src={banner.imageUrl}
-          alt={banner.title}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+          alt={banner.title || 'Banner'}
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out rounded-2xl"
         />
-        {/* Subtle Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-black/20" />
-
-        {/* Tag / Badge Overlay */}
-        {banner.tag && (
-          <div
-            className={`absolute z-20 px-3 py-1 rounded-full bg-[#00BCE1]/90 backdrop-blur-md text-slate-950 font-black uppercase tracking-wider flex items-center gap-1.5 shadow-lg border border-white/20 ${
-              isMain ? 'top-5 left-5 text-xs' : 'top-3.5 left-3.5 text-[10px]'
-            }`}
-          >
-            <Tag className={isMain ? 'w-3.5 h-3.5 fill-slate-950' : 'w-3 h-3 fill-slate-950'} />
-            {banner.tag}
-          </div>
-        )}
-
-        {/* Content Details */}
-        <div
-          className={`absolute z-20 text-white ${
-            isMain
-              ? 'bottom-14 sm:bottom-12 left-5 sm:left-8 right-5 sm:right-28 space-y-2'
-              : 'bottom-4 left-4 right-4 space-y-1'
-          }`}
-        >
-          <h3
-            className={`font-extrabold text-white leading-tight drop-shadow-md group-hover:text-[#00BCE1] transition-colors ${
-              isMain ? 'text-xl sm:text-2xl lg:text-3xl line-clamp-2' : 'text-base sm:text-lg line-clamp-1'
-            }`}
-          >
-            {banner.title}
-          </h3>
-
-          {banner.subtitle && (
-            <p
-              className={`text-slate-200 line-clamp-2 drop-shadow-sm ${
-                isMain ? 'text-xs sm:text-sm max-w-xl' : 'text-xs text-slate-300'
-              }`}
-            >
-              {banner.subtitle}
-            </p>
-          )}
-
-          {/* CTA Link Button */}
-          {banner.ctaLink && (
-            <div className={isMain ? 'pt-2' : 'pt-1'}>
-              <span
-                className={`inline-flex items-center gap-1.5 rounded-xl font-bold transition-all shadow-md ${
-                  isMain
-                    ? 'px-4 py-2 bg-[#00BCE1] hover:bg-cyan-400 text-slate-950 text-xs sm:text-sm hover:scale-105'
-                    : 'text-xs text-[#00BCE1] group-hover:text-cyan-300 font-semibold'
-                }`}
-              >
-                {isMain ? 'Explore Details' : 'Learn More'}{' '}
-                <ArrowRight className={isMain ? 'w-4 h-4' : 'w-3.5 h-3.5 group-hover:translate-x-1 transition-transform'} />
-              </span>
-            </div>
-          )}
-        </div>
       </div>
     );
 
@@ -226,7 +169,7 @@ export const HeroSlider: React.FC = () => {
                     isCurrent ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 pointer-events-none z-0'
                   }`}
                 >
-                  {renderBannerContent(slide, true)}
+                  {renderBannerContent(slide)}
                 </div>
               );
             })}
@@ -275,12 +218,12 @@ export const HeroSlider: React.FC = () => {
         <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 h-full min-h-[380px] sm:min-h-[440px] lg:min-h-[480px]">
           {/* Side Promo Top Banner */}
           <div className="flex-1 relative w-full h-[180px] sm:h-auto lg:h-[232px] rounded-2xl overflow-hidden shadow-xl border border-slate-800 hover:border-[#00BCE1]/60 transition-all duration-300 bg-slate-950 group">
-            {renderBannerContent(sideTopBanner, false)}
+            {renderBannerContent(sideTopBanner)}
           </div>
 
           {/* Side Promo Bottom Banner */}
           <div className="flex-1 relative w-full h-[180px] sm:h-auto lg:h-[232px] rounded-2xl overflow-hidden shadow-xl border border-slate-800 hover:border-[#00BCE1]/60 transition-all duration-300 bg-slate-950 group">
-            {renderBannerContent(sideBottomBanner, false)}
+            {renderBannerContent(sideBottomBanner)}
           </div>
         </div>
       </div>
