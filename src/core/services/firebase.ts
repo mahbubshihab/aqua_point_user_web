@@ -123,9 +123,11 @@ export const BANNERS_COLLECTION = 'banners';
 export interface BannerItem {
   id: string;
   title: string;
+  subtitle?: string;
   tag?: string;
   imageUrl: string;
   ctaLink?: string;
+  position?: 'main' | 'side_top' | 'side_bottom' | string;
   isActive: boolean;
   createdAt?: DocumentData;
 }
@@ -406,7 +408,7 @@ export const subscribeToApprovedReviewsFromFirestore = (callback: (reviews: Revi
 
 export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
   try {
-    const q = query(collection(db, BANNERS_COLLECTION), where('isActive', '==', true), limit(5));
+    const q = query(collection(db, BANNERS_COLLECTION), where('isActive', '==', true), limit(20));
     const querySnapshot = await getDocs(q);
     const banners: BannerItem[] = [];
     querySnapshot.forEach((docSnap) => {
@@ -414,9 +416,11 @@ export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
       banners.push({
         id: docSnap.id,
         title: data.title || 'Untitled Banner',
+        subtitle: data.subtitle || data.description || '',
         tag: data.tag || data.badge || '',
         imageUrl: data.imageUrl || data.image || '',
         ctaLink: data.ctaLink || data.link || '',
+        position: data.position || 'main',
         isActive: true,
         createdAt: data.createdAt,
       });
@@ -425,7 +429,7 @@ export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
   } catch (error) {
     console.warn("Firestore fetch banners error, falling back to simple query:", error);
     try {
-      const fallbackQ = query(collection(db, BANNERS_COLLECTION), limit(5));
+      const fallbackQ = query(collection(db, BANNERS_COLLECTION), limit(20));
       const querySnapshot = await getDocs(fallbackQ);
       const banners: BannerItem[] = [];
       querySnapshot.forEach((docSnap) => {
@@ -433,9 +437,11 @@ export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
         banners.push({
           id: docSnap.id,
           title: data.title || 'Untitled Banner',
+          subtitle: data.subtitle || data.description || '',
           tag: data.tag || data.badge || '',
           imageUrl: data.imageUrl || data.image || '',
           ctaLink: data.ctaLink || data.link || '',
+          position: data.position || 'main',
           isActive: true,
           createdAt: data.createdAt,
         });
@@ -449,16 +455,18 @@ export const fetchBannersFromFirestore = async (): Promise<BannerItem[]> => {
 };
 
 export const subscribeToBannersFromFirestore = (callback: (banners: BannerItem[]) => void) => {
-  const q = query(collection(db, BANNERS_COLLECTION), where('isActive', '==', true), limit(5));
+  const q = query(collection(db, BANNERS_COLLECTION), where('isActive', '==', true), limit(20));
   return onSnapshot(q, (snapshot) => {
     const list: BannerItem[] = snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
       return {
         id: docSnap.id,
         title: data.title || 'Untitled Banner',
+        subtitle: data.subtitle || data.description || '',
         tag: data.tag || data.badge || '',
         imageUrl: data.imageUrl || data.image || '',
         ctaLink: data.ctaLink || data.link || '',
+        position: data.position || 'main',
         isActive: true,
         createdAt: data.createdAt,
       };
@@ -466,16 +474,18 @@ export const subscribeToBannersFromFirestore = (callback: (banners: BannerItem[]
     callback(list);
   }, (error) => {
     console.warn("Firestore banners snapshot error, falling back:", error);
-    const fallbackQ = query(collection(db, BANNERS_COLLECTION), limit(5));
+    const fallbackQ = query(collection(db, BANNERS_COLLECTION), limit(20));
     onSnapshot(fallbackQ, (snapshot) => {
       const list: BannerItem[] = snapshot.docs.map((docSnap) => {
         const data = docSnap.data();
         return {
           id: docSnap.id,
           title: data.title || 'Untitled Banner',
+          subtitle: data.subtitle || data.description || '',
           tag: data.tag || data.badge || '',
           imageUrl: data.imageUrl || data.image || '',
           ctaLink: data.ctaLink || data.link || '',
+          position: data.position || 'main',
           isActive: true,
           createdAt: data.createdAt,
         };
