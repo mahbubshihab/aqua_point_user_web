@@ -281,6 +281,32 @@ export const fetchProductsFromFirestore = async (categoryFilter?: string, limitC
   }
 };
 
+export const searchProductsFromFirestore = async (searchQuery: string, limitCount: number = 5): Promise<ProductItem[]> => {
+  try {
+    const q = query(collection(db, PRODUCTS_COLLECTION), limit(50));
+    const querySnapshot = await getDocs(q);
+    const products: ProductItem[] = [];
+    const term = searchQuery.toLowerCase().trim();
+    if (!term) return [];
+
+    querySnapshot.forEach((docSnap) => {
+      const data = { id: docSnap.id, ...docSnap.data() } as ProductItem;
+      const nameMatch = data.name?.toLowerCase().includes(term);
+      const catMatch = data.category?.toLowerCase().includes(term);
+      const typeMatch = data.type?.toLowerCase().includes(term);
+      const descMatch = data.description?.toLowerCase().includes(term);
+
+      if (nameMatch || catMatch || typeMatch || descMatch) {
+        products.push(data);
+      }
+    });
+    return products.slice(0, limitCount);
+  } catch (error) {
+    console.warn("Firestore search products error:", error);
+    return [];
+  }
+};
+
 export const fetchProductsByTypeFromFirestore = async (type: string, limitCount: number = 12): Promise<ProductItem[]> => {
   try {
     const q = query(

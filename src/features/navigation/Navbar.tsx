@@ -15,9 +15,11 @@ import {
   Wrench,
   Sparkles,
   MapPin,
-  ArrowRight
+  ArrowRight,
+  Loader2
 } from 'lucide-react';
 import { useCart } from '@/core/context/CartContext';
+import { ProductItem, fetchProductsFromFirestore, searchProductsFromFirestore } from '@/core/services/firebase';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -28,6 +30,11 @@ export const Navbar: React.FC = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
+  const [allProducts, setAllProducts] = useState<ProductItem[]>([]);
+  const [searchResults, setSearchResults] = useState<ProductItem[]>([]);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+
   const quickSearchTags = [
     'RO Water Purifier',
     'Alkaline Filter',
@@ -36,6 +43,54 @@ export const Navbar: React.FC = () => {
     'UV Sterilizer',
     'Filter Cartridge'
   ];
+
+  // Prefetch products from Firestore when search bar is focused
+  useEffect(() => {
+    if (isSearchFocused && allProducts.length === 0) {
+      setIsSearching(true);
+      fetchProductsFromFirestore(undefined, 50).then((prods) => {
+        if (prods && prods.length > 0) {
+          setAllProducts(prods);
+        }
+        setIsSearching(false);
+      }).catch(() => setIsSearching(false));
+    }
+  }, [isSearchFocused, allProducts.length]);
+
+  // Dynamic live search filtering as user types letter-by-letter
+  useEffect(() => {
+    const term = searchQuery.trim().toLowerCase();
+    setSelectedIndex(-1);
+
+    if (!term) {
+      setSearchResults([]);
+      return;
+    }
+
+    // 1. Instant local match for 0ms latency if allProducts is loaded
+    if (allProducts.length > 0) {
+      const matched = allProducts.filter((p) =>
+        p.name?.toLowerCase().includes(term) ||
+        p.category?.toLowerCase().includes(term) ||
+        p.type?.toLowerCase().includes(term) ||
+        p.description?.toLowerCase().includes(term)
+      ).slice(0, 5);
+      setSearchResults(matched);
+    }
+
+    // 2. Fetch up-to-date dynamic results from Firestore
+    const timer = setTimeout(() => {
+      setIsSearching(true);
+      searchProductsFromFirestore(searchQuery, 5).then((remoteResults) => {
+        if (remoteResults) {
+          setSearchResults(remoteResults);
+        }
+        setIsSearching(false);
+      }).catch(() => setIsSearching(false));
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, allProducts]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,6 +104,29 @@ export const Navbar: React.FC = () => {
     setSearchQuery(tag);
     router.push(`/products?search=${encodeURIComponent(tag)}`);
     setIsSearchFocused(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (searchResults.length > 0) {
+        setSelectedIndex((prev) => (prev + 1) % searchResults.length);
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (searchResults.length > 0) {
+        setSelectedIndex((prev) => (prev - 1 + searchResults.length) % searchResults.length);
+      }
+    } else if (e.key === 'Enter') {
+      if (selectedIndex >= 0 && searchResults[selectedIndex]) {
+        e.preventDefault();
+        router.push(`/products/${searchResults[selectedIndex].id}`);
+        setIsSearchFocused(false);
+        setSearchQuery('');
+      }
+    } else if (e.key === 'Escape') {
+      setIsSearchFocused(false);
+    }
   };
 
   // Close search dropdown when clicking outside
@@ -135,7 +213,7 @@ export const Navbar: React.FC = () => {
               </Link>
             </div>
 
-            {/* Center: Search Bar */}
+            {/* Center: Search Bar with Autocomplete Dropdown */}
             <div className="hidden md:block flex-1 max-w-[420px] lg:max-w-[480px] relative" ref={searchRef}>
               <form onSubmit={handleSearchSubmit} className="relative w-full">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none select-none">
@@ -143,10 +221,11 @@ export const Navbar: React.FC = () => {
                 </span>
                 <input
                   type="text"
-                  placeholder="Search..."
+                  placeholder="Search products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
+                  onKeyDown={handleKeyDown}
                   className="w-full bg-slate-50 border border-slate-200 focus:border-[#00BCE1] focus:ring-2 focus:ring-[#00BCE1]/20 rounded-full pl-11 pr-10 py-2.5 text-sm text-slate-800 placeholder-slate-400 transition-all focus:outline-none focus:bg-white"
                 />
                 {searchQuery ? (
@@ -160,38 +239,117 @@ export const Navbar: React.FC = () => {
                 ) : null}
               </form>
 
-              {/* Instant Live Search Dropdown */}
+              {/* Glassmorphic Autocomplete Live Dropdown */}
               {isSearchFocused && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-slate-100 p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <div className="flex items-center justify-between mb-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                    <span>Popular Searches</span>
-                    <Sparkles className="w-3.5 h-3.5 text-[#00BCE1]" />
-                  </div>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {quickSearchTags.map((tag) => (
-                      <button
-                        key={tag}
-                        type="button"
-                        onClick={() => handleTagClick(tag)}
-                        className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-[#F0F9FF] border border-slate-200 hover:border-[#BAE6FD] text-slate-700 hover:text-[#00BCE1] text-xs font-medium transition-all text-left flex items-center gap-1.5 group"
-                      >
-                        <Search className="w-3 h-3 text-slate-400 group-hover:text-[#00BCE1]" />
-                        <span>{tag}</span>
-                      </button>
-                    ))}
-                  </div>
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/60 p-3.5 z-50 animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden">
+                  {searchQuery.trim() !== '' ? (
+                    <div>
+                      <div className="flex items-center justify-between px-2 pb-2 mb-1.5 border-b border-slate-100/80 text-[11px] font-bold uppercase tracking-wider">
+                        <span className="flex items-center gap-1.5 text-[#0369A1]">
+                          <Search className="w-3.5 h-3.5 text-[#00BCE1]" />
+                          Product Suggestions ({searchResults.length})
+                        </span>
+                        {isSearching ? (
+                          <span className="flex items-center gap-1 text-[10px] text-[#00BCE1] font-medium">
+                            <Loader2 className="w-3 h-3 animate-spin" />
+                            Searching...
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-slate-400 font-semibold">Top 5</span>
+                        )}
+                      </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                    <span>Press <kbd className="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 font-mono text-[10px] text-slate-600">Enter</kbd> to view all results</span>
-                    <button
-                      type="button"
-                      onClick={handleSearchSubmit}
-                      className="text-[#00BCE1] font-bold hover:underline flex items-center gap-1"
-                    >
-                      <span>Search Catalog</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
-                  </div>
+                      {searchResults.length > 0 ? (
+                        <div className="space-y-1 my-1">
+                          {searchResults.map((product, index) => (
+                            <div
+                              key={product.id}
+                              onClick={() => {
+                                router.push(`/products/${product.id}`);
+                                setIsSearchFocused(false);
+                                setSearchQuery('');
+                              }}
+                              onMouseEnter={() => setSelectedIndex(index)}
+                              className={`flex items-center justify-between p-2 rounded-xl transition-all cursor-pointer group ${
+                                selectedIndex === index
+                                  ? 'bg-[#F0F9FF] border border-[#BAE6FD] shadow-xs'
+                                  : 'hover:bg-slate-50/80 border border-transparent'
+                              }`}
+                            >
+                              {/* Product Thumbnail & Title */}
+                              <div className="flex items-center gap-3 min-w-0 pr-2">
+                                <div className="w-11 h-11 rounded-lg bg-slate-100 border border-slate-200/80 overflow-hidden shrink-0 flex items-center justify-center">
+                                  <img
+                                    src={product.imageUrl || '/app_logo.png'}
+                                    alt={product.name}
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                    onError={(e) => {
+                                      (e.target as HTMLImageElement).src = '/app_logo.png';
+                                    }}
+                                  />
+                                </div>
+                                <div className="min-w-0">
+                                  <h4 className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-[#00BCE1] transition-colors truncate">
+                                    {product.name}
+                                  </h4>
+                                  <span className="text-[10px] text-slate-500 font-medium tracking-wide">
+                                    {product.category || 'Water Purifier'}
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Price Tag */}
+                              <div className="shrink-0">
+                                <span className="text-xs font-black text-[#0369A1] bg-[#E0F7FA] px-2.5 py-1 rounded-full border border-[#00BCE1]/30">
+                                  ৳{product.price ? product.price.toLocaleString() : '0'}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : !isSearching ? (
+                        <div className="py-6 text-center text-slate-500 text-xs">
+                          <p className="font-semibold text-slate-700">No products found for "{searchQuery}"</p>
+                          <p className="text-[11px] text-slate-400 mt-1">Try checking spelling or search a general term like RO, Filter</p>
+                        </div>
+                      ) : null}
+
+                      {/* Footer Link */}
+                      <div className="pt-2.5 mt-2 border-t border-slate-100/80 flex items-center justify-between text-xs text-slate-500">
+                        <span className="text-[11px] text-slate-400">
+                          Press <kbd className="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 font-mono text-[10px] text-slate-600">Enter</kbd> to search catalog
+                        </span>
+                        <button
+                          type="button"
+                          onClick={handleSearchSubmit}
+                          className="text-[#00BCE1] font-bold hover:underline flex items-center gap-1 text-xs"
+                        >
+                          <span>See all results</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex items-center justify-between mb-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                        <span>Popular Searches</span>
+                        <Sparkles className="w-3.5 h-3.5 text-[#00BCE1]" />
+                      </div>
+                      <div className="flex flex-wrap gap-1.5 mb-2">
+                        {quickSearchTags.map((tag) => (
+                          <button
+                            key={tag}
+                            type="button"
+                            onClick={() => handleTagClick(tag)}
+                            className="px-3 py-1.5 rounded-full bg-slate-50 hover:bg-[#F0F9FF] border border-slate-200 hover:border-[#BAE6FD] text-slate-700 hover:text-[#00BCE1] text-xs font-medium transition-all text-left flex items-center gap-1.5 group"
+                          >
+                            <Search className="w-3 h-3 text-slate-400 group-hover:text-[#00BCE1]" />
+                            <span>{tag}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -245,19 +403,58 @@ export const Navbar: React.FC = () => {
           {isMobileMenuOpen && (
             <div className="md:hidden pb-6 border-t border-slate-100 pt-4 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
               {/* Mobile Search Bar */}
-              <div className="px-1">
+              <div className="px-1 relative">
                 <form onSubmit={handleSearchSubmit} className="relative w-full">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
                     🔍
                   </span>
                   <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search products..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="w-full bg-slate-50 border border-slate-200 focus:border-[#00BCE1] focus:ring-2 focus:ring-[#00BCE1]/20 rounded-full pl-11 pr-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none"
                   />
                 </form>
+
+                {/* Mobile Suggestions List */}
+                {searchQuery.trim() !== '' && searchResults.length > 0 && (
+                  <div className="mt-2 bg-white rounded-2xl shadow-xl border border-slate-200 p-2 space-y-1">
+                    <div className="px-2 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                      Matching Products ({searchResults.length})
+                    </div>
+                    {searchResults.map((product) => (
+                      <div
+                        key={product.id}
+                        onClick={() => {
+                          router.push(`/products/${product.id}`);
+                          setIsMobileMenuOpen(false);
+                          setSearchQuery('');
+                        }}
+                        className="flex items-center justify-between p-2 rounded-xl hover:bg-[#F0F9FF] text-left cursor-pointer transition-colors"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                          <img
+                            src={product.imageUrl || '/app_logo.png'}
+                            alt={product.name}
+                            className="w-9 h-9 object-cover rounded-lg border border-slate-200 shrink-0"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = '/app_logo.png';
+                            }}
+                          />
+                          <div className="min-w-0">
+                            <p className="text-xs font-bold text-slate-800 truncate">{product.name}</p>
+                            <p className="text-[10px] text-slate-400">{product.category}</p>
+                          </div>
+                        </div>
+                        <span className="text-xs font-bold text-[#0369A1] bg-[#E0F7FA] px-2 py-0.5 rounded-full shrink-0">
+                          ৳{product.price ? product.price.toLocaleString() : '0'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Mobile Navigation Links */}
