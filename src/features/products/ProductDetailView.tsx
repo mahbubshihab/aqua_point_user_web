@@ -24,6 +24,8 @@ import {
 } from 'lucide-react';
 
 import { ProductImageGallery } from './ProductImageGallery';
+import { ProductReviewsSection } from './ProductReviewsSection';
+
 
 interface ProductDetailViewProps {
   productId: string;
@@ -295,6 +297,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
           ))}
         </div>
       </div>
+
+      {/* Customer Product Reviews & Submission */}
+      <ProductReviewsSection
+        productId={productId}
+        productName={product.name}
+        initialRating={product.rating}
+      />
+
 
       {/* Quick Order Modal */}
       {isModalOpen && (

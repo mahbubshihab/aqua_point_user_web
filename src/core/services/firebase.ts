@@ -246,13 +246,17 @@ export interface ServiceItem {
 
 export interface ReviewItem {
   id: string;
-  customerName: string;
-  location: string;
+  userId?: string;
+  userName?: string;
+  customerName?: string;
+  productId?: string;
+  location?: string;
   rating: number;
   comment: string;
   isApproved: boolean;
   createdAt?: DocumentData;
 }
+
 
 // Firestore Helper API
 export const fetchProductsFromFirestore = async (categoryFilter?: string, limitCount: number = 12): Promise<ProductItem[]> => {
@@ -402,6 +406,116 @@ export const submitInquiryToFirestore = async (data: Omit<InquiryPayload, 'id' |
     ...data,
     createdAt: serverTimestamp()
   });
+};
+
+export const submitReviewToFirestore = async (data: {
+  userId?: string;
+  userName: string;
+  productId: string;
+  rating: number;
+  comment: string;
+}) => {
+  return await addDoc(collection(db, REVIEWS_COLLECTION), {
+    userId: data.userId || `user_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    userName: data.userName,
+    productId: data.productId,
+    rating: Number(data.rating),
+    comment: data.comment,
+    isApproved: false,
+    createdAt: serverTimestamp()
+  });
+};
+
+export const fetchApprovedReviewsForProductFromFirestore = async (productId: string): Promise<ReviewItem[]> => {
+  try {
+    const q = query(
+      collection(db, REVIEWS_COLLECTION),
+      where('productId', '==', productId),
+      where('isApproved', '==', true)
+    );
+    const querySnapshot = await getDocs(q);
+    const reviews: ReviewItem[] = [];
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      reviews.push({
+        id: docSnap.id,
+        userId: data.userId || '',
+        userName: data.userName || data.customerName || data.name || 'Valued Customer',
+        customerName: data.customerName || data.userName || data.name || 'Valued Customer',
+        productId: data.productId || productId,
+        location: data.location || 'Verified Buyer',
+        rating: Number(data.rating) || 5,
+        comment: data.comment || '',
+        isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+        createdAt: data.createdAt,
+      });
+    });
+    return reviews;
+  } catch (error) {
+    console.warn(`Firestore fetch approved reviews for product ${productId} error:`, error);
+    try {
+      const fallbackQ = query(collection(db, REVIEWS_COLLECTION), where('isApproved', '==', true));
+      const snapshot = await getDocs(fallbackQ);
+      const reviews: ReviewItem[] = [];
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        if (data.productId === productId) {
+          reviews.push({
+            id: docSnap.id,
+            userId: data.userId || '',
+            userName: data.userName || data.customerName || data.name || 'Valued Customer',
+            customerName: data.customerName || data.userName || data.name || 'Valued Customer',
+            productId: data.productId || productId,
+            location: data.location || 'Verified Buyer',
+            rating: Number(data.rating) || 5,
+            comment: data.comment || '',
+            isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+            createdAt: data.createdAt,
+          });
+        }
+      });
+      return reviews;
+    } catch (e) {
+      console.warn("Fallback fetch product reviews error:", e);
+      return [];
+    }
+  }
+};
+
+export const subscribeToApprovedReviewsForProductFromFirestore = (
+  productId: string,
+  callback: (reviews: ReviewItem[]) => void
+) => {
+  const q = query(
+    collection(db, REVIEWS_COLLECTION),
+    where('productId', '==', productId),
+    where('isApproved', '==', true)
+  );
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const list: ReviewItem[] = snapshot.docs.map((docSnap) => {
+        const data = docSnap.data();
+        return {
+          id: docSnap.id,
+          userId: data.userId || '',
+          userName: data.userName || data.customerName || data.name || 'Valued Customer',
+          customerName: data.customerName || data.userName || data.name || 'Valued Customer',
+          productId: data.productId || productId,
+          location: data.location || 'Verified Buyer',
+          rating: Number(data.rating) || 5,
+          comment: data.comment || '',
+          isApproved: data.isApproved !== undefined ? Boolean(data.isApproved) : true,
+          createdAt: data.createdAt,
+        };
+      });
+      callback(list);
+    },
+    (error) => {
+      console.warn("Firestore product reviews snapshot error:", error);
+      fetchApprovedReviewsForProductFromFirestore(productId).then(callback);
+    }
+  );
 };
 
 export const fetchApprovedReviewsFromFirestore = async (): Promise<ReviewItem[]> => {
