@@ -19,6 +19,8 @@ export const ServiceBookingForm: React.FC = () => {
   const today = new Date().toISOString().split('T')[0];
   const maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
+  const [submittedServiceId, setSubmittedServiceId] = useState('');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!customerName.trim() || !phone.trim() || !address.trim() || !preferredDate || !preferredSlot) {
@@ -30,7 +32,7 @@ export const ServiceBookingForm: React.FC = () => {
     setErrorMsg('');
 
     try {
-      await submitServiceRequestToFirestore({
+      const res = await submitServiceRequestToFirestore({
         customerName: customerName.trim(),
         phone: phone.trim(),
         address: address.trim(),
@@ -40,6 +42,7 @@ export const ServiceBookingForm: React.FC = () => {
         problemDescription: problemDescription.trim(),
       });
 
+      setSubmittedServiceId(res.serviceId);
       setSuccess(true);
       setCustomerName('');
       setPhone('');
@@ -83,6 +86,11 @@ export const ServiceBookingForm: React.FC = () => {
               </div>
               <div className="space-y-1">
                 <h3 className="text-lg font-bold text-[#0F172A]">Request Submitted!</h3>
+                {submittedServiceId && (
+                  <div className="inline-block px-3 py-1 rounded-full bg-[#00BCE1]/10 text-[#00BCE1] font-mono font-bold text-xs border border-[#00BCE1]/20 my-1">
+                    Service ID: #{submittedServiceId}
+                  </div>
+                )}
                 <p className="text-xs text-[#64748B]">We will call you to confirm.</p>
               </div>
               <button

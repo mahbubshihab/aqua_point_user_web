@@ -7,6 +7,8 @@ import {
   getDoc, 
   doc, 
   addDoc, 
+  setDoc,
+  runTransaction,
   onSnapshot,
   query, 
   where, 
@@ -109,7 +111,7 @@ if (typeof window !== 'undefined') {
 
 // Collection References
 export const PRODUCTS_COLLECTION = 'products';
-export const SERVICES_COLLECTION = 'services';
+export const SERVICES_COLLECTION = 'service_requests';
 export const ORDERS_COLLECTION = 'orders';
 export const INQUIRIES_COLLECTION = 'inquiries';
 export const USERS_COLLECTION = 'users';
@@ -412,12 +414,47 @@ export const fetchCompanyInfoFromFirestore = async (): Promise<CompanyInfo | nul
   }
 };
 
+export const generateNextServiceId = async (): Promise<string> => {
+  const counterRef = doc(db, 'counters', 'service_requests');
+  try {
+    const nextIdStr = await runTransaction(db, async (transaction) => {
+      const counterDoc = await transaction.get(counterRef);
+      let nextCount = 1;
+      if (counterDoc.exists()) {
+        const currentCount = counterDoc.data().currentCount || 0;
+        nextCount = currentCount + 1;
+      } else {
+        const existingDocs = await getDocs(collection(db, 'service_requests'));
+        if (existingDocs.docs.length > 0) {
+          nextCount = existingDocs.docs.length + 1;
+        }
+      }
+      transaction.set(counterRef, { currentCount: nextCount }, { merge: true });
+      return String(nextCount).padStart(3, '0');
+    });
+    return nextIdStr;
+  } catch (error) {
+    console.warn('Transaction failed, fallback counting:', error);
+    const existingDocs = await getDocs(collection(db, 'service_requests'));
+    const count = existingDocs.docs.length + 1;
+    return String(count).padStart(3, '0');
+  }
+};
+
 export const submitServiceRequestToFirestore = async (data: Omit<ServiceBooking, 'id' | 'status' | 'createdAt'>) => {
-  return await addDoc(collection(db, SERVICES_COLLECTION), {
+  const serviceId = await generateNextServiceId();
+  const docRef = await addDoc(collection(db, SERVICES_COLLECTION), {
     ...data,
-    status: 'PENDING',
+    serviceId,
+    requestId: serviceId,
+    appointmentDate: data.preferredDate,
+    appointmentTime: data.preferredSlot,
+    problemDetails: data.problemDescription,
+    status: 'Pending',
+    userId: data.phone,
     createdAt: serverTimestamp()
   });
+  return { docId: docRef.id, serviceId };
 };
 
 export const submitOrderToFirestore = async (data: Omit<OrderPayload, 'id' | 'status' | 'createdAt'>) => {
