@@ -163,6 +163,7 @@ export interface ProductItem {
   cloudinary_url?: string;
   imageUrl: string;
   galleryUrls?: string[];
+  images?: string[];
   stock: number;
   rating?: number;
   featured?: boolean;

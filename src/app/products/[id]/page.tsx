@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import { ProductDetailView } from '@/features/products/ProductDetailView';
+import ProductDetailPageComponent from '@/features/products/ProductDetailPage';
 import { fetchProductsFromFirestore } from '@/core/services/firebase';
 
 export const metadata = {
@@ -27,5 +27,6 @@ export default function ProductDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const resolvedParams = use(params);
-  return <ProductDetailView productId={resolvedParams.id} />;
+  return <ProductDetailPageComponent productId={resolvedParams.id} />;
 }
+

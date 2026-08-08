@@ -23,6 +23,8 @@ import {
   Sparkles
 } from 'lucide-react';
 
+import { ProductImageGallery } from './ProductImageGallery';
+
 interface ProductDetailViewProps {
   productId: string;
 }
@@ -33,7 +35,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
 
   const [product, setProduct] = useState<ProductItem | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeImage, setActiveImage] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
 
@@ -51,7 +52,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
       const dbProduct = await fetchProductByIdFromFirestore(productId);
       if (dbProduct) {
         setProduct(dbProduct);
-        setActiveImage(dbProduct.imageUrl);
       } else {
         setProduct(null);
       }
@@ -59,6 +59,26 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
     };
     loadProduct();
   }, [productId]);
+
+  // Extract gallery images incorporating product.images, product.galleryUrls, product.imageUrl, and product.cloudinary_url
+  const galleryImages = React.useMemo(() => {
+    if (!product) return [];
+    const list: string[] = [];
+    if (Array.isArray(product.images) && product.images.length > 0) {
+      list.push(...product.images);
+    }
+    if (Array.isArray(product.galleryUrls) && product.galleryUrls.length > 0) {
+      list.push(...product.galleryUrls);
+    }
+    if (product.imageUrl) {
+      list.push(product.imageUrl);
+    }
+    if (product.cloudinary_url) {
+      list.push(product.cloudinary_url);
+    }
+    const unique = Array.from(new Set(list.filter(url => typeof url === 'string' && url.trim().length > 0)));
+    return unique.length > 0 ? unique : [product.imageUrl || '/placeholder.png'];
+  }, [product]);
 
   if (loading) {
     return (
@@ -79,10 +99,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
       </div>
     );
   }
-
-  const gallery = product.galleryUrls && product.galleryUrls.length > 0 
-    ? product.galleryUrls 
-    : [product.imageUrl];
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
@@ -136,39 +152,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ productId 
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         
-        {/* Left: Image Gallery */}
-        <div className="lg:col-span-6 space-y-4">
-          <div className="relative w-full h-[420px] rounded-3xl bg-[#F8FAFC] border border-[#E2E8F0] overflow-hidden shadow-sm">
-            <img
-              src={getCloudinaryUrl(activeImage, { width: 900, height: 700 })}
-              alt={product.name}
-              className="w-full h-full object-cover transition-all duration-300"
-            />
-            <div className="absolute top-4 left-4">
-              <span className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#BAE6FD] text-xs font-bold text-[#00BCE1] shadow-sm">
-                {product.category}
-              </span>
-            </div>
-          </div>
-
-          {/* Thumbnails */}
-          {gallery.length > 1 && (
-            <div className="flex items-center gap-3 overflow-x-auto pb-2">
-              {gallery.map((imgUrl, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveImage(imgUrl)}
-                  className={`w-20 h-20 rounded-xl bg-[#F8FAFC] border overflow-hidden transition-all ${
-                    activeImage === imgUrl 
-                      ? 'border-[#00BCE1] ring-2 ring-[#00BCE1]/20 shadow-sm' 
-                      : 'border-[#E2E8F0] opacity-70 hover:opacity-100'
-                  }`}
-                >
-                  <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
-          )}
+        {/* Left: Interactive Multi-Image Gallery */}
+        <div className="lg:col-span-6">
+          <ProductImageGallery
+            images={galleryImages}
+            productName={product.name}
+            category={product.category}
+          />
         </div>
 
         {/* Right: Product Info & Actions */}
