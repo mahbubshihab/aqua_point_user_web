@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { 
-  Droplets, 
   Search, 
   ShoppingBag, 
   Phone, 
@@ -16,9 +15,7 @@ import {
   Wrench,
   Sparkles,
   MapPin,
-  Clock,
-  ArrowRight,
-  Filter
+  ArrowRight
 } from 'lucide-react';
 import { useCart } from '@/core/context/CartContext';
 
@@ -30,15 +27,6 @@ export const Navbar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
-
-  const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Products', href: '/products' },
-    { name: 'Services', href: '/services' },
-    { name: 'TDS Meter', href: '/#water-quality' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-  ];
 
   const quickSearchTags = [
     'RO Water Purifier',
@@ -118,42 +106,36 @@ export const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 gap-4 lg:gap-6">
             
-            {/* Left: Aqua Point Logo (app_logo.png + AQUA POINT brand text) */}
-            <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <Image
-                src="/app_logo.png"
-                alt="Aqua Point Logo"
-                width={160}
-                height={48}
-                className="h-10 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                priority
-              />
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-[#0A2540] flex items-center gap-1">
-                AQUA <span className="text-[#00BCE1]">POINT</span>
-              </span>
-            </Link>
+            {/* Left: Brand Logo & Home Link */}
+            <div className="flex items-center gap-4 sm:gap-6 shrink-0">
+              <Link href="/" className="flex items-center gap-2.5 group">
+                <Image
+                  src="/app_logo.png"
+                  alt="Aqua Point Logo"
+                  width={160}
+                  height={48}
+                  className="h-10 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  priority
+                />
+                <span className="font-extrabold text-lg sm:text-xl tracking-tight text-[#0A2540] flex items-center gap-1">
+                  AQUA <span className="text-[#00BCE1]">POINT</span>
+                </span>
+              </Link>
 
-            {/* Nav Links Row: Clean Pill Navigation */}
-            <nav className="hidden xl:flex items-center gap-1 bg-slate-50 p-1.5 rounded-full border border-slate-200/80 shrink-0">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
-                      isActive
-                        ? 'bg-[#00BCE1] text-white shadow-sm shadow-cyan-500/25'
-                        : 'text-slate-600 hover:text-[#00BCE1] hover:bg-white'
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </nav>
+              {/* Home link */}
+              <Link
+                href="/"
+                className={`hidden md:inline-flex px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
+                  pathname === '/'
+                    ? 'bg-[#00BCE1] text-white shadow-sm shadow-cyan-500/25'
+                    : 'text-slate-600 hover:text-[#00BCE1] hover:bg-slate-100'
+                }`}
+              >
+                Home
+              </Link>
+            </div>
 
-            {/* Center / Prominent Large Search Bar */}
+            {/* Center: Search Bar */}
             <div className="hidden md:block flex-1 max-w-[420px] lg:max-w-[480px] relative" ref={searchRef}>
               <form onSubmit={handleSearchSubmit} className="relative w-full">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none select-none">
@@ -161,11 +143,11 @@ export const Navbar: React.FC = () => {
                 </span>
                 <input
                   type="text"
-                  placeholder="Search purifiers, filters, dispensers, spare parts..."
+                  placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
-                  className="w-full bg-slate-50/80 border border-slate-200 focus:border-[#00BCE1] focus:ring-2 focus:ring-[#00BCE1]/20 rounded-full pl-11 pr-10 py-2.5 text-sm text-slate-800 placeholder-slate-400 transition-all shadow-inner focus:outline-none focus:bg-white"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-[#00BCE1] focus:ring-2 focus:ring-[#00BCE1]/20 rounded-full pl-11 pr-10 py-2.5 text-sm text-slate-800 placeholder-slate-400 transition-all focus:outline-none focus:bg-white"
                 />
                 {searchQuery ? (
                   <button
@@ -214,7 +196,7 @@ export const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* Right Actions */}
+            {/* Right Action Buttons */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               
               {/* Account Button */}
@@ -229,7 +211,7 @@ export const Navbar: React.FC = () => {
                 <span>Account</span>
               </Link>
 
-              {/* Book Service Button (Cyan outline button with wrench icon) */}
+              {/* Book Service Button */}
               <Link
                 href="/services"
                 className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full border-2 border-[#00BCE1] text-[#00BCE1] hover:bg-[#00BCE1] hover:text-white text-xs font-extrabold transition-all duration-200 shadow-xs hover:shadow-md hover:shadow-cyan-500/20"
@@ -238,7 +220,7 @@ export const Navbar: React.FC = () => {
                 <span>Book Service</span>
               </Link>
 
-              {/* Cart (0) Button (Filled #00BCE1 cyan button with cart icon & item counter) */}
+              {/* Cart Button */}
               <Link
                 href="/cart"
                 className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#00BCE1] hover:bg-[#00A3C7] text-white text-xs font-extrabold shadow-md shadow-cyan-500/25 hover:shadow-lg hover:shadow-cyan-500/35 transition-all duration-200 group"
@@ -250,7 +232,7 @@ export const Navbar: React.FC = () => {
               {/* Mobile Menu Toggle Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2.5 rounded-full bg-slate-50 border border-slate-200 text-slate-800 hover:bg-slate-100 transition-colors"
+                className="md:hidden p-2.5 rounded-full bg-slate-50 border border-slate-200 text-slate-800 hover:bg-slate-100 transition-colors"
                 aria-label="Toggle navigation menu"
               >
                 {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -259,32 +241,10 @@ export const Navbar: React.FC = () => {
 
           </div>
 
-          {/* Medium Screens (lg) Nav Links bar if screen width is between lg and xl */}
-          <div className="hidden lg:flex xl:hidden justify-center pb-3 border-t border-slate-100 pt-2">
-            <nav className="flex items-center gap-1 bg-slate-50 p-1.5 rounded-full border border-slate-200/80">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
-                      isActive
-                        ? 'bg-[#00BCE1] text-white shadow-sm shadow-cyan-500/25'
-                        : 'text-slate-600 hover:text-[#00BCE1] hover:bg-white'
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
-
           {/* Mobile Drawer (Visible on small screens) */}
           {isMobileMenuOpen && (
-            <div className="lg:hidden pb-6 border-t border-slate-100 pt-4 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
-              {/* Mobile Prominent Search Bar */}
+            <div className="md:hidden pb-6 border-t border-slate-100 pt-4 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+              {/* Mobile Search Bar */}
               <div className="px-1">
                 <form onSubmit={handleSearchSubmit} className="relative w-full">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
@@ -292,7 +252,7 @@ export const Navbar: React.FC = () => {
                   </span>
                   <input
                     type="text"
-                    placeholder="Search purifiers, filters, dispensers, spare parts..."
+                    placeholder="Search..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full bg-slate-50 border border-slate-200 focus:border-[#00BCE1] focus:ring-2 focus:ring-[#00BCE1]/20 rounded-full pl-11 pr-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none"
@@ -301,24 +261,18 @@ export const Navbar: React.FC = () => {
               </div>
 
               {/* Mobile Navigation Links */}
-              <div className="grid grid-cols-2 gap-2 px-1">
-                {navLinks.map((link) => {
-                  const isActive = pathname === link.href;
-                  return (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`px-4 py-3 rounded-2xl text-xs font-bold text-center transition-all ${
-                        isActive
-                          ? 'bg-[#00BCE1] text-white shadow-sm'
-                          : 'bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100'
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  );
-                })}
+              <div className="flex flex-col gap-2 px-1">
+                <Link
+                  href="/"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`px-4 py-2.5 rounded-2xl text-xs font-bold text-center transition-all ${
+                    pathname === '/'
+                      ? 'bg-[#00BCE1] text-white shadow-sm'
+                      : 'bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100'
+                  }`}
+                >
+                  Home
+                </Link>
               </div>
 
               {/* Mobile Action Buttons */}
@@ -329,7 +283,7 @@ export const Navbar: React.FC = () => {
                   className="w-full py-2.5 rounded-2xl border-2 border-[#00BCE1] text-[#00BCE1] font-extrabold text-xs text-center flex items-center justify-center gap-2 shadow-xs"
                 >
                   <Wrench className="w-4 h-4" />
-                  <span>Book Service & Maintenance</span>
+                  <span>Book Service</span>
                 </Link>
                 <Link
                   href="/contact"
@@ -337,7 +291,7 @@ export const Navbar: React.FC = () => {
                   className="w-full py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs text-center flex items-center justify-center gap-2"
                 >
                   <User className="w-4 h-4 text-[#00BCE1]" />
-                  <span>My Account</span>
+                  <span>Account</span>
                 </Link>
                 <a
                   href="tel:09613700750"
