@@ -10,11 +10,13 @@ import { ProductCard } from './ProductCard';
 export const ProductCatalog: React.FC = () => {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') || 'All Products';
+  const initialType = searchParams.get('type') || '';
   const initialSearch = searchParams.get('search') || '';
 
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+  const [selectedType, setSelectedType] = useState<string>(initialType);
   const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
   const [priceSort, setPriceSort] = useState<'default' | 'low-to-high' | 'high-to-low'>('default');
 
@@ -60,10 +62,11 @@ export const ProductCatalog: React.FC = () => {
   // Filter & Sort Logic
   const filteredProducts = products.filter((item) => {
     const matchesCategory = matchesCategoryFilter(item, selectedCategory);
+    const matchesType = !selectedType || item.type === selectedType;
     const matchesSearch = searchQuery === '' || 
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
       item.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+    return matchesCategory && matchesType && matchesSearch;
   }).sort((a, b) => {
     if (priceSort === 'low-to-high') return a.price - b.price;
     if (priceSort === 'high-to-low') return b.price - a.price;

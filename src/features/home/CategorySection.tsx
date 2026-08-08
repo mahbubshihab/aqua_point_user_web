@@ -1,4 +1,4 @@
-export { CategoriesSection, CategoriesSection as CategorySection } from './CategoriesSection';
-export default function CategorySectionExport() {
-  return null;
-}
+import { CategoriesSection } from './CategoriesSection';
+
+export { CategoriesSection as CategorySection, CategoriesSection };
+export default CategoriesSection;

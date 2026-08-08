@@ -269,6 +269,10 @@ export const fetchProductsFromFirestore = async (categoryFilter?: string, limitC
     querySnapshot.forEach((docSnap) => {
       products.push({ id: docSnap.id, ...docSnap.data() } as ProductItem);
     });
+    return products;
+  } catch (error) {
+    console.warn("Firestore fetch error:", error);
+    return [];
   }
 };
 
