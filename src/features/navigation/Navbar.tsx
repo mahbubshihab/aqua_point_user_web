@@ -19,7 +19,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { useCart } from '@/core/context/CartContext';
-import { ProductItem, fetchProductsFromFirestore, searchProductsFromFirestore } from '@/core/services/firebase';
+import { ProductItem, fetchProductsFromFirestore, searchProductsFromFirestore, fetchCompanyInfoFromFirestore, CompanyInfo } from '@/core/services/firebase';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -34,6 +34,13 @@ export const Navbar: React.FC = () => {
   const [searchResults, setSearchResults] = useState<ProductItem[]>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
+
+  useEffect(() => {
+    fetchCompanyInfoFromFirestore().then(info => {
+      if (info) setCompanyInfo(info);
+    }).catch(() => {});
+  }, []);
 
   const quickSearchTags = [
     'RO Water Purifier',
@@ -147,34 +154,33 @@ export const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           {/* Left: Helpline & Address & Offer */}
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="flex items-center gap-1.5 font-bold tracking-wide">
-              <span>💧</span> 100% Certified Pure RO Water
-            </span>
-            <span className="hidden sm:inline text-white/40">•</span>
-            <span className="hidden md:flex items-center gap-1 text-sky-100 font-medium">
-              <MapPin className="w-3 h-3 text-cyan-200" />
-              House 72, Janata Housing Road, 3 Ring Road, Dhaka 1219
-            </span>
-            <span className="hidden lg:inline text-white/40">•</span>
-            <span className="hidden lg:inline bg-white/20 hover:bg-white/30 text-white px-2 py-0.5 rounded-full text-[11px] font-semibold transition-colors cursor-default">
-              🧪 Free Water Testing Offer
-            </span>
+            {companyInfo?.name && (
+              <span className="flex items-center gap-1.5 font-bold tracking-wide">
+                <span>💧</span> {companyInfo.name}
+              </span>
+            )}
+            {companyInfo?.address && (
+              <>
+                <span className="hidden sm:inline text-white/40">•</span>
+                <span className="hidden md:flex items-center gap-1 text-sky-100 font-medium">
+                  <MapPin className="w-3 h-3 text-cyan-200" />
+                  {companyInfo.address}
+                </span>
+              </>
+            )}
           </div>
 
           {/* Right: Phone Numbers & Warranty */}
           <div className="flex items-center gap-3 text-right ml-auto sm:ml-0">
-            <a 
-              href="tel:01780885841" 
-              className="flex items-center gap-1.5 hover:text-cyan-200 transition-colors font-bold text-white"
-            >
-              <Phone className="w-3.5 h-3.5 text-cyan-200" />
-              <span>01780-885841 / 09613 700 750</span>
-            </a>
-            <span className="hidden md:inline text-white/40">•</span>
-            <span className="hidden md:flex items-center gap-1 text-sky-100 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-300 inline" />
-              <span>🛡️ 1-Year Warranty</span>
-            </span>
+            {companyInfo?.helpline && (
+              <a 
+                href={`tel:${companyInfo.helpline.split('/')[0].trim()}`} 
+                className="flex items-center gap-1.5 hover:text-cyan-200 transition-colors font-bold text-white"
+              >
+                <Phone className="w-3.5 h-3.5 text-cyan-200" />
+                <span>{companyInfo.helpline}</span>
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -490,13 +496,15 @@ export const Navbar: React.FC = () => {
                   <User className="w-4 h-4 text-[#00BCE1]" />
                   <span>Account</span>
                 </Link>
-                <a
-                  href="tel:09613700750"
-                  className="w-full py-2.5 rounded-2xl bg-[#F0F9FF] border border-[#BAE6FD] text-[#00BCE1] font-bold text-xs text-center flex items-center justify-center gap-2"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>Call Hotline: 09613 700 750</span>
-                </a>
+                {companyInfo?.helpline && (
+                  <a
+                    href={`tel:${companyInfo.helpline.split('/')[0].trim()}`}
+                    className="w-full py-2.5 rounded-2xl bg-[#F0F9FF] border border-[#BAE6FD] text-[#00BCE1] font-bold text-xs text-center flex items-center justify-center gap-2"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>Call Hotline: {companyInfo.helpline}</span>
+                  </a>
+                )}
               </div>
             </div>
           )}

@@ -4,7 +4,7 @@ import { CategoriesSection } from '@/features/home/CategoriesSection';
 import { ProductTypeSection } from '@/features/home/ProductTypeSection';
 import { FeaturedProducts } from '@/features/home/FeaturedProducts';
 import { ServicesHighlight } from '@/features/home/ServicesHighlight';
-import { WaterQualityMeter } from '@/features/home/WaterQualityMeter';
+
 import { AboutCompanySection } from '@/features/home/AboutCompanySection';
 import { OurClientsSection } from '@/features/home/OurClientsSection';
 import { FaqsSection } from '@/features/home/FaqsSection';
@@ -54,8 +54,8 @@ export default function HomePage() {
       {/* 5. Water Treatment Services */}
       <ServicesHighlight />
 
-      {/* 6. Interactive TDS Meter / Water Quality Tester */}
-      <WaterQualityMeter />
+
+
 
       {/* 7. About Aqua Point BD */}
       <AboutCompanySection />

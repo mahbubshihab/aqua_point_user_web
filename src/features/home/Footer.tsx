@@ -17,12 +17,12 @@ export const Footer: React.FC = () => {
     loadInfo();
   }, []);
 
-  const founder = info?.founder || 'Enjamamul Haque (Kiron)';
-  const foundedYear = info?.foundedYear || '2007';
-  const address = info?.address || 'House 72, Janata Housing Road, 3 Ring Road, Dhaka 1219';
-  const helpline = info?.helpline || '01780-885841 / 09613 700 750';
-  const email = info?.email || 'aquabd112@gmail.com';
-  const description = info?.description || 'Aqua Point is committed to providing 100% pure, healthy, and mineral-balanced drinking water solutions across Bangladesh.';
+  const founder = info?.founder;
+  const foundedYear = info?.foundedYear;
+  const address = info?.address;
+  const helpline = info?.helpline;
+  const email = info?.email;
+  const description = info?.description;
 
   return (
     <footer className="mt-20 bg-[#0F172A] text-white text-sm">
@@ -42,9 +42,11 @@ export const Footer: React.FC = () => {
               />
             </Link>
             
-            <p className="text-xs text-slate-300 leading-relaxed">
-              {description} Founded {foundedYear} by {founder}.
-            </p>
+            {(description || foundedYear || founder) && (
+              <p className="text-xs text-slate-300 leading-relaxed">
+                {description} {foundedYear ? `Founded ${foundedYear}` : ''} {founder ? `by ${founder}` : ''}
+              </p>
+            )}
 
             <div className="pt-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-200">
@@ -133,27 +135,35 @@ export const Footer: React.FC = () => {
               Contact & Location
             </h4>
             <ul className="space-y-3 text-xs text-slate-300">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#00E5FF] shrink-0 mt-0.5" />
-                <span>{address}</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <PhoneCall className="w-4 h-4 text-[#10B981] shrink-0" />
-                <a href={`tel:${helpline.split('/')[0].trim()}`} className="hover:text-[#00E5FF] font-bold">{helpline}</a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                <a href={`mailto:${email}`} className="hover:text-[#00E5FF]">{email}</a>
-              </li>
+              {address && (
+                <li className="flex items-start gap-2.5">
+                  <MapPin className="w-4 h-4 text-[#00E5FF] shrink-0 mt-0.5" />
+                  <span>{address}</span>
+                </li>
+              )}
+              {helpline && (
+                <li className="flex items-center gap-2.5">
+                  <PhoneCall className="w-4 h-4 text-[#10B981] shrink-0" />
+                  <a href={`tel:${helpline.split('/')[0].trim()}`} className="hover:text-[#00E5FF] font-bold">{helpline}</a>
+                </li>
+              )}
+              {email && (
+                <li className="flex items-center gap-2.5">
+                  <Mail className="w-4 h-4 text-[#F59E0B] shrink-0" />
+                  <a href={`mailto:${email}`} className="hover:text-[#00E5FF]">{email}</a>
+                </li>
+              )}
             </ul>
 
             {/* Helpline CTA box inside column */}
-            <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 space-y-1">
-              <span className="text-[11px] text-slate-400 font-medium block">Need instant assistance?</span>
-              <a href={`tel:${helpline.split('/')[0].trim()}`} className="text-sm font-extrabold text-[#00E5FF] hover:underline block">
-                Helpline: {helpline}
-              </a>
-            </div>
+            {helpline && (
+              <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 space-y-1">
+                <span className="text-[11px] text-slate-400 font-medium block">Need instant assistance?</span>
+                <a href={`tel:${helpline.split('/')[0].trim()}`} className="text-sm font-extrabold text-[#00E5FF] hover:underline block">
+                  Helpline: {helpline}
+                </a>
+              </div>
+            )}
           </div>
 
         </div>
@@ -163,7 +173,7 @@ export const Footer: React.FC = () => {
       <div className="border-t border-slate-800 bg-[#0B1120] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} {info?.name || 'Aqua Point BD'}. All rights reserved. Founded {foundedYear} by {founder}.
+            © {new Date().getFullYear()} {info?.name || 'Aqua Point BD'}. All rights reserved. {foundedYear ? `Founded ${foundedYear}` : ''} {founder ? `by ${founder}` : ''}
           </div>
 
           {/* Payment Gateway Badges */}

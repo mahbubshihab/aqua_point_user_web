@@ -5,65 +5,10 @@ import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { subscribeToBannersFromFirestore, BannerItem } from '@/core/services/firebase';
 
-const DEFAULT_MAIN_BANNERS: BannerItem[] = [
-  {
-    id: 'default-main-1',
-    title: 'Livotec & RO Water Purifiers Showcase',
-    subtitle: 'Advanced 6-Stage Reverse Osmosis Technology for Pure & Safe Drinking Water',
-    tag: 'PREMIUM SELECTION',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129051/rjlqkn2a9vi9kcsraa9y.webp',
-    ctaLink: '/products',
-    position: 'main',
-    isActive: true
-  },
-  {
-    id: 'default-main-2',
-    title: 'Pure X Hot & Cold Water Dispenser Showcase',
-    subtitle: 'Instant Hot & Refreshing Cold Mineral Water for Home & Office',
-    tag: 'BESTSELLER',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129081/xwspevqgsjmaltfbizug.webp',
-    ctaLink: '/products',
-    position: 'main',
-    isActive: true
-  },
-  {
-    id: 'default-main-3',
-    title: '500-1000 LPH Commercial & Industrial RO Plant Showcase',
-    subtitle: 'Heavy-Duty Water Treatment Plants with Stainless Steel Skid & High Recovery',
-    tag: 'INDUSTRIAL SOLUTION',
-    imageUrl: 'https://res.cloudinary.com/rvoym2gw/image/upload/v1786129103/nz44nrn2bth9ky0sin3p.webp',
-    ctaLink: '/products',
-    position: 'main',
-    isActive: true
-  }
-];
-
-const DEFAULT_SIDE_TOP: BannerItem = {
-  id: 'default-side-top',
-  title: 'Commercial RO Systems',
-  subtitle: 'High capacity water purification solutions for factories, offices & restaurants',
-  tag: 'SPECIAL OFFER',
-  imageUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?q=80&w=800&auto=format&fit=crop',
-  ctaLink: '/products?category=Commercial',
-  position: 'side_top',
-  isActive: true
-};
-
-const DEFAULT_SIDE_BOTTOM: BannerItem = {
-  id: 'default-side-bottom',
-  title: '24/7 Expert Service & Repair',
-  subtitle: 'Professional filter replacement, membrane cleaning & rapid technical maintenance',
-  tag: 'EXPERT SUPPORT',
-  imageUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop',
-  ctaLink: '/services',
-  position: 'side_bottom',
-  isActive: true
-};
-
 export const HeroSlider: React.FC = () => {
-  const [mainSlides, setMainSlides] = useState<BannerItem[]>(DEFAULT_MAIN_BANNERS);
-  const [sideTopBanner, setSideTopBanner] = useState<BannerItem>(DEFAULT_SIDE_TOP);
-  const [sideBottomBanner, setSideBottomBanner] = useState<BannerItem>(DEFAULT_SIDE_BOTTOM);
+  const [mainSlides, setMainSlides] = useState<BannerItem[]>([]);
+  const [sideTopBanner, setSideTopBanner] = useState<BannerItem | null>(null);
+  const [sideBottomBanner, setSideBottomBanner] = useState<BannerItem | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -73,7 +18,7 @@ export const HeroSlider: React.FC = () => {
       if (banners && banners.length > 0) {
         // Filter position == 'main'
         const mainBanners = banners.filter(
-          (b) => b.position === 'main' || (!b.position && b.id !== sideTopBanner.id && b.id !== sideBottomBanner.id)
+          (b) => b.position === 'main' || (!b.position && b.id !== sideTopBanner?.id && b.id !== sideBottomBanner?.id)
         );
         if (mainBanners.length > 0) {
           setMainSlides(mainBanners);
@@ -149,6 +94,10 @@ export const HeroSlider: React.FC = () => {
     );
   };
 
+  if (mainSlides.length === 0 && !sideTopBanner && !sideBottomBanner) {
+    return null; // Do not render if no banners exist
+  }
+
   return (
     <section className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-3 sm:py-5">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-stretch">
@@ -217,14 +166,18 @@ export const HeroSlider: React.FC = () => {
         {/* Right Column (1/3 width / 4 cols): 2 Stacked Side Promo Banners */}
         <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 h-full min-h-[380px] sm:min-h-[440px] lg:min-h-[480px]">
           {/* Side Promo Top Banner */}
-          <div className="flex-1 relative w-full h-[180px] sm:h-auto lg:h-[232px] rounded-2xl overflow-hidden shadow-xl border border-slate-800 hover:border-[#00BCE1]/60 transition-all duration-300 bg-slate-950 group">
-            {renderBannerContent(sideTopBanner)}
-          </div>
+          {sideTopBanner && (
+            <div className="flex-1 relative w-full h-[180px] sm:h-auto lg:h-[232px] rounded-2xl overflow-hidden shadow-xl border border-slate-800 hover:border-[#00BCE1]/60 transition-all duration-300 bg-slate-950 group">
+              {renderBannerContent(sideTopBanner)}
+            </div>
+          )}
 
           {/* Side Promo Bottom Banner */}
-          <div className="flex-1 relative w-full h-[180px] sm:h-auto lg:h-[232px] rounded-2xl overflow-hidden shadow-xl border border-slate-800 hover:border-[#00BCE1]/60 transition-all duration-300 bg-slate-950 group">
-            {renderBannerContent(sideBottomBanner)}
-          </div>
+          {sideBottomBanner && (
+            <div className="flex-1 relative w-full h-[180px] sm:h-auto lg:h-[232px] rounded-2xl overflow-hidden shadow-xl border border-slate-800 hover:border-[#00BCE1]/60 transition-all duration-300 bg-slate-950 group">
+              {renderBannerContent(sideBottomBanner)}
+            </div>
+          )}
         </div>
       </div>
     </section>
